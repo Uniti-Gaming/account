@@ -1,0 +1,130 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 10;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(34, 34, 40, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        z-index: 2;
+    }
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    max-width: 1000px;
+    margin: auto;
+    height: 100%;
+    position: relative;
+}
+.logo {
+    width: 76px;
+    height: 48px;
+    margin-right: 15px;
+    position: relative;
+    z-index: 3;
+}
+.navigation {
+    margin-left: auto;
+}
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
+    & li {
+        position: relative;
+    }
+
+    & div {
+        padding-top: 43px;
+        position: absolute;
+        z-index: 3;
+        top: 23px;
+        left: 0;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 300ms ease-in-out;
+    }
+}
+.link {
+    display: block;
+    text-decoration-line: none;
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 3;
+    position: relative;
+    cursor: pointer;
+
+    &_home {
+        display: none;
+    }
+
+    &:hover {
+        background: #18181B;
+        border-radius: 10px;
+    }
+}
+.submenu {
+    margin: 0;
+    list-style: none;
+    background: #2F2F32;
+    border-radius: 20px;
+    width: 185px;
+    padding: 21px 17px;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 14px;
+    display: flex;
+}
+.sublink {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: -0.005em;
+    color: #D2D2D2;
+    text-decoration-line: none;
+
+    &:hover {
+        color: #fff;
+    }
+}
+.lang {
+    border: 0;
+    color: #fff;
+    margin: 0 auto;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    background: transparent;
+    z-index: 3;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@media screen and (min-width:851px) {
+
+    .menu li:hover div {
+        max-height: 350px;
+    }
+}

@@ -1,0 +1,19 @@
+.container {
+    max-width: 1000px;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.content {
+    max-width: 660px;
+    width: 100%;
+}
+.title {
+    margin: 72px auto;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.48px;
+}

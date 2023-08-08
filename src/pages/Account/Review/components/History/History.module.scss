@@ -1,0 +1,22 @@
+.body {
+    padding: 14px 0;
+    height: 180px;
+    box-sizing: border-box;
+}
+.transaction {
+    padding: 18px 0;
+    display: grid;
+    gap: 0 34px;
+    grid-template-columns: 84px 263px 79px 66px;
+    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    &:nth-of-type(3) {
+        border: none;
+    }
+}
+.text {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    margin: 0;
+}

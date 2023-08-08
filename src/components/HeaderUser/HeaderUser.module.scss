@@ -1,0 +1,55 @@
+@import '../../assets/styles/constants.scss';
+
+.button {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: $primaryColor;
+    color: inherit;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    transition: all 0.2s ease-in-out;
+
+    p {
+        margin: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 110px;
+    };
+
+    &:hover {
+        background-color: $primaryHoverColor;
+    }
+}
+.arrow {
+    transition: all 0.2s ease-in-out;
+
+    &.active {
+        transform: rotate(180deg);
+    }
+}
+.name {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.24px;
+}
+.email {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.14px;
+    margin: 0;
+    opacity: 0.5;
+}
+.navigation {
+    margin-top: 10px;
+    min-width: 272px;
+    width: 100%;
+}
