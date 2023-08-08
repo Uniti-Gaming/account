@@ -6,7 +6,7 @@ export const appLoader = async () => {
     email: 'petrosov.her@yandex.ru',
     safety: {
       number: false,
-      email: true,
+      email: false,
       other: false,
     },
     balance: {
