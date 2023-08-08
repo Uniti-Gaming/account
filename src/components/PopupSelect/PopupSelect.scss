@@ -1,0 +1,48 @@
+.popup-select-container {
+    width: 398px;
+    height: 48px;
+}
+
+.popup-select {
+
+    &__control {
+        background-color: #232229 !important;
+        height: 48px;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 6px !important;
+        &:hover,
+        &--is-focused {
+            border: 1px solid #635790 !important;
+            box-shadow: none !important;
+        }
+    }
+
+    &__input-container,
+    &__single-value {
+        color: #fff !important;
+    }
+
+    &__indicator-separator {
+        opacity: 0;
+    }
+
+    &__menu-list {
+        max-height: 170px !important;
+    }
+    &__menu {
+        z-index: 10 !important;
+        background-color: #34323C !important;
+    }
+
+    &__option {
+        &:hover {
+            cursor: pointer;
+        }
+        &--is-focused {
+            background-color: lighten( #34323C, 8%) !important;
+        }
+    }
+    &__indicator:hover {
+        cursor: pointer;
+    }
+}

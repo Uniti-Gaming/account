@@ -23,6 +23,10 @@ const HeaderUser = () => {
     setOpen(!isOpen);
   };
 
+  const handleNavigationClick = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <button
@@ -31,9 +35,7 @@ const HeaderUser = () => {
         title={currentUser.name}
       >
         <img src={userIcon} alt='пак-мэн' />
-        <p>
-          {currentUser.name}
-        </p>
+        <p>{currentUser.name}</p>
         <img
           className={classNames(styles.arrow, { [styles.active]: isOpen })}
           src={arowIcon}
@@ -48,9 +50,27 @@ const HeaderUser = () => {
         <h2 className={styles.name}>ID: {currentUser.id}</h2>
         <p className={styles.email}>{currentUser.email}</p>
         <nav className={styles.navigation}>
-          <NavLinkWidthIcon path='/' text='Учётная запись' icon={userSquare} style={{ opacity: 1 }} />
-          <NavLinkWidthIcon path='/' text='Пополнить баланс' icon={wallet} style={{ opacity: 1 }} />
-          <NavLinkWidthIcon path='/' text='Тарифы и ключи' icon={tariffIcon} style={{ opacity: 1 }} />
+          <NavLinkWidthIcon
+            path='/'
+            text='Учётная запись'
+            icon={userSquare}
+            style={{ opacity: 1 }}
+            onClick={handleNavigationClick}
+          />
+          <NavLinkWidthIcon
+            path='/'
+            text='Пополнить баланс'
+            icon={wallet}
+            style={{ opacity: 1 }}
+            onClick={handleNavigationClick}
+          />
+          <NavLinkWidthIcon
+            path='/'
+            text='Тарифы и ключи'
+            icon={tariffIcon}
+            style={{ opacity: 1 }}
+            onClick={handleNavigationClick}
+          />
           <NavLinkWidthIcon
             path='/'
             text='Выйти из аккаунта'

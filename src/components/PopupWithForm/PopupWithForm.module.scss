@@ -1,0 +1,15 @@
+.form {
+    padding: 40px 0;
+}
+.buttons {
+    margin-left: 180px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.buttonGray {
+    background: #34323C;
+    &:hover {
+        background: #4c4a54;
+    }
+}

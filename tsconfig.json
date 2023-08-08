@@ -11,6 +11,7 @@
       "@images/*": [ "assets/images/*" ],
       "@interfaces/*": [ "core/interfaces/*" ],
       "@utils/*": [ "core/utils/*" ],
+      "@hooks/*": [ "core/hooks/*" ],
       "@services/*": [ "core/services/*" ],
     },
 

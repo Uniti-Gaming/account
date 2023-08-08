@@ -5,6 +5,7 @@ import { appLoader } from './appLoader';
 import App from './App';
 import Account from './pages/Account/Account';
 import Review from './pages/Account/Review/Review';
+import Information from './pages/Account/Information/Information';
 
 const router = createHashRouter([
   {
@@ -16,7 +17,8 @@ const router = createHashRouter([
         path: '',
         element: <Account />,
         children: [
-          { index: true, element: <Review/>},
+          { index: true, element: <Review />},
+          { path: 'information', element: <Information />},
         ],
       },
     ],
