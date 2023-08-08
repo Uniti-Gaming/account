@@ -1,12 +1,17 @@
 @import '../../assets/styles/constants.scss';
 
+.wrapper {
+    width: 320px;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
 .navbar {
     background-color: $mainColor;
-    width: 320px;
+    width: 100%;
     border-radius: 6px;
     padding: 6px 24px 24px;
     box-sizing: border-box;
     height: fit-content;
-    position: sticky;
-    top: 80px;
 }

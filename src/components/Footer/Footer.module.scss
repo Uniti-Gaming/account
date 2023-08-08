@@ -1,0 +1,167 @@
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 0 20px 47px;
+    margin: 0 auto;
+    max-width: 1200px;
+    list-style: none;
+}
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link {
+    font-weight: 700;
+    opacity: 1;
+    margin: 0 0 15px;
+}
+
+.sublink {
+    text-decoration-line: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFFFFF;
+    opacity: 0.5;
+    margin: 0 0 13px;
+    display: block;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.under {
+    margin: 47px auto 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    align-items: center;
+    padding: 0 20px 60px;
+    row-gap: 20px;
+}
+
+
+.underlinks {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.underlink {
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-decoration-line: none;
+}
+
+.logo {
+    max-width: 92px;
+}
+
+.social {
+    display: flex;
+    gap: 15px;
+
+    & img {
+        opacity: 0.6;
+    }
+
+    & a {
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            border: 1.5px solid rgba(255, 255, 255, 1);
+
+            & img {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width:850px) {
+    .menu {
+        gap: 64px;
+        justify-content: space-between;
+    }
+
+    .underlinks {
+        gap: 14px;
+    }
+
+    .underlink {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .submenu {
+        flex-basis: 146px;
+
+        &:nth-of-type(2) {
+            flex-basis: 146px;
+            order: 2;
+        }
+
+        &:nth-of-type(3) {
+            flex-basis: 117px;
+            order: 3;
+        }
+
+        &:nth-of-type(4) {
+            flex-basis: 117px;
+            order: 1;
+        }
+    }
+
+    .sublink {
+        font-size: 14px;
+    }
+
+    .under {
+        flex-wrap: wrap;
+    }
+
+    .underlinks {
+        order: 2;
+        justify-content: space-between;
+        width: 100%;
+        gap: 11px;
+    }
+
+    .underlink {
+        font-size: 9px;
+    }
+
+}
+
+@media screen and (max-width:400px) {
+    .menu {
+        justify-content: space-between;
+        column-gap: 0;
+    }
+
+    .under {
+        padding: 0 10px 50px;
+    }
+}

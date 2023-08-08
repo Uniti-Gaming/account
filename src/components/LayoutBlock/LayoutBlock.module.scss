@@ -8,6 +8,10 @@
     box-sizing: border-box;
     position: relative;
     margin-bottom: 20px;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 .header {
