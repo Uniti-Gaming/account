@@ -5,26 +5,27 @@ export interface IUser {
     phone: string;
     city: string;
     lang: string;
-    safety: ISafety
-    balance: IBalance
-    difrent: IDifrent
+    ref: string;
+    safety: ISafety;
+    balance: IBalance;
+    difrent: IDifrent;
 }
 
 export interface ISafety {
-    number: boolean,
-    email: boolean,
-    other: boolean,
+    number: boolean;
+    email: boolean;
+    other: boolean;
 }
 
 export interface IBalance {
-    un_coins: number,
-    up_coins: number,
-    tickets: number,
+    un_coins: number;
+    up_coins: number;
+    tickets: number;
 }
 
 export interface IDifrent {
-    sex: string,
-    instagram: string,
-    tiktok: string,
-    favorite: string,
+    sex: string;
+    instagram: string;
+    tiktok: string;
+    favorite: string;
 }

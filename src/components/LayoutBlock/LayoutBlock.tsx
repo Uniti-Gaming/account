@@ -10,10 +10,13 @@ interface LayoutBlockProps {
       text: string
     }
     button?: {
+      text: string
+      edit?: boolean;
       handleClick: () => void;
     }
     children: JSX.Element | JSX.Element[]
 }
+
 const LayoutBlock: FC<LayoutBlockProps> = ({title, children, link, button}) => {
   return (
     <div className={styles.container}>
@@ -22,9 +25,10 @@ const LayoutBlock: FC<LayoutBlockProps> = ({title, children, link, button}) => {
         {link && (<Link className={styles.link} to={link.path}>{link.text}</Link>)}
         {button && (
           <button
-            className={styles.button}
-            onClick={button.handleClick} >
-                Обновить
+            className={`${styles.button} ${button.edit && styles.edit}`}
+            onClick={button.handleClick}
+          >
+            {button.text}
           </button>
         )}
       </div>

@@ -1,67 +1,51 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
 
-import Account from './components/Account/Account';
+import AccountBlock from './components/AccountBlock/AccountBlock';
+import Difrent from './components/Difrent/Difrent';
 import PrivateInfo from './components/PrivateInfo/PrivateInfo';
 import BlockWithOneString from './components/BlockWithOneString/BlockWithOneString';
-import Difrent from './components/Difrent/Difrent';
-import UserPopups from './components/UserPopups/UserPopups';
+import EmailPopup from './components/EmailPopup/EmailPopup';
+import PhonePopup from './components/PhonePopup/PhonePopup';
+import LangPopup from './components/LangPopup/LangPopup';
 
 const Information = () => {
   const { currentUser } = useContext(AuthContext);
-  const [popupIsOpen, setPopupIsOpen] = useState({
-    private: false,
-    email: false,
-    phone: false,
-    lang: false,
-    difrent: false,
-  });
-  const openPopup = (name: string) => {
-    setPopupIsOpen({ ...popupIsOpen, [name]: true });
-  };
-  const closeAllPopups = () => {
-    setPopupIsOpen({
-      private: false,
-      email: false,
-      phone: false,
-      lang: false,
-      difrent: false,
-    });
-  };
+  const pageData = [
+    {
+      title: 'Электронная почта',
+      value: currentUser.email,
+      label: 'Электронная почта',
+      Popup: EmailPopup,
+    },
+    {
+      title: 'Номер телефона',
+      value: currentUser.phone,
+      label: 'Номер телефона',
+      Popup: PhonePopup,
+    },
+    {
+      title: 'РАССЫЛКА ОТ UNITE GAMING',
+      value: currentUser.lang,
+      label: 'Предпочитаемый язык переписки',
+      Popup: LangPopup,
+    },
+  ];
+
   return (
     <>
-      <UserPopups
-        currentUser={currentUser}
-        popupIsOpen={popupIsOpen}
-        close={closeAllPopups}
-      />
-      <Account />
-      <PrivateInfo
-        name={currentUser.name}
-        city={currentUser.city}
-        handleClick={() => openPopup('private')} />
-      <BlockWithOneString
-        title='Электронная почта'
-        handleClick={() => openPopup('email')}
-        value={currentUser.email}
-        label='Электронная почта:' />
-      <BlockWithOneString
-        title='Номер телефона'
-        handleClick={() => openPopup('phone')}
-        value={currentUser.phone}
-        label='Номер телефона:' />
-      <BlockWithOneString
-        title='РАССЫЛКА ОТ UNITE GAMING'
-        handleClick={() => openPopup('lang')}
-        value={currentUser.lang}
-        label='Предпочитаемый язык переписки:' />
+      <AccountBlock id={currentUser.id} code={currentUser.ref} />
+      <PrivateInfo name={currentUser.name} city={currentUser.city} />
+      {pageData.map((item, index) => (
+        <BlockWithOneString key={index} {...item} />
+      ))}
       <Difrent
         sex={currentUser.difrent.sex}
         instagram={currentUser.difrent.instagram}
         tiktok={currentUser.difrent.tiktok}
         favorite={currentUser.difrent.favorite}
-        handleClick={() => openPopup('difrent')} />
+      />
     </>
   );
 };

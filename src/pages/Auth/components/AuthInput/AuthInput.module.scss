@@ -1,0 +1,31 @@
+.input {
+    width: 100%;
+    height: 60px;
+    padding: 21px 18px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    background-color: #34323C;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    outline: none;
+    color: #fff;
+
+    &:focus,
+    &:hover {
+        border: 1px solid #635790;
+    }
+}
+
+.input.erorr {
+    border: 1px solid #DE3341;
+}
+
+.error-message {
+    color: #DE3341;
+    position: absolute;
+    left: 0;
+    bottom: -18px;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: -0.015em;
+}

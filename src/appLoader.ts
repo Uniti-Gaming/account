@@ -6,6 +6,7 @@ export const appLoader = async () => {
     email: 'petrosov.her@yandex.ru',
     city: 'Ашхабад',
     lang: 'Русский',
+    ref: 'XXXX-XXXX-XXXX',
     safety: {
       number: false,
       email: false,

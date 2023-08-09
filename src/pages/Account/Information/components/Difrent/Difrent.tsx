@@ -1,19 +1,21 @@
-import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
+import DifrentPopup from '../DifrentPopup/DifrentPopup';
+import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
 
 interface DifrentProps {
-  handleClick: () => void;
   sex: string
   instagram: string
   tiktok: string
   favorite: string
 }
 
-const Difrent = ({ handleClick, sex, instagram, tiktok, favorite }: DifrentProps) => {
+const Difrent = ({ sex, instagram, tiktok, favorite }: DifrentProps) => {
   return (
-    <LayoutBlock
+    <BlockWidthPopup
       title='ДОПОЛНИТЕЛЬНЫЕ ПОЛЯ'
-      button={{ handleClick }} >
+      button={{ text: 'Обновить', edit: true }}
+      Popup={DifrentPopup}
+    >
       <div style={{ padding: '54px 0 59px' }}>
         <FieldValuePair
           value={sex}
@@ -28,7 +30,7 @@ const Difrent = ({ handleClick, sex, instagram, tiktok, favorite }: DifrentProps
           value={favorite}
           label='Любимый сервис в Unite Gaming' />
       </div>
-    </LayoutBlock>
+    </BlockWidthPopup>
   );
 };
 

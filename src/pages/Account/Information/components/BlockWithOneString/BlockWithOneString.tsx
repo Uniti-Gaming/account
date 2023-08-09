@@ -1,21 +1,27 @@
-import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
+import { FC } from 'react';
+
+import { PopupProps } from '@/core/interfaces/PopupProps';
+
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
+import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
 
 interface BlockWithOneStringProps {
-    handleClick: () => void;
-    title: string
-    value: string
-    label: string
+  title: string
+  value: string
+  label: string
+  Popup: FC<PopupProps>
 }
-const BlockWithOneString = ({ handleClick, label, value, title }: BlockWithOneStringProps) => {
+const BlockWithOneString: FC<BlockWithOneStringProps> = ({ value, label, Popup, title }) => {
   return (
-    <LayoutBlock
+    <BlockWidthPopup
       title={title}
-      button={{ handleClick }} >
+      button={{ text: 'Обновить', edit: true }}
+      Popup={Popup}
+    >
       <div style={{ padding: '70px 0 64px' }}>
-        <FieldValuePair {...{ value, label }} />
+        <FieldValuePair {...{value, label}} />
       </div>
-    </LayoutBlock>
+    </BlockWidthPopup>
   );
 };
 

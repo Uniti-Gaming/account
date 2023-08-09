@@ -1,19 +1,21 @@
-import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 import FieldValuePairWrapperWithUnderLine from
   '@/components/FieldValuePairWrapperWithUnderLine/FieldValuePairWrapperWithUnderLine';
+import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
+import PrivateInfoPopup from '../PrivateInfoPopup/PrivateInfoPopup';
 
 interface PrivateInfoProps {
-  handleClick: () => void;
   name: string
   city: string
 }
 
-const PrivateInfo = ({ handleClick, name, city }: PrivateInfoProps) => {
+const PrivateInfo = ({ name, city }: PrivateInfoProps) => {
   return (
-    <LayoutBlock
+    <BlockWidthPopup
       title='ЛИЧНАЯ ИНФОРМАЦИЯ'
-      button={{ handleClick }} >
+      button={{ text: 'Обновить', edit: true }}
+      Popup={PrivateInfoPopup}
+    >
       <div style={{ padding: '31px 0 23px' }}>
         <FieldValuePairWrapperWithUnderLine>
           <FieldValuePair value={name} label='Имя' />
@@ -22,7 +24,7 @@ const PrivateInfo = ({ handleClick, name, city }: PrivateInfoProps) => {
           <FieldValuePair value={city} label='Город' />
         </FieldValuePairWrapperWithUnderLine>
       </div>
-    </LayoutBlock>
+    </BlockWidthPopup>
   );
 };
 

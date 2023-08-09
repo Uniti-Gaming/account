@@ -14,7 +14,7 @@ const UserInfo: FC<UserInfoProps> = ({currentUser}) => {
   const userInfo = [
     { label: 'ID:', value: currentUser.id },
     { label: 'Имя:', value: currentUser.name },
-    { label: 'Телефон:', value: currentUser.number },
+    { label: 'Телефон:', value: currentUser.phone },
     { label: 'Электронная почта:', value: currentUser.email },
     { label: 'Реферальный номер:', value: 'ХХХХ-ХХХХ-XXXX' },
   ];
