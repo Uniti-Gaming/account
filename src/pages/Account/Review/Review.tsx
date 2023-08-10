@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
 
@@ -11,6 +12,8 @@ import UserInfo from './components/UserInfo/UserInfo';
 
 const Review = () => {
   const { currentUser } = useContext(AuthContext);
+  const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
+  titleRef.current ? titleRef.current.textContent = 'Обзор учётной записи' : null;
 
   return (
     <>

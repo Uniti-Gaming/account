@@ -1,0 +1,58 @@
+.label {
+    font-weight: 500;
+    height: 36px;
+    font-size: 16px;
+    letter-spacing: -0.015em;
+    color: #A2A2A2;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    p {
+        margin: 0;
+    }
+}
+
+.input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.span {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #4E4C57;
+    border-radius: 3px;
+    margin-right: 14px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.span:hover {
+    border: 2px solid #72707a;
+}
+
+.checkmark {
+    opacity: 0;
+}
+
+.input:checked~.span .checkmark {
+    opacity: 1;
+}
+
+@media (max-width: 520px) {
+    .label {
+        font-size: 12px;
+    }
+    .span {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+    .label p {
+        flex-basis: calc(100% - 30px);
+    }
+}

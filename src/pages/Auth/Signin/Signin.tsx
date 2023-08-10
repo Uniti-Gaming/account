@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { signin } from '@services/authService';
 import { useForm } from '@/core/hooks/useForm';
-// import styles from './Signin.module.scss';
+import styles from './Signin.module.scss';
 
-// import Checkbox from '../../../components/ui/Checkbox';
+import Checkbox from '@/components/Checkbox/Checkbox';
 import MainAuth from '../components/MainAuth/MainAuth';
 import AuthInput from '../components/AuthInput/AuthInput';
 import AuthLabel from '../components/AuthLabel/AuthLabel';
@@ -12,16 +14,22 @@ import AuthForm from '../components/AuthForm/AuthForm';
 
 const Signin = () => {
   const [isLoading, setLoading] = useState<boolean>(false);
-  
+  const [showPass, setShowPass] = useState<boolean>(false);
+
   const { values, handleChange } = useForm({});
   const onSubmit = () => {
     setLoading(true);
     signin({
       email: values.email,
       password: values.password,
-    }).finally(() => {
-      setLoading(false);
-    });
+    })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
   return (
     <MainAuth
@@ -43,19 +51,24 @@ const Signin = () => {
         </AuthLabel>
         <AuthLabel text='Пароль'>
           <AuthInput
-            type='text'
+            type={showPass? 'text' : 'password'}
             name='password'
             value={values.password || ''}
             onChange={handleChange}
             placeholder='Введите пароль'
           />
+          <button
+            type='button'
+            className={classNames(styles.buttonShowPass, {[styles.active]: showPass})}
+            onClick={() => setShowPass(!showPass)}
+          />
         </AuthLabel>
-        {/* <div className={styles.wraper}>
-          <Checkbox register={register}>
+        <div className={styles.wraper}>
+          <Checkbox>
             <p>Запомнить меня</p>
           </Checkbox>
           <Link className={styles.forget} to='/forgot'>Забыли пароль?</Link>
-        </div> */}
+        </div>
       </AuthForm>
     </MainAuth>
   );

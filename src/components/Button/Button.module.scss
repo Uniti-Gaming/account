@@ -12,6 +12,13 @@
     position: relative;
     padding: 13px 40px;
 
+    &.small {
+        padding: 9px 0;
+        width: 100%;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
     &:after {
         content: '';
         display: none;

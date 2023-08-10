@@ -2,7 +2,7 @@
 
 .main {
     max-width: 480px;
-    width: 100%;
+    width: calc(100% - 40px);
     box-sizing: border-box;
     background-color: $mainColor;
     border-radius: 10px;
@@ -33,5 +33,12 @@
     a {
         margin-left: 5px;
         color: #378FC1;
+    }
+}
+
+@media (max-width: 520px) {
+    .main {
+        margin: 115px 20px 80px;
+        padding: 51px 24px 64px;
     }
 }

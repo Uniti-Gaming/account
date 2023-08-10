@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
 
@@ -12,6 +13,12 @@ import LangPopup from './components/LangPopup/LangPopup';
 
 const Information = () => {
   const { currentUser } = useContext(AuthContext);
+  const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
+
+  useEffect(() => {
+    titleRef.current ? titleRef.current.textContent = 'Информация о записи' : null;
+  }, [titleRef]);
+  
   const pageData = [
     {
       title: 'Электронная почта',

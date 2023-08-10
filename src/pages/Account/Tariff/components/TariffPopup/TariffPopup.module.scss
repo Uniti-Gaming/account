@@ -1,0 +1,41 @@
+.container {
+    width: 660px;
+    height: 370px;
+    border-radius: 20px;
+    background: #232229;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 48px 35px 65px;
+    box-sizing: border-box;
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: none;
+    background-image: url(../../../../../assets/images/close-small.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.title {
+    color: #FFF;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.14px;
+    align-self: flex-start;
+    margin: 0 0 18px;
+}
+.text {
+    color: #FFF;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.075px;
+    margin: 0;
+    flex: 1;
+}

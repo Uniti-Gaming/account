@@ -7,6 +7,7 @@ import Account from './pages/Account/Account';
 import Review from './pages/Account/Review/Review';
 import Information from './pages/Account/Information/Information';
 import Signin from './pages/Auth/Signin/Signin';
+import Tariff from './pages/Account/Tariff/Tariff';
 
 const router = createHashRouter([
   {
@@ -20,6 +21,7 @@ const router = createHashRouter([
         children: [
           { index: true, element: <Review />},
           { path: 'information', element: <Information />},
+          { path: 'tariff', element: <Tariff />},
         ],
       },
       {

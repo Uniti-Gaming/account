@@ -1,0 +1,60 @@
+.card {
+    border-radius: 6px;
+    background: #34323C;
+    width: 186px;
+    height: 326px;
+    box-sizing: border-box;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.16px;
+    margin: 15px 0 21px;
+    width: 130px;
+    min-height: 44px;
+    line-height: normal;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+}
+.image {
+    border-radius: 50%;
+}
+.label,
+.pass {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.18px;
+}
+.pass {
+    color: #A1A1A1;
+    margin: 0 8px;
+}
+.edit, .show {
+    background-color: transparent;
+    border: none;
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+.show {
+    background-image:  url(../../../../../assets/images/eye-slash.svg);
+    margin-right: 2px;
+    &.open {
+        background-image:  url(../../../../../assets/images/eye.svg);
+    }
+}
+.edit {
+    background-image:  url(../../../../../assets/images/account/pencil.svg);
+}

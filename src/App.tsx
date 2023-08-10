@@ -20,7 +20,6 @@ function App() {
     login,
   }), [currentUser, login]);
 
-
   return (
     <AuthContext.Provider value={contextValue}>
       <Header />

@@ -11,10 +11,21 @@ interface ButtonProps {
     handleClick?: () => void
     children?: JSX.Element
     fullPage?: boolean
+    small?: boolean
     disabled?: boolean
 }
 
-const Button: FC<ButtonProps> = ({text, style, handleClick, loading, children, fullPage, type, disabled }) => {
+const Button: FC<ButtonProps> = ({
+  handleClick, loading, disabled,
+  fullPage, small, style,
+  text, type,
+  children,
+}) => {
+  const buttonClass = classNames(styles.button, {
+    [styles.load]: loading,
+    [styles.fullPage]: fullPage,
+    [styles.small]: small,
+  });
 
   return (
     <button
@@ -22,7 +33,8 @@ const Button: FC<ButtonProps> = ({text, style, handleClick, loading, children, f
       style={style}
       onClick={handleClick}
       disabled={loading || disabled}
-      className={classNames(styles.button, {[styles.load]: loading, [styles.fullPage]: fullPage})}>
+      className={buttonClass}
+    >
       {children}
       {text}
     </button>

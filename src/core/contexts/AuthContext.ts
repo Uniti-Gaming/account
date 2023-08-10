@@ -6,4 +6,4 @@ interface IAuthContext {
   login: Dispatch<SetStateAction<IUser>>;
 }
 
-export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+export const AuthContext = createContext({} as IAuthContext);
