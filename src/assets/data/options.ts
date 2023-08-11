@@ -1,10 +1,5 @@
 import { IOption } from '@interfaces/optionInterface';
 
-export const options: IOption[] = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 export const optionsLanguage: IOption[] = [
   { value: 'Русский', label: 'Русский' },
   { value: 'Türkmençe', label: 'Türkmençe' },

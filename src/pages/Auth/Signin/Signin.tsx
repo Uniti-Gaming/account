@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 
 import { signin } from '@services/authService';
 import { useForm } from '@/core/hooks/useForm';
 import styles from './Signin.module.scss';
+import eye from '@images/eye.svg';
+import eyeSlash from '@images/eye-slash.svg';
 
 import Checkbox from '@/components/Checkbox/Checkbox';
 import MainAuth from '../components/MainAuth/MainAuth';
 import AuthInput from '../components/AuthInput/AuthInput';
 import AuthLabel from '../components/AuthLabel/AuthLabel';
 import AuthForm from '../components/AuthForm/AuthForm';
+import InputButton from '../components/InputButton/InputButton';
 
 const Signin = () => {
+  const saveRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showPass, setShowPass] = useState<boolean>(false);
 
@@ -22,7 +25,12 @@ const Signin = () => {
     signin({
       email: values.email,
       password: values.password,
+      checkbox: !!saveRef.current?.checked,
     })
+      .then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res);
+      })
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
@@ -33,7 +41,7 @@ const Signin = () => {
   };
   return (
     <MainAuth
-      link='/sign-up'
+      link='/signup'
       text={{
         title: 'Войдите в платформу Unite-Gaming',
         footnote: 'Нет аккаунта?',
@@ -57,14 +65,12 @@ const Signin = () => {
             onChange={handleChange}
             placeholder='Введите пароль'
           />
-          <button
-            type='button'
-            className={classNames(styles.buttonShowPass, {[styles.active]: showPass})}
-            onClick={() => setShowPass(!showPass)}
-          />
+          <InputButton handleClick={() => setShowPass(!showPass)}>
+            <img src={showPass ? eye : eyeSlash} alt='иконка с глазом' />
+          </InputButton>
         </AuthLabel>
         <div className={styles.wraper}>
-          <Checkbox>
+          <Checkbox chekboxRef={saveRef}>
             <p>Запомнить меня</p>
           </Checkbox>
           <Link className={styles.forget} to='/forgot'>Забыли пароль?</Link>

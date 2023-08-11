@@ -17,22 +17,3 @@
     width: 100%;
     margin-top: 38px;
 }
-
-.buttonShowPass {
-    position: absolute;
-    background-color: transparent;
-    background-image: url(../../../assets/images/eye-slash.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 60px;
-    height: 60px;
-    bottom: 0;
-    right: 0;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.buttonShowPass.active {
-    background-image: url(../../../assets/images/eye.svg);
-}

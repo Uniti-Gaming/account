@@ -7,7 +7,7 @@ import { optionsFavorite, optionsSex } from '@/assets/data/options';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
 import PopupInput from '@/components/PopupInput/PopupInput';
-import PopupSelect from '@/components/PopupSelect/PopupSelect';
+import PopupSelect from '../PopupSelect/PopupSelect';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 
 const DifrentPopup: FC<PopupProps> = (props) => {

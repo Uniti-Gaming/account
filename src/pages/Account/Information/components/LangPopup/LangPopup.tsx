@@ -6,7 +6,7 @@ import { optionsLanguage } from '@/assets/data/options';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
-import PopupSelect from '@/components/PopupSelect/PopupSelect';
+import PopupSelect from '../PopupSelect/PopupSelect';
 
 const LangPopup: FC<PopupProps> = (props) => {
   const { currentUser } = useContext(AuthContext);
