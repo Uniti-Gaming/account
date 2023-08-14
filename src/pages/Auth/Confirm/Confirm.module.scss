@@ -1,0 +1,35 @@
+.text {
+    max-width: 270px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: -0.08px;
+}
+
+.mail {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 115%;
+    letter-spacing: -0.015em;
+    color: #C04BE8;
+    margin: 38px auto;
+}
+
+.repeat {
+    background-image: url(../../../asets/images/auth/repeat.svg);
+    background-repeat: no-repeat;
+    background-position: 283px 20px;
+    padding-inline: 0 45px !important;
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    margin-bottom: 24px !important;
+    &:hover {
+        background-color: transparent !important;
+    }
+}
+
+.cancel {
+    display: block;
+    margin: 20px 0 24px;
+    width: 100%;
+}

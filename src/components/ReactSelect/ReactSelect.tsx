@@ -12,7 +12,7 @@ interface ReactSelectProps extends SelectProps {
 
 const ReactSelect: FC<ReactSelectProps> = ({
   options, values, name, setValues, placeholder,
-  containerStyles, controlStyles }) => {
+  containerStyles, controlStyles, error }) => {
   const handleChange = (selectedOption: SingleValue<IOption>) => {
     if (selectedOption) {
       const newValue = (selectedOption as IOption).value;
@@ -38,6 +38,7 @@ const ReactSelect: FC<ReactSelectProps> = ({
           borderRadius: '6px',
           backgroundColor: 'transparent',
           border: state.isFocused ? '1px solid #635790' : '1px solid transparent',
+          borderColor: error? '#DE3341': 'transparent',
           '&:hover': {
             borderColor: '#635790',
             boxShadow: 'none',

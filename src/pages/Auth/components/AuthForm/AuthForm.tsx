@@ -9,9 +9,10 @@ interface AuthFormProps {
     children: JSX.Element | JSX.Element[]
     button: string
     loading: boolean
+    isValid: boolean
 }
 
-const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading }) => {
+const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading, isValid }) => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     handleSubmit();
@@ -20,7 +21,13 @@ const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading }
   return (
     <form onSubmit={onSubmit} className={styles.form} noValidate>
       {children}
-      <Button type='submit' text={button} fullPage={true} loading={loading} />
+      <Button
+        type='submit'
+        text={button}
+        fullPage={true}
+        loading={loading}
+        disabled={!isValid}
+      />
     </form>
   );
 };

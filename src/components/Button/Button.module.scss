@@ -38,6 +38,10 @@
         cursor: pointer;
         background-color: $primaryHoverColor;
     }
+    &.disabled:hover {
+        cursor: not-allowed;
+        background-color: $primaryColor;
+    }
     &.load {
         color: transparent;
 

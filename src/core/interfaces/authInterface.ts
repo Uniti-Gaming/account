@@ -1,4 +1,4 @@
-export interface ILoginForm {
+export interface ISigninForm {
     email: string;
     password: string;
     checkbox: boolean;
@@ -6,15 +6,13 @@ export interface ILoginForm {
 
 export interface ISignupForm {
     name: string;
-    password: string;
-    confirmPassword: string;
-    phone: string;
     email: string;
-    day: string;
-    month: string;
-    year: string;
+    number: string;
+    password: string;
+    birthday: string;
     city: string;
-    knows: string;
-    referal: string;
-    checkbox: boolean;
+    visit_from: string;
+    friend_ref?: string;
+    privacy_policy: true;
+    terms_of_use: true;
 }

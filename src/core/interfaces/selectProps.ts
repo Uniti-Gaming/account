@@ -2,11 +2,11 @@ import { IOption } from './optionInterface';
 
 export interface SelectProps {
     name: string;
+    error?: boolean;
     values: {
         [key: string]: string;
     };
     options: IOption[];
-    setValues: React.Dispatch<React.SetStateAction<{
-        [key: string]: string;
-    }>>;
+
+    setValues: (values: { [key: string]: string }) => void;
 }

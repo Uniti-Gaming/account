@@ -22,6 +22,7 @@ const Button: FC<ButtonProps> = ({
   children,
 }) => {
   const buttonClass = classNames(styles.button, {
+    [styles.disabled]: disabled,
     [styles.load]: loading,
     [styles.fullPage]: fullPage,
     [styles.small]: small,

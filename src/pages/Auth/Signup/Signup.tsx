@@ -1,7 +1,8 @@
 import { useRef, useState, MouseEvent } from 'react';
 
-import { useForm } from '@/core/hooks/useForm';
-import { optionsCity } from '@/assets/data/options';
+import { useFormWithValidation } from '@hooks/useFormWithValidation';
+import { signup } from '@services/authService';
+import { optionsAge, optionsCity, optionsMonth, optionsDay, optionsvisitFrom } from '@/assets/data/options';
 import styles from './SignUp.module.scss';
 import infoIcon from '@images/info.svg';
 
@@ -13,21 +14,17 @@ import AuthInput from '../components/AuthInput/AuthInput';
 import AuthSelect from '../components/AuthSelect/AuthSelect';
 import InputButton from '../components/InputButton/InputButton';
 import InfoToolTip from '../components/InfoToolTip/InfoToolTip';
+import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
+import AuthInputWithMask from '../components/AuthInput/AuthInputWithMask';
 
 const mainUrl = import.meta.env.VITE_MAIN_URL;
-
-const defaultValues = {
-
-};
 
 const SignUp = () => {
   const agreeRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [showInfo, setShowInfo] = useState({
-    email: false,
-    ref: false,
-  });
-  const { values, handleChange, setValues } = useForm(defaultValues);
+  const [showInfo, setShowInfo] = useState({ email: false, ref: false });
+  const { values, handleChange, errors, isValid, setValuesAndValidate } = useFormWithValidation({});
 
   const toggleShowInfo = (evt: MouseEvent, name: 'email' | 'ref') => {
     evt.stopPropagation();
@@ -37,9 +34,36 @@ const SignUp = () => {
     });
   };
 
+  const handleCheckbox = (evt: MouseEvent) => {
+    if (evt.target && 'checked' in evt.target) {
+      setValuesAndValidate({...values, checkbox: evt.target.checked as string});
+    }
+  };
+
   const onSubmit = () => {
-    setLoading(true);
-    console.log(agreeRef.current?.checked);
+    
+    if(agreeRef.current?.checked) {
+      setLoading(true);
+      signup({
+        name: values.name,
+        email: values.email,
+        number: values.number,
+        password: values.password,
+        birthday: `${values.day}-${values.month}-${values.year}`,
+        city: values.city,
+        visit_from: values.visitFrom,
+        friend_ref: values.friendRef,
+        privacy_policy: true,
+        terms_of_use: true,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   return (
@@ -50,7 +74,12 @@ const SignUp = () => {
         footnote: 'Уже есть учётная запись?',
         link: 'Войти',
       }}>
-      <AuthForm loading={isLoading} handleSubmit={onSubmit} button='Войти в систему'>
+      <AuthForm
+        loading={isLoading}
+        handleSubmit={onSubmit}
+        button='Войти в систему'
+        isValid={isValid}
+      >
         <AuthLabel text='Имя' required>
           <AuthInput
             type='text'
@@ -58,34 +87,46 @@ const SignUp = () => {
             value={values.name || ''}
             onChange={handleChange}
             placeholder='Введите имя'
+            maxLength={30}
+            minLength={2}
+            error={!!errors.name}
+            required
           />
+          <ErrorMessage message={errors.name} />
         </AuthLabel>
         <AuthLabel text='Пароль' required>
-          <AuthInput
-            type='password'
-            name='password'
-            value={values.password || ''}
+          <PasswordInput
             onChange={handleChange}
+            name='password'
             placeholder='Введите пароль'
+            value={values.password || ''}
+            error={!!errors.password}
           />
+          <ErrorMessage message={errors.password} />
         </AuthLabel>
         <AuthLabel text='Подтвердить пароль' required>
-          <AuthInput
-            type='password'
-            name='password2'
-            value={values.password2 || ''}
+          <PasswordInput
+            name='confirmPassword'
+            value={values.confirmPassword || ''}
             onChange={handleChange}
-            placeholder='Введите пароль'
+            placeholder='Повторите пароль'
+            error={!!errors.confirmPassword}
           />
+          <ErrorMessage message={errors.confirmPassword} />
         </AuthLabel>
         <AuthLabel text='Номер телефона' required>
-          <AuthInput
-            type='phone'
-            name='phone'
-            value={values.phone || ''}
+          <AuthInputWithMask
+            type='tel'
+            name='number'
+            mask={'+\\9\\93(99)99-99-99'}
+            value={values.number || ''}
             onChange={handleChange}
             placeholder='Введите номер телефона'
+            error={!!errors.number}
+            minLength={10}
+            required
           />
+          <ErrorMessage message={errors.number} />
         </AuthLabel>
         <AuthLabel text='E-mail' required>
           <AuthInput
@@ -94,7 +135,10 @@ const SignUp = () => {
             value={values.email || ''}
             onChange={handleChange}
             placeholder='Введите адрес электронной почты'
+            error={!!errors.email}
+            required
           />
+          <ErrorMessage message={errors.email} />
           <InputButton handleClick={(evt) => toggleShowInfo(evt, 'email')}>
             <img src={infoIcon} alt='Информация' />
           </InputButton>
@@ -105,54 +149,75 @@ const SignUp = () => {
         <AuthLabel text='Дата рождения' required>
           <div className={styles.date}>
             <AuthSelect
-              options={optionsCity}
+              options={optionsDay}
               values={values}
               name='day'
-              setValues={setValues}
+              setValues={setValuesAndValidate}
               placeholder='День'
+              error={!!errors.day}
             />
             <AuthSelect
-              options={optionsCity}
+              options={optionsMonth}
               values={values}
               name='month'
-              setValues={setValues}
+              setValues={setValuesAndValidate}
               placeholder='Месяц'
+              error={!!errors.month}
             />
             <AuthSelect
-              options={optionsCity}
+              options={optionsAge}
               values={values}
               name='year'
-              setValues={setValues}
+              setValues={setValuesAndValidate}
               placeholder='Год'
+              error={!!errors.year}
             />
           </div>
+          <>
+            {errors.day || errors.month || errors.year && (
+              <ErrorMessage message='Обязательное поле' />
+            )}
+          </>
         </AuthLabel>
         <AuthLabel text='Город' required>
           <AuthSelect
             options={optionsCity}
             values={values}
             name='city'
-            setValues={setValues}
+            setValues={setValuesAndValidate}
             placeholder='Выберите из списка'
+            error={!!errors.city}
           />
+          <>
+            {errors.city && (<ErrorMessage message='Обязательное поле' />)}
+          </>
         </AuthLabel>
         <AuthLabel text='Как вы о нас узнали' required>
           <AuthSelect
-            options={optionsCity}
+            options={optionsvisitFrom}
             values={values}
-            name='how'
-            setValues={setValues}
+            name='visitFrom'
+            setValues={setValuesAndValidate}
             placeholder='Выберите из списка'
+            error={!!errors.visitFrom}
           />
+          <>
+            {errors.visitFrom && (<ErrorMessage message='Обязательное поле' />)}
+          </>
         </AuthLabel>
         <AuthLabel text='Реферальный код'>
-          <AuthInput
+          <AuthInputWithMask
             type='text'
-            name='ref'
-            value={values.ref || ''}
+            name='friendRef'
+            value={values.friendRef || ''}
             onChange={handleChange}
             placeholder='Введите код приглашения'
+            error={!!errors.friendRef}
+            mask='****-****-****-****'
           />
+          <>
+            {errors.friendRef && (<ErrorMessage message='Неверный реферальный код' />)}
+          </>
           <InputButton handleClick={(evt) => toggleShowInfo(evt, 'ref')}>
             <img src={infoIcon} alt='Информация' />
           </InputButton>
@@ -161,7 +226,11 @@ const SignUp = () => {
           </InfoToolTip>
         </AuthLabel>
         <div className={styles.checkboxWraper}>
-          <Checkbox chekboxRef={agreeRef}>
+          <Checkbox
+            chekboxRef={agreeRef}
+            onClick={handleCheckbox}
+            required
+          >
             <p className={styles.checkboxText}>
               Я согласен с
               <a className={styles.checkboxLink} href={`${mainUrl}/privacy-policy`}>политикой конфиденциальности</a>

@@ -2,24 +2,28 @@ import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { signin } from '@services/authService';
-import { useForm } from '@/core/hooks/useForm';
+import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import styles from './Signin.module.scss';
-import eye from '@images/eye.svg';
-import eyeSlash from '@images/eye-slash.svg';
 
 import Checkbox from '@/components/Checkbox/Checkbox';
 import MainAuth from '../components/MainAuth/MainAuth';
 import AuthInput from '../components/AuthInput/AuthInput';
 import AuthLabel from '../components/AuthLabel/AuthLabel';
 import AuthForm from '../components/AuthForm/AuthForm';
-import InputButton from '../components/InputButton/InputButton';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
+import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 
 const Signin = () => {
   const saveRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [showPass, setShowPass] = useState<boolean>(false);
+  const [serverError, setServerError] = useState<boolean>(false);
+  const { values, handleChange, errors, isValid } = useFormWithValidation({});
 
-  const { values, handleChange } = useForm({});
+  const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if(serverError) setServerError(false);
+    handleChange(evt);
+  };
+  
   const onSubmit = () => {
     setLoading(true);
     signin({
@@ -34,6 +38,7 @@ const Signin = () => {
       .catch((err) => {
         // eslint-disable-next-line no-console
         console.log(err);
+        setServerError(true);
       })
       .finally(() => {
         setLoading(false);
@@ -47,27 +52,38 @@ const Signin = () => {
         footnote: 'Нет аккаунта?',
         link: 'Регистрация',
       }} >
-      <AuthForm loading={isLoading} handleSubmit={onSubmit} button='Войти в систему'>
+      <AuthForm
+        loading={isLoading}
+        handleSubmit={onSubmit}
+        button='Войти в систему'
+        isValid={isValid}
+      >
         <AuthLabel text='E-mail'>
           <AuthInput
-            type='text'
+            type='email'
             name='email'
             value={values.email || ''}
-            onChange={handleChange}
+            onChange={onChange}
             placeholder='Введите адрес электронной почты'
+            error={!!errors.email || serverError}
           />
+          <>
+            {serverError && (<ErrorMessage message='Неверный адрес электронной почты' />)}
+          </>
+          <ErrorMessage message={errors.email} />
         </AuthLabel>
         <AuthLabel text='Пароль'>
-          <AuthInput
-            type={showPass? 'text' : 'password'}
+          <PasswordInput
+            onChange={onChange}
             name='password'
-            value={values.password || ''}
-            onChange={handleChange}
             placeholder='Введите пароль'
+            value={values.password || ''}
+            error={!!errors.password || serverError}
           />
-          <InputButton handleClick={() => setShowPass(!showPass)}>
-            <img src={showPass ? eye : eyeSlash} alt='иконка с глазом' />
-          </InputButton>
+          <>
+            {serverError && (<ErrorMessage message='Неверный пароль' />)}
+          </>
+          <ErrorMessage message={errors.password} />
         </AuthLabel>
         <div className={styles.wraper}>
           <Checkbox chekboxRef={saveRef}>

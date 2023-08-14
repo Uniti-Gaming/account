@@ -1,9 +1,15 @@
+import { FC, InputHTMLAttributes } from 'react';
+import classNames from 'classnames';
+
 import styles from './AuthInput.module.scss';
 
+export interface AuthInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  error?: boolean;
+}
 
-const AuthInput= ({ ...props }) => {
+const AuthInput: FC<AuthInputProps> = ({ error, ...props }) => {
   return (
-    <input {...props} className={styles.input} />
+    <input {...props} className={classNames(styles.input, { [styles.error]: error })} />
   );
 };
 

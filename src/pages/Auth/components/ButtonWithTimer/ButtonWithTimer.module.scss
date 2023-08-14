@@ -1,0 +1,18 @@
+.button {
+    width: 100%;
+    margin: 54px 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.08px;
+    font-size: inherit;
+    padding: 20px 0;
+    cursor: pointer;
+}
