@@ -56,8 +56,9 @@ const SignUp = () => {
 
   const onSubmit = async (evt: React.FormEvent) => {
     const form = evt.target as HTMLFormElement;
-    if (form.checkValidity()) {
+    if (form.checkValidity() && values.password === values.confirmPassword) {
       setLoading(true);
+      console.log(values);
       signup({
         name: values.name,
         email: values.email,
@@ -82,12 +83,15 @@ const SignUp = () => {
         .finally(() => setLoading(false));
     } else {
       const newErrors: { [key: string]: string } = {};
+      if(values.password !== values.confirmPassword) {
+        newErrors.confirmPassword = 'Пароли не совпадают';
+      }
       Object.keys(values).forEach(key => {
         if (values[key] === '') {
           newErrors[key] = 'Обязательное поле';
         }
       });
-      await setErrors(newErrors);
+      await setErrors({...errors, ...newErrors});
 
       const elementPosition = document.getElementById('error')?.getBoundingClientRect().top;
       if (elementPosition) {
@@ -224,7 +228,7 @@ const SignUp = () => {
             onChange={handleChange}
             placeholder='Введите код приглашения'
             error={!!errors.friendRef}
-            mask='****-****-****-****'
+            mask='****-****-****'
           />
           <>
             {errors.friendRef && (<ErrorMessage message='Неверный реферальный код' />)}

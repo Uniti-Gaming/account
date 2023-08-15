@@ -7,7 +7,7 @@ interface FormValues {
 interface UseFormReturn {
   values: FormValues;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  setValues: React.Dispatch<React.SetStateAction<FormValues>>;
+  setValues: (values: FormValues) => void;
 }
 
 export function useForm(inputValues: FormValues = {}): UseFormReturn {

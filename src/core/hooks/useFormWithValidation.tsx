@@ -1,6 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-
-let form: HTMLFormElement | null = null;
+import { checkValidity } from '../utils/checkValidity';
 
 interface InputValues {
   [key: string]: string;
@@ -14,34 +13,27 @@ interface FormWithValidation {
   values: InputValues;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errors: Errors;
-  isValid: boolean;
   setValues: (values: InputValues) => void;
   setErrors: (errors: Errors) => void;
 }
 
-export function useFormWithValidation(inputValues: InputValues = {}, initialValid = false): FormWithValidation {
+export function useFormWithValidation(inputValues: InputValues = {}): FormWithValidation {
   const [values, setValues] = useState<InputValues>(inputValues);
   const [errors, setErrors] = useState<Errors>({});
-  const [isValid, setIsValid] = useState<boolean>(initialValid);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
+    const { name, value } = event.target;
+    setErrors({ ...errors, [name]: checkValidity(name, value)});
+    setValues({ ...values, [name]: value });
 
     if (name === 'confirmPassword') {
       if (values.password !== value) {
-        target.setCustomValidity('Пароли не совпадают');
+        setErrors({ ...errors, confirmPassword: 'Пароли не совпадают' });
       } else {
-        target.setCustomValidity('');
+        setErrors({ ...errors, confirmPassword: '' });
       }
     }
-
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
-    if (!form) form = target.closest('form');
-    if (form) setIsValid(form.checkValidity());
   };
 
-  return { values, handleChange, errors, isValid, setValues, setErrors };
+  return { values, handleChange, errors, setValues, setErrors };
 }

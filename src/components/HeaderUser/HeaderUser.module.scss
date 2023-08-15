@@ -53,3 +53,10 @@
     min-width: 272px;
     width: 100%;
 }
+
+@media screen and (max-width: 1010px) {
+    .button p {
+        max-width: 80px;
+        font-size: 14px;
+    }
+}

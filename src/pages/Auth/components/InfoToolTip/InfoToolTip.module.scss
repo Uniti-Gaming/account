@@ -7,7 +7,7 @@
     border-radius: 6px;
     position: absolute;
     top: 26px;
-    right: -100vw;
+    // right: -100vw;
     transition: all .2s ease-in-out;
     z-index: 2;
     font-size: 13px;
@@ -15,9 +15,11 @@
     line-height: 110%;
     letter-spacing: -0.195px;
     margin: 0;
+    display: none;
 
     &.open {
         right: -285px;
+        display: block;
     }
 }
 
