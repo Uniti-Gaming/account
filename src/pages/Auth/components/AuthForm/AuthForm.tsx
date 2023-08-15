@@ -5,17 +5,17 @@ import styles from './AuthForm.module.scss';
 import Button from '@/components/Button/Button';
 
 interface AuthFormProps {
-    handleSubmit: () => void
+    handleSubmit: (event: React.FormEvent) => void
     children: JSX.Element | JSX.Element[]
     button: string
     loading: boolean
-    isValid: boolean
+    disabled?: boolean
 }
 
-const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading, isValid }) => {
+const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading, disabled }) => {
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    handleSubmit();
+    handleSubmit(event);
   };
 
   return (
@@ -26,7 +26,7 @@ const AuthForm: FC<AuthFormProps> = ({ children, handleSubmit, button, loading, 
         text={button}
         fullPage={true}
         loading={loading}
-        disabled={!isValid}
+        disabled={disabled}
       />
     </form>
   );

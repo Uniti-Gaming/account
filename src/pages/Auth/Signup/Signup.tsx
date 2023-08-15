@@ -1,8 +1,8 @@
 import { useRef, useState, MouseEvent } from 'react';
 
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
+import { optionsCity, optionsvisitFrom } from '@/assets/data/options';
 import { signup } from '@services/authService';
-import { optionsAge, optionsCity, optionsMonth, optionsDay, optionsvisitFrom } from '@/assets/data/options';
 import styles from './SignUp.module.scss';
 import infoIcon from '@images/info.svg';
 
@@ -17,14 +17,28 @@ import InfoToolTip from '../components/InfoToolTip/InfoToolTip';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
 import AuthInputWithMask from '../components/AuthInput/AuthInputWithMask';
+import DateOfBirthSelects from '../components/DateOfBirthSelects/DateOfBirthSelects';
 
 const mainUrl = import.meta.env.VITE_MAIN_URL;
+const initialState = {
+  name: '',
+  email: '',
+  number: '',
+  password: '',
+  confirmPassword: '',
+  day: '',
+  month: '',
+  year: '',
+  city: '',
+  visitFrom: '',
+  checkbox: '',
+};
 
 const SignUp = () => {
   const agreeRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState({ email: false, ref: false });
-  const { values, handleChange, errors, isValid, setValuesAndValidate } = useFormWithValidation({});
+  const { values, handleChange, errors, setValues, setErrors } = useFormWithValidation(initialState);
 
   const toggleShowInfo = (evt: MouseEvent, name: 'email' | 'ref') => {
     evt.stopPropagation();
@@ -36,18 +50,18 @@ const SignUp = () => {
 
   const handleCheckbox = (evt: MouseEvent) => {
     if (evt.target && 'checked' in evt.target) {
-      setValuesAndValidate({...values, checkbox: evt.target.checked as string});
+      setValues({ ...values, checkbox: evt.target.checked as string });
     }
   };
 
-  const onSubmit = () => {
-    
-    if(agreeRef.current?.checked) {
+  const onSubmit = async (evt: React.FormEvent) => {
+    const form = evt.target as HTMLFormElement;
+    if (form.checkValidity()) {
       setLoading(true);
       signup({
         name: values.name,
         email: values.email,
-        number: values.number,
+        number: values.number.replace(/[^\d+]/g, ''),
         password: values.password,
         birthday: `${values.day}-${values.month}-${values.year}`,
         city: values.city,
@@ -61,8 +75,27 @@ const SignUp = () => {
         })
         .catch((err) => {
           console.log(err);
+          if (err.errors) {
+            setErrors(err.errors);
+          }
         })
         .finally(() => setLoading(false));
+    } else {
+      const newErrors: { [key: string]: string } = {};
+      Object.keys(values).forEach(key => {
+        if (values[key] === '') {
+          newErrors[key] = 'Обязательное поле';
+        }
+      });
+      await setErrors(newErrors);
+
+      const elementPosition = document.getElementById('error')?.getBoundingClientRect().top;
+      if (elementPosition) {
+        window.scrollBy({
+          top: elementPosition - 200,
+          behavior: 'smooth',
+        });
+      }
     }
   };
 
@@ -78,12 +111,13 @@ const SignUp = () => {
         loading={isLoading}
         handleSubmit={onSubmit}
         button='Войти в систему'
-        isValid={isValid}
+        disabled={agreeRef.current?.checked ? false : true}
       >
         <AuthLabel text='Имя' required>
           <AuthInput
             type='text'
             name='name'
+            pattern='[A-Za-z]+'
             value={values.name || ''}
             onChange={handleChange}
             placeholder='Введите имя'
@@ -92,7 +126,9 @@ const SignUp = () => {
             error={!!errors.name}
             required
           />
-          <ErrorMessage message={errors.name} />
+          <>
+            {errors.name && (<ErrorMessage message={errors.name} />)}
+          </>
         </AuthLabel>
         <AuthLabel text='Пароль' required>
           <PasswordInput
@@ -102,7 +138,9 @@ const SignUp = () => {
             value={values.password || ''}
             error={!!errors.password}
           />
-          <ErrorMessage message={errors.password} />
+          <>
+            {errors.password && (<ErrorMessage message={errors.password} />)}
+          </>
         </AuthLabel>
         <AuthLabel text='Подтвердить пароль' required>
           <PasswordInput
@@ -112,7 +150,9 @@ const SignUp = () => {
             placeholder='Повторите пароль'
             error={!!errors.confirmPassword}
           />
-          <ErrorMessage message={errors.confirmPassword} />
+          <>
+            {errors.confirmPassword && (<ErrorMessage message={errors.confirmPassword} />)}
+          </>
         </AuthLabel>
         <AuthLabel text='Номер телефона' required>
           <AuthInputWithMask
@@ -123,7 +163,6 @@ const SignUp = () => {
             onChange={handleChange}
             placeholder='Введите номер телефона'
             error={!!errors.number}
-            minLength={10}
             required
           />
           <ErrorMessage message={errors.number} />
@@ -146,47 +185,17 @@ const SignUp = () => {
             Вы можете узнать адрес своей электронной почты в приложении Google Play или App Store.
           </InfoToolTip>
         </AuthLabel>
-        <AuthLabel text='Дата рождения' required>
-          <div className={styles.date}>
-            <AuthSelect
-              options={optionsDay}
-              values={values}
-              name='day'
-              setValues={setValuesAndValidate}
-              placeholder='День'
-              error={!!errors.day}
-            />
-            <AuthSelect
-              options={optionsMonth}
-              values={values}
-              name='month'
-              setValues={setValuesAndValidate}
-              placeholder='Месяц'
-              error={!!errors.month}
-            />
-            <AuthSelect
-              options={optionsAge}
-              values={values}
-              name='year'
-              setValues={setValuesAndValidate}
-              placeholder='Год'
-              error={!!errors.year}
-            />
-          </div>
-          <>
-            {errors.day || errors.month || errors.year && (
-              <ErrorMessage message='Обязательное поле' />
-            )}
-          </>
-        </AuthLabel>
+        <DateOfBirthSelects values={values} setValues={setValues} errors={errors} setErrors={setErrors} />
         <AuthLabel text='Город' required>
           <AuthSelect
             options={optionsCity}
             values={values}
             name='city'
-            setValues={setValuesAndValidate}
+            setValues={setValues}
             placeholder='Выберите из списка'
             error={!!errors.city}
+            setErrors={setErrors}
+            errors={errors}
           />
           <>
             {errors.city && (<ErrorMessage message='Обязательное поле' />)}
@@ -197,9 +206,11 @@ const SignUp = () => {
             options={optionsvisitFrom}
             values={values}
             name='visitFrom'
-            setValues={setValuesAndValidate}
+            setValues={setValues}
             placeholder='Выберите из списка'
             error={!!errors.visitFrom}
+            setErrors={setErrors}
+            errors={errors}
           />
           <>
             {errors.visitFrom && (<ErrorMessage message='Обязательное поле' />)}
@@ -222,10 +233,10 @@ const SignUp = () => {
             <img src={infoIcon} alt='Информация' />
           </InputButton>
           <InfoToolTip isOpen={showInfo.ref} onClose={() => setShowInfo({ ...showInfo, ref: false })}>
-            Введите код приглашения, если он у вас есть. Это даст вам бонусы. 
+            Введите код приглашения, если он у вас есть. Это даст вам бонусы.
           </InfoToolTip>
         </AuthLabel>
-        <div className={styles.checkboxWraper}>
+        <div className={styles.checkboxWrapper}>
           <Checkbox
             chekboxRef={agreeRef}
             onClick={handleCheckbox}

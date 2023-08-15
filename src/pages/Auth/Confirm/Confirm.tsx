@@ -2,7 +2,7 @@ import { useState, useRef, useContext, FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
-import { text } from './text';
+import { title } from './text';
 import styles from './Confirm.module.scss';
 
 import Button from '@/components/Button/Button';
@@ -25,12 +25,16 @@ const Confirm: FC<ConfirmProps> = ({type}) => {
     console.log(digits);
   };
   return (
-    <MainAuth text={{ title: text.title[type] }} >
+    <MainAuth text={{ title: title[type] }} >
       <p className={styles.text}>
         Введите проверочный код, отправленный на:
       </p>
       <p className={styles.mail}>{currentUser[type]}</p>
-      <AuthForm handleSubmit={onSubmit} button='Далее' loading={false}>
+      <AuthForm
+        handleSubmit={onSubmit}
+        button='Далее'
+        loading={false}
+      >
         <label className='label'>
           <PinInput ref={ref} digits={digits} onChange={setDigits} />
         </label>

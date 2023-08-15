@@ -5,16 +5,20 @@ import AuthForm from '../components/AuthForm/AuthForm';
 import AuthLabel from '../components/AuthLabel/AuthLabel';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
 
-const Forgot = () => {
+const NewPassword = () => {
   const { values, handleChange } = useForm({});
   const onSubmit = () => { };
 
   return (
     <MainAuth text={{ title: 'Новый пароля' }}>
-      <AuthForm handleSubmit={onSubmit} button='Сохранить' loading={false}>
+      <AuthForm
+        handleSubmit={onSubmit}
+        button='Сохранить'
+        loading={false}
+      >
         <AuthLabel text='Новый пароль*'>
           <PasswordInput
-            handleChange={handleChange}
+            onChange={handleChange}
             name='password'
             placeholder='Введите новый пароль'
             value={values.password || ''}
@@ -22,7 +26,7 @@ const Forgot = () => {
         </AuthLabel>
         <AuthLabel text='Подтвердите новый пароль*'>
           <PasswordInput
-            handleChange={handleChange}
+            onChange={handleChange}
             name='password2'
             placeholder='Повторите пароль'
             value={values.password2 || ''}
@@ -34,4 +38,4 @@ const Forgot = () => {
   );
 };
 
-export default Forgot;
+export default NewPassword;

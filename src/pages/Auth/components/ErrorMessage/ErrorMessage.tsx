@@ -8,7 +8,7 @@ interface ErrorMessageProps {
 
 const ErrorMessage: FC<ErrorMessageProps> = ({message}) => {
   return (
-    <span className={styles.error} title={message}>{message}</span>
+    <span id='error' className={styles.error} title={message}>{message}</span>
   );
 };
 

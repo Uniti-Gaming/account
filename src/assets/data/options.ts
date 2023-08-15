@@ -28,12 +28,12 @@ export const optionsSex: IOption[] = [
   { value: 'Женский', label: 'Женский' },
 ];
 export const optionsvisitFrom: IOption[] = [
-  { value: 'friends', label: 'Узнал от друзей' },
-  { value: 'instagram', label: 'Инстаграм' },
-  { value: 'tiktok', label: 'Тик-Ток' },
-  { value: 'advertisement', label: 'Увидел рекламу' },
-  { value: 'media', label: 'СМИ (новостные сайты, доски объявлений)' },
-  { value: 'other', label: 'Другое' },
+  { value: 'Узнал от друзей', label: 'Узнал от друзей' },
+  { value: 'Инстаграм', label: 'Инстаграм' },
+  { value: 'Тик-Ток', label: 'Тик-Ток' },
+  { value: 'Увидел рекламу', label: 'Увидел рекламу' },
+  { value: 'СМИ (новостные сайты, доски объявлений)', label: 'СМИ (новостные сайты, доски объявлений)' },
+  { value: 'Другое', label: 'Другое' },
 ];
 export const optionsCity: IOption[] = [
   { value: 'Ашхабад', label: 'Ашхабад' },

@@ -17,32 +17,50 @@ const Signin = () => {
   const saveRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [serverError, setServerError] = useState<boolean>(false);
-  const { values, handleChange, errors, isValid } = useFormWithValidation({});
+  const { values, handleChange, errors, setErrors } = useFormWithValidation({
+    email: '',
+    password: '',
+  });
 
   const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if(serverError) setServerError(false);
+    if (serverError) setServerError(false);
     handleChange(evt);
   };
-  
-  const onSubmit = () => {
-    setLoading(true);
-    signin({
-      email: values.email,
-      password: values.password,
-      checkbox: !!saveRef.current?.checked,
-    })
-      .then((res) => {
-        // eslint-disable-next-line no-console
-        console.log(res);
+
+  const onSubmit = (evt: React.FormEvent) => {
+    const form = evt.target as HTMLFormElement;
+    if (form.checkValidity()) {
+      setLoading(true);
+      signin({
+        email: values.email,
+        password: values.password,
+        checkbox: !!saveRef.current?.checked,
       })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-        setServerError(true);
-      })
-      .finally(() => {
-        setLoading(false);
+        .then((res) => {
+          // eslint-disable-next-line no-console
+          console.log(res);
+        })
+        .catch((err) => {
+          // eslint-disable-next-line no-console
+          console.log(err);
+          if (err.errors) {
+            setErrors(err.errors);
+          } else {
+            setServerError(true);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      const newErrors: { [key: string]: string } = {};
+      Object.keys(values).forEach(key => {
+        if (values[key] === '') {
+          newErrors[key] = 'Обязательное поле';
+        }
       });
+      setErrors(newErrors);
+    }
   };
   return (
     <MainAuth
@@ -56,7 +74,6 @@ const Signin = () => {
         loading={isLoading}
         handleSubmit={onSubmit}
         button='Войти в систему'
-        isValid={isValid}
       >
         <AuthLabel text='E-mail'>
           <AuthInput
@@ -69,6 +86,7 @@ const Signin = () => {
           />
           <>
             {serverError && (<ErrorMessage message='Неверный адрес электронной почты' />)}
+            {errors.email && (<ErrorMessage message={errors.email} />)}
           </>
           <ErrorMessage message={errors.email} />
         </AuthLabel>
@@ -82,6 +100,7 @@ const Signin = () => {
           />
           <>
             {serverError && (<ErrorMessage message='Неверный пароль' />)}
+            {errors.password && (<ErrorMessage message={errors.password} />)}
           </>
           <ErrorMessage message={errors.password} />
         </AuthLabel>

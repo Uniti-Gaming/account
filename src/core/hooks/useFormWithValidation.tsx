@@ -15,7 +15,8 @@ interface FormWithValidation {
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   errors: Errors;
   isValid: boolean;
-  setValuesAndValidate: (values: InputValues) => void;
+  setValues: (values: InputValues) => void;
+  setErrors: (errors: Errors) => void;
 }
 
 export function useFormWithValidation(inputValues: InputValues = {}, initialValid = false): FormWithValidation {
@@ -42,10 +43,5 @@ export function useFormWithValidation(inputValues: InputValues = {}, initialVali
     if (form) setIsValid(form.checkValidity());
   };
 
-  const setValuesAndValidate = (values: InputValues) => {
-    setValues(values);
-    if (form) setIsValid(form.checkValidity());
-  };
-
-  return { values, handleChange, errors, isValid, setValuesAndValidate };
+  return { values, handleChange, errors, isValid, setValues, setErrors };
 }

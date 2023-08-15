@@ -10,7 +10,8 @@ import Tariff from './pages/Account/Tariff/Tariff';
 import Signin from './pages/Auth/Signin/Signin';
 import SignUp from './pages/Auth/Signup/Signup';
 import Confirm from './pages/Auth/Confirm/Confirm';
-import Forgot from './pages/Auth/Forgot/Forgot';
+import NewPassword from './pages/Auth/NewPassword/NewPassword';
+import Success from './pages/Auth/Success/Success';
 
 const router = createHashRouter([
   {
@@ -29,9 +30,12 @@ const router = createHashRouter([
       },
       { path: '/signin', element: <Signin /> },
       { path: '/signup', element: <SignUp /> },
-      { path: '/forgot', element: <Forgot /> },
+      { path: '/new-password', element: <NewPassword /> },
       { path: '/confirm-email', element: <Confirm type='email' /> },
       { path: '/confirm-phone', element: <Confirm type='phone' /> },
+      { path: '/success-phone', element: <Success type='phone' /> },
+      { path: '/success-email', element: <Success type='email' /> },
+      { path: '/success-password', element: <Success type='password' /> },
     ],
   },
 ]);

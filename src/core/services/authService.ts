@@ -13,6 +13,9 @@ const baseOptions: RequestInit = {
 
 const getResponseData = async (res: Response) => {
   if (!res.ok) {
+    if(res.status === 400){
+      return await res.json();
+    }
     return Promise.reject(res);
   }
   return await res.json();
