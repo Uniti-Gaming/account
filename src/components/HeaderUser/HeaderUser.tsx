@@ -1,7 +1,6 @@
-import { MouseEvent, useContext, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
-
-import { AuthContext } from '@/core/contexts/AuthContext';
 
 import styles from './HeaderUser.module.scss';
 import userIcon from '@images/user-icon.svg';
@@ -13,9 +12,15 @@ import exitIcon from '@images/exit.svg';
 
 import DropDown from '../DropDown/DropDown';
 import NavLinkWidthIcon from '../NavLinkWidthIcon/NavLinkWidthIcon';
+import HeaderUserInfo from '../HeaderUserInfo/HeaderUserInfo';
+import { IUser } from '@/core/interfaces/userInterface';
 
-const HeaderUser = () => {
-  const { currentUser } = useContext(AuthContext);
+interface HeaderUserProps {
+  currentUser: IUser | null;
+}
+
+const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
+  const location = useLocation();
   const [isOpen, setOpen] = useState(false);
 
   const toggleOpen = (e: MouseEvent) => {
@@ -23,62 +28,70 @@ const HeaderUser = () => {
     setOpen(!isOpen);
   };
 
-  const handleNavigationClick = () => {
+  useEffect(() => {
     setOpen(false);
-  };
+  }, [location]);
 
   return (
     <>
       <button
         className={styles.button}
         onClick={toggleOpen}
-        title={currentUser.name}
+        title={currentUser ? currentUser.name : 'Учётная запись'}
       >
         <img src={userIcon} alt='пак-мэн' />
-        <p>{currentUser.name}</p>
-        <img
-          className={classNames(styles.arrow, { [styles.active]: isOpen })}
-          src={arowIcon}
-          alt='стрелка'
-        />
+        <p>{currentUser ? currentUser.name : 'Учётная запись'}</p>
+        {currentUser && (
+          <img
+            className={classNames(styles.arrow, { [styles.active]: isOpen })}
+            src={arowIcon}
+            alt='стрелка'
+          />
+        )}
       </button>
-      <DropDown
-        style={{ marginTop: '20px', padding: '22px 30px' }}
-        isOpen={isOpen}
-        onClose={() => setOpen(false)}
-      >
-        <h2 className={styles.name}>ID: {currentUser.id}</h2>
-        <p className={styles.email}>{currentUser.email}</p>
-        <nav className={styles.navigation}>
-          <NavLinkWidthIcon
-            path='/'
-            text='Учётная запись'
-            icon={userSquare}
-            style={{ opacity: 1 }}
-            onClick={handleNavigationClick}
-          />
-          <NavLinkWidthIcon
-            path='/'
-            text='Пополнить баланс'
-            icon={wallet}
-            style={{ opacity: 1 }}
-            onClick={handleNavigationClick}
-          />
-          <NavLinkWidthIcon
-            path='/'
-            text='Тарифы и ключи'
-            icon={tariffIcon}
-            style={{ opacity: 1 }}
-            onClick={handleNavigationClick}
-          />
-          <NavLinkWidthIcon
-            path='/'
-            text='Выйти из аккаунта'
-            icon={exitIcon}
-            style={{ opacity: 1, color: '#DE3341' }}
-          />
-        </nav>
-      </DropDown>
+      {currentUser ? (
+        <DropDown
+          onClose={() => setOpen(false)}
+          className={classNames(styles.dropdownUser, { [styles.open]: isOpen })}
+        >
+          <HeaderUserInfo variable='desktop' />
+          <nav className={styles.navigation}>
+            <h4 className={styles.navTitle}>Мой профиль</h4>
+            <NavLinkWidthIcon
+              path='/'
+              text='Учётная запись'
+              icon={userSquare}
+              style={{ opacity: 1 }}
+            />
+            <NavLinkWidthIcon
+              path='/'
+              text='Пополнить баланс'
+              icon={wallet}
+              style={{ opacity: 1 }}
+            />
+            <NavLinkWidthIcon
+              path='/tariff'
+              text='Тарифы и ключи'
+              icon={tariffIcon}
+              style={{ opacity: 1 }}
+            />
+            <NavLinkWidthIcon
+              path='/'
+              text='Выйти из аккаунта'
+              icon={exitIcon}
+              style={{ opacity: 1, color: '#DE3341' }}
+            />
+          </nav>
+        </DropDown>
+      ) : (
+        <DropDown
+          onClose={() => setOpen(false)}
+          className={classNames(styles.dropdownSign, { [styles.open]: isOpen })}
+        >
+          <Link to='/signin' className={styles.link}>Войти</Link>
+          <Link to='/signup' className={styles.link}>Регистрация</Link>
+        </DropDown>
+      )}
     </>
   );
 };

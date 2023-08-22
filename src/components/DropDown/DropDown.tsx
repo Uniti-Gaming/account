@@ -1,29 +1,22 @@
 import { FC, useEffect } from 'react';
-import classNames from 'classnames';
-
-import styles from './DropDown.module.scss';
-
 
 interface DropDownProps {
-    children: JSX.Element[];
-    isOpen: boolean;
+    children: JSX.Element[] | JSX.Element;
     onClose: () => void;
-    style?: React.CSSProperties;
+    className: string
 }
-const DropDown: FC<DropDownProps> = ({ children, style, isOpen, onClose }) => {
-
+const DropDown: FC<DropDownProps> = ({ children, className, onClose }) => {
   useEffect(() => {
     document.addEventListener('click', onClose);
     return () => {
       document.removeEventListener('click', onClose);
     };
-  }, [isOpen, onClose]);
+  }, [onClose]);
     
   return (
     <div
-      className={classNames(styles.dropdown, { [styles.open]: isOpen })}
+      className={className}
       onClick={e => e.stopPropagation()}
-      style={style}
     >
       {children}
     </div>

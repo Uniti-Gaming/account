@@ -1,25 +1,20 @@
 export interface IUser {
     name: string;
-    id: string;
+    user_id: string;
     email: string;
-    phone: string;
-    city: string;
-    lang: string;
-    ref: string;
-    safety: ISafety;
-    balance: IBalance;
-    difrent: IDifrent;
+    number: string;
+    user_ref: string;
 }
 
-export interface ISafety {
-    number: boolean;
-    email: boolean;
-    other: boolean;
+export interface IVerification {
+    VerifyEmail: boolean;
+    VerifyNumber: boolean;
+    userDetails: boolean;
 }
 
 export interface IBalance {
-    un_coins: number;
-    up_coins: number;
+    main: number;
+    coins: number;
     tickets: number;
 }
 

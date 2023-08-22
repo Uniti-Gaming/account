@@ -9,6 +9,10 @@
 .content {
     max-width: 660px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .title {
     margin: 72px auto;

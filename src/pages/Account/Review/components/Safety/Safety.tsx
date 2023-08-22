@@ -1,21 +1,21 @@
 import { FC, useEffect, useState } from 'react';
 
 import { calculateCircleLength } from '@utils/calculateCircleLength';
-import { ISafety } from '@interfaces/userInterface';
+import { IVerification } from '@interfaces/userInterface';
 import styles from './Safety.module.scss';
 
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 import SafetyItem from '../SafetyItem/SafetyItem';
 
 interface SafetyProps {
-  safety: ISafety
+  safety: IVerification;
 }
 
 const Safety: FC<SafetyProps> = ({ safety }) => {
   const [procent, setProcent] = useState<number>(25);
 
   useEffect(() => {
-    const trueCount = Number(safety.number) + Number(safety.email) + Number(safety.other);
+    const trueCount = Number(safety.VerifyEmail) + Number(safety.VerifyNumber) + Number(safety.userDetails);
     setProcent(trueCount * 25 + 25);
   }, [safety]);
 
@@ -45,10 +45,30 @@ const Safety: FC<SafetyProps> = ({ safety }) => {
           </div>
         </div>
         <div className={styles.data}>
-          <SafetyItem text='Регистрация аккаунта Пройдена' approved={true} />
-          <SafetyItem text='Подтвердить Номер телефона' approved={safety.number} />
-          <SafetyItem text='Подтвердить адрес электронной почты' approved={safety.email} />
-          <SafetyItem text='Дополнительные поля не заполнены' approved={safety.other} />
+          <SafetyItem text={{ approved: 'Регистрация аккаунта Пройдена'}} approved />
+          <SafetyItem
+            text={{
+              notApproved: 'Подтвердить номер телефона',
+              approved: 'Номер телефона Подтверждён',
+            }}
+            approved={safety.VerifyNumber}
+            path='/confirm-phone'
+          />
+          <SafetyItem
+            text={{
+              notApproved: 'Подтвердить электронную почту',
+              approved: 'Адрес электронной почты Подтверждён ',
+            }}
+            approved={safety.VerifyEmail}
+            path='/confirm-email'
+          />
+          <SafetyItem
+            text={{
+              notApproved: 'Дополнительные поля не заполнены',
+              approved: 'Дополнительные поля заполнены',
+            }}
+            approved={safety.userDetails}
+          />
         </div>
       </div>
     </LayoutBlock>

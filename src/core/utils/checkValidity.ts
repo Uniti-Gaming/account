@@ -1,5 +1,6 @@
 import isEmail from 'validator/es/lib/isEmail';
 export const checkValidity = (name: string, value: string): string => {
+  if (name === 'friendRef') return '';
   if (value.length === 0) return 'Обязательное поле';
   if (name === 'name') {
     const pattern = /^[a-zA-Z]+$/;

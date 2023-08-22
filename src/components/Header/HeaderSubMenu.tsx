@@ -18,7 +18,7 @@ const HeaderSubMenu: FC<HeaderSubMenuProps> = ({ mainLink, menulinks }) => {
     <li className={classNames({ [styles.open]: isMenuOpen })}>
       <p className={styles.link} onClick={() => setMenuOpen(!isMenuOpen)} >
         {mainLink}
-        <span className={styles.arow}></span>
+        <span className={styles.arow} />
       </p>
       <div>
         <ul className={styles.submenu}>

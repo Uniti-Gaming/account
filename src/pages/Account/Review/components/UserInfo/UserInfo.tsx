@@ -12,11 +12,11 @@ interface UserInfoProps {
 
 const UserInfo: FC<UserInfoProps> = ({currentUser}) => {
   const userInfo = [
-    { label: 'ID:', value: currentUser.id },
+    { label: 'ID:', value: currentUser.user_id },
     { label: 'Имя:', value: currentUser.name },
-    { label: 'Телефон:', value: currentUser.phone },
+    { label: 'Телефон:', value: currentUser.number },
     { label: 'Электронная почта:', value: currentUser.email },
-    { label: 'Реферальный номер:', value: 'ХХХХ-ХХХХ-XXXX' },
+    { label: 'Реферальный номер:', value: currentUser.user_ref },
   ];
   return (
     <LayoutBlock

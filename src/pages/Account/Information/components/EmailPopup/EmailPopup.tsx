@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from 'react';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
+import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { PopupProps } from '@/core/interfaces/PopupProps';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
@@ -8,8 +8,8 @@ import PopupInput from '@/components/PopupInput/PopupInput';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 
 const EmailPopup: FC<PopupProps> = (props) => {
-  const { currentUser } = useContext(AuthContext);
-  const [value, setValue] = useState(currentUser.email);
+  const verifiedUser = useContext(VerifiedUserContext);
+  const [value, setValue] = useState(verifiedUser.email);
   const handleSubmit = () => { };
   
   return (

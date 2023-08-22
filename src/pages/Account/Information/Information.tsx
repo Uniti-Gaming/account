@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
+import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 
 import AccountBlock from './components/AccountBlock/AccountBlock';
 import Difrent from './components/Difrent/Difrent';
@@ -12,7 +12,7 @@ import PhonePopup from './components/PhonePopup/PhonePopup';
 import LangPopup from './components/LangPopup/LangPopup';
 
 const Information = () => {
-  const { currentUser } = useContext(AuthContext);
+  const verifiedUser = useContext(VerifiedUserContext);
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
 
   useEffect(() => {
@@ -22,19 +22,19 @@ const Information = () => {
   const pageData = [
     {
       title: 'Электронная почта',
-      value: currentUser.email,
+      value: verifiedUser.email,
       label: 'Электронная почта',
       Popup: EmailPopup,
     },
     {
       title: 'Номер телефона',
-      value: currentUser.phone,
+      value: verifiedUser.number,
       label: 'Номер телефона',
       Popup: PhonePopup,
     },
     {
       title: 'РАССЫЛКА ОТ UNITE GAMING',
-      value: currentUser.lang,
+      value: 'Русский',
       label: 'Предпочитаемый язык переписки',
       Popup: LangPopup,
     },
@@ -42,16 +42,16 @@ const Information = () => {
 
   return (
     <>
-      <AccountBlock id={currentUser.id} code={currentUser.ref} />
-      <PrivateInfo name={currentUser.name} city={currentUser.city} />
+      <AccountBlock id={verifiedUser.user_id} code={verifiedUser.user_ref} />
+      <PrivateInfo name={verifiedUser.name} city={''} />
       {pageData.map((item, index) => (
         <BlockWithOneString key={index} {...item} />
       ))}
       <Difrent
-        sex={currentUser.difrent.sex}
-        instagram={currentUser.difrent.instagram}
-        tiktok={currentUser.difrent.tiktok}
-        favorite={currentUser.difrent.favorite}
+        sex={''}
+        instagram={''}
+        tiktok={''}
+        favorite={''}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from 'react';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
+import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { PopupProps } from '@/core/interfaces/PopupProps';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
@@ -8,8 +8,8 @@ import PopupInput from '@/components/PopupInput/PopupInput';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 
 const PhonePopup: FC<PopupProps> = (props) => {
-  const { currentUser } = useContext(AuthContext);
-  const [value, setValue] = useState(currentUser.phone);
+  const verifiedUser = useContext(VerifiedUserContext);
+  const [value, setValue] = useState(verifiedUser.number);
   const handleSubmit = () => { };
   
   return (

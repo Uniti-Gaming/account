@@ -22,8 +22,8 @@ const Deposit: FC<DepositProps> = ({ balance }) => {
         path: '/account/balance',
       }}>
       <div className={styles.body}>
-        <BalanceItem imageSrc={unCoin} count={`${balance.un_coins} TMT`}/>
-        <BalanceItem imageSrc={upCoin} count={balance.up_coins}/>
+        <BalanceItem imageSrc={unCoin} count={`${balance.main} TMT`}/>
+        <BalanceItem imageSrc={upCoin} count={balance.coins}/>
         <BalanceItem imageSrc={ticket} count={balance.tickets}/>
       </div>
     </LayoutBlock>

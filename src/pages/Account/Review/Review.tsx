@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
+import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
+import { IBalance, IVerification } from '@interfaces/userInterface';
 
 import Deposit from './components/Deposit/Deposit';
 import History from './components/History/History';
@@ -10,17 +11,23 @@ import Safety from './components/Safety/Safety';
 import TariffBlock from './components/TariffBlock/TariffBlock';
 import UserInfo from './components/UserInfo/UserInfo';
 
+interface ReviewLoaderData {
+  verification: IVerification;
+  balance: IBalance
+}
+
 const Review = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { verification, balance } = useLoaderData() as ReviewLoaderData;
+  const verifiedUser = useContext(VerifiedUserContext);
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
   titleRef.current ? titleRef.current.textContent = 'Обзор учётной записи' : null;
 
   return (
     <>
-      <Safety safety={currentUser.safety} />
+      <Safety safety={verification} />
       <PromoCode />
-      <Deposit balance={currentUser.balance} />
-      <UserInfo currentUser={currentUser} />
+      <Deposit balance={balance} />
+      <UserInfo currentUser={verifiedUser} />
       <TariffBlock />
       <History />
     </>

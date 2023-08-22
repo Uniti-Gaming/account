@@ -1,6 +1,5 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
 import { useForm } from '@hooks/useForm';
 import { PopupProps } from '@interfaces/PopupProps';
 import { optionsFavorite, optionsSex } from '@/assets/data/options';
@@ -11,8 +10,7 @@ import PopupSelect from '../PopupSelect/PopupSelect';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 
 const DifrentPopup: FC<PopupProps> = (props) => {
-  const { currentUser } = useContext(AuthContext);
-  const { values, handleChange, setValues } = useForm({...currentUser.difrent});
+  const { values, handleChange, setValues } = useForm({});
   const handleSubmit = () => {};
 
   return (

@@ -31,7 +31,6 @@ const initialState = {
   year: '',
   city: '',
   visitFrom: '',
-  checkbox: '',
 };
 
 const SignUp = () => {
@@ -54,36 +53,49 @@ const SignUp = () => {
     }
   };
 
+  const scrollToError = () => {
+    const elementPosition = document.getElementById('error')?.getBoundingClientRect().top;
+    if (elementPosition) {
+      window.scrollBy({
+        top: elementPosition - 200,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const onSubmit = async (evt: React.FormEvent) => {
     const form = evt.target as HTMLFormElement;
     if (form.checkValidity() && values.password === values.confirmPassword) {
       setLoading(true);
-      console.log(values);
-      signup({
-        name: values.name,
-        email: values.email,
-        number: values.number.replace(/[^\d+]/g, ''),
-        password: values.password,
-        birthday: `${values.day}-${values.month}-${values.year}`,
-        city: values.city,
-        visit_from: values.visitFrom,
-        friend_ref: values.friendRef,
-        privacy_policy: true,
-        terms_of_use: true,
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.errors) {
-            setErrors(err.errors);
-          }
-        })
-        .finally(() => setLoading(false));
+      try {
+        const res = await signup({
+          name: values.name,
+          email: values.email,
+          number: values.number.replace(/[^\d+]/g, ''),
+          password: values.password,
+          birthday: `${values.day}-${values.month}-${values.year}`,
+          city: values.city,
+          visit_from: values.visitFrom,
+          friend_ref: values.friendRef,
+          privacy_policy: true,
+          terms_of_use: true,
+        });
+        if (res.success) {
+          console.log('Регистрация прошла успешно');
+        } else {
+          setErrors(res.errors);
+          setTimeout(() => {
+            scrollToError();
+          }, 100);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     } else {
       const newErrors: { [key: string]: string } = {};
-      if(values.password !== values.confirmPassword) {
+      if (values.password !== values.confirmPassword) {
         newErrors.confirmPassword = 'Пароли не совпадают';
       }
       Object.keys(values).forEach(key => {
@@ -91,17 +103,13 @@ const SignUp = () => {
           newErrors[key] = 'Обязательное поле';
         }
       });
-      await setErrors({...errors, ...newErrors});
-
-      const elementPosition = document.getElementById('error')?.getBoundingClientRect().top;
-      if (elementPosition) {
-        window.scrollBy({
-          top: elementPosition - 200,
-          behavior: 'smooth',
-        });
-      }
+      setErrors({ ...errors, ...newErrors });
+      setTimeout(() => {
+        scrollToError();
+      }, 100);
     }
   };
+  
 
   return (
     <MainAuth
@@ -169,7 +177,9 @@ const SignUp = () => {
             error={!!errors.number}
             required
           />
-          <ErrorMessage message={errors.number} />
+          <>
+            {errors.number && (<ErrorMessage message={errors.number} />)}
+          </>
         </AuthLabel>
         <AuthLabel text='E-mail' required>
           <AuthInput
@@ -181,7 +191,9 @@ const SignUp = () => {
             error={!!errors.email}
             required
           />
-          <ErrorMessage message={errors.email} />
+          <>
+            {errors.email && (<ErrorMessage message={errors.email} />)}
+          </>
           <InputButton handleClick={(evt) => toggleShowInfo(evt, 'email')}>
             <img src={infoIcon} alt='Информация' />
           </InputButton>

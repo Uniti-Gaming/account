@@ -22,3 +22,12 @@
         padding-bottom: 0;
     }
 }
+
+@media screen and (max-width: 900px) {
+    .link {
+        border-bottom: none;
+        &.active {
+            border-bottom: none;
+        }
+    }
+}

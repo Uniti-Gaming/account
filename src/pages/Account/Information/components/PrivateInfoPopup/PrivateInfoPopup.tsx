@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
+import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { useForm } from '@hooks/useForm';
 import { PopupProps } from '@interfaces/PopupProps';
 import { optionsCity } from '@/assets/data/options';
@@ -11,10 +11,10 @@ import PopupSelect from '../PopupSelect/PopupSelect';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 
 const PrivateInfoPopup: FC<PopupProps> = (props) => {
-  const { currentUser } = useContext(AuthContext);
+  const verifiedUser = useContext(VerifiedUserContext);
   const { values, handleChange, setValues } = useForm({
-    name: currentUser.name,
-    city: currentUser.city,
+    name: verifiedUser.name,
+    city: '',
   });
   const handleSubmit = () => { };
 

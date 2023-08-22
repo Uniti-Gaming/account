@@ -1,6 +1,5 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 
-import { AuthContext } from '@/core/contexts/AuthContext';
 import { PopupProps } from '@/core/interfaces/PopupProps';
 import { optionsLanguage } from '@/assets/data/options';
 
@@ -9,8 +8,7 @@ import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
 import PopupSelect from '../PopupSelect/PopupSelect';
 
 const LangPopup: FC<PopupProps> = (props) => {
-  const { currentUser } = useContext(AuthContext);
-  const [value, setValue] = useState<{[key: string]: string }>({ lang: currentUser.lang });
+  const [value, setValue] = useState<{[key: string]: string }>({});
   const handleSubmit = () => { };
 
   return (
