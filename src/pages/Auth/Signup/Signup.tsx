@@ -1,8 +1,11 @@
-import { useRef, useState, MouseEvent } from 'react';
+import { useRef, useState, MouseEvent, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '@/core/contexts/AuthContext';
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import { optionsCity, optionsvisitFrom } from '@/assets/data/options';
 import { signup } from '@services/authService';
+import { getUser } from '@/core/services/userService';
 import styles from './SignUp.module.scss';
 import infoIcon from '@images/info.svg';
 
@@ -34,6 +37,8 @@ const initialState = {
 };
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const agreeRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState({ email: false, ref: false });
@@ -81,16 +86,19 @@ const SignUp = () => {
           terms_of_use: true,
         });
         if (res.success) {
-          console.log('Регистрация прошла успешно');
+          getUser()
+            .then((user) => {
+              login(user);
+              navigate('/', { replace: true });
+            });
         } else {
           setErrors(res.errors);
           setTimeout(() => {
             scrollToError();
           }, 100);
+          setLoading(false);
         }
       } catch (err) {
-        console.log(err);
-      } finally {
         setLoading(false);
       }
     } else {
@@ -109,7 +117,7 @@ const SignUp = () => {
       }, 100);
     }
   };
-  
+
 
   return (
     <MainAuth

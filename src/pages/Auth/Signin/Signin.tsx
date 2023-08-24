@@ -1,7 +1,9 @@
-import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useRef, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { signin } from '@services/authService';
+import { getUser } from '@/core/services/userService';
+import { AuthContext } from '@/core/contexts/AuthContext';
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import styles from './Signin.module.scss';
 
@@ -14,7 +16,9 @@ import PasswordInput from '../components/PasswordInput/PasswordInput';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 
 const Signin = () => {
+  const navigate = useNavigate();
   const saveRef = useRef<HTMLInputElement | null>(null);
+  const { login } = useContext(AuthContext);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [serverError, setServerError] = useState<boolean>(false);
   const { values, handleChange, errors, setErrors } = useFormWithValidation({
@@ -37,19 +41,19 @@ const Signin = () => {
         checkbox: !!saveRef.current?.checked,
       })
         .then((res) => {
-          // eslint-disable-next-line no-console
-          console.log(res);
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.log(err);
-          if (err.errors) {
-            setErrors(err.errors);
+          if (res.success) {
+            getUser()
+              .then((user) => {
+                login(user);
+                navigate('/', { replace: true });
+              });
           } else {
-            setServerError(true);
+            setErrors(res.errors);
+            setLoading(false);
           }
         })
-        .finally(() => {
+        .catch(() => {
+          setServerError(true);
           setLoading(false);
         });
     } else {

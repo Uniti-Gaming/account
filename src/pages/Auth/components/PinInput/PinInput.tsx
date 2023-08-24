@@ -1,6 +1,7 @@
 import { useImperativeHandle, useRef, forwardRef, Ref } from 'react';
 
 import styles from './PinInput.module.scss';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function updateArray(array: string[], index: number, newValue: string): string[] {
   const copy = [...array];
@@ -11,6 +12,7 @@ function updateArray(array: string[], index: number, newValue: string): string[]
 interface IPinInputProps {
   digits: string[];
   onChange: React.Dispatch<React.SetStateAction<string[]>>;
+  error: boolean;
 }
 
 export interface IPinInputRef {
@@ -65,6 +67,7 @@ export const PinInput = forwardRef<IPinInputRef, IPinInputProps> ((props, ref: R
           required
         />
       ))}
+      {props.error && (<ErrorMessage message='Неверный код, попробуйте ещё раз' />)}
     </div>
   );
 });

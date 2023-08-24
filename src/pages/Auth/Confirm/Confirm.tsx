@@ -1,6 +1,7 @@
 import { useState, useRef, FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import { checkCode, resendCodeVerification } from '@services/verificationService';
 import { IUser } from '@interfaces/userInterface';
 import { title } from './text';
 import styles from './Confirm.module.scss';
@@ -11,7 +12,6 @@ import MainAuth from '../components/MainAuth/MainAuth';
 import AuthForm from '../components/AuthForm/AuthForm';
 import ButtonWithTimer from '../components/ButtonWithTimer/ButtonWithTimer';
 import { PinInput, IPinInputRef } from '../components/PinInput/PinInput';
-import { checkCode } from '@/core/services/verificationService';
 
 interface ConfirmProps {
   type: 'number' | 'email';
@@ -19,15 +19,26 @@ interface ConfirmProps {
 }
 
 const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
+  const navigate = useNavigate();
   const initialDigits = type ===  'number' ? ['', '', '', ''] : ['', '', '', '', '', ''];
   const [digits, setDigits] = useState<string[]>(initialDigits);
+  const [status, setStatus] = useState('idle');
   const ref = useRef<IPinInputRef>(null);
   const onSubmit = () => {
-    console.log(digits);
+    setStatus('loading');
+    checkCode(type, digits.join(''))
+      .then((res) => {
+        if(res.success) {
+          setStatus('success');
+          navigate(`/success-${type}`, { replace: true });
+        } else {
+          setStatus('error');
+        }
+      });
   };
 
   const resendCode = () => {
-    checkCode(type);
+    resendCodeVerification(type);
   };
 
   return (
@@ -39,10 +50,10 @@ const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
       <AuthForm
         handleSubmit={onSubmit}
         button='Далее'
-        loading={false}
+        loading={status === 'loading'}
       >
         <label className='label'>
-          <PinInput ref={ref} digits={digits} onChange={setDigits} />
+          <PinInput ref={ref} digits={digits} onChange={setDigits} error={status === 'error'}/>
         </label>
         <ButtonWithTimer
           time={type === 'number' ? 120 : 60}
