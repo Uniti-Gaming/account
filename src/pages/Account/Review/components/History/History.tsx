@@ -6,7 +6,7 @@ const History = () => {
     <LayoutBlock
       title='недавние покупки'
       link={{
-        path: '/account/history',
+        path: '/history',
         text: 'История платежей >',
       }}>
       <div className={styles.body}>

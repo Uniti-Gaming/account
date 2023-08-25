@@ -23,7 +23,7 @@ const UserInfo: FC<UserInfoProps> = ({currentUser}) => {
       title='ваши данные'
       link={{
         text: 'Сведения об учётной записи >',
-        path: '/account/user-info',
+        path: '/information',
       }} >
       <div className={styles.body}>
         {userInfo.map((item, index) => (

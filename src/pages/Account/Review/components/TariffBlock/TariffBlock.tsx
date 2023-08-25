@@ -14,7 +14,7 @@ const TariffBlock = () => {
       title='Тарифы'
       link={{
         text: 'Ключи и Тарифы >',
-        path: '/account/tariff',
+        path: '/tariff',
       }}>
       <div className={styles.body}>
         <Tariff image={heroy} name='Герой' isActive={false} />

@@ -20,13 +20,7 @@ const Safety: FC<SafetyProps> = ({ safety }) => {
   }, [safety]);
 
   return (
-    <LayoutBlock
-      title='Безопасность'
-      link={{
-        text: 'Безопасность >',
-        path: '/account/safety',
-      }}
-    >
+    <LayoutBlock title='Безопасность'>
       <div className={styles.body}>
         <div className={styles.value}>
           <svg className={styles.progress}>

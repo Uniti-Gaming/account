@@ -19,7 +19,7 @@ const Deposit: FC<DepositProps> = ({ balance }) => {
     <LayoutBlock title='кошелёк unite gaming'
       link={{
         text: 'Пополнить баланс >',
-        path: '/account/balance',
+        path: '/balance',
       }}>
       <div className={styles.body}>
         <BalanceItem imageSrc={unCoin} count={`${balance.main} TMT`}/>
