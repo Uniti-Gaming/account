@@ -2,6 +2,7 @@ import { createHashRouter } from 'react-router-dom';
 
 import { appLoader } from './appLoader';
 import { loader as reviewLoader } from './pages/Account/Review/loader';
+import { loader as balanceLoader } from './pages/Account/Balance/loader';
 import { emailLoader } from './pages/Auth/Confirm/loader';
 
 import App from './App';
@@ -16,6 +17,9 @@ import Confirm from './pages/Auth/Confirm/Confirm';
 import NewPassword from './pages/Auth/NewPassword/NewPassword';
 import Success from './pages/Auth/Success/Success';
 import Reset from './pages/Auth/Reset/Reset';
+import Balance from './pages/Account/Balance/Balance';
+import History from './pages/Account/History/History';
+import Support from './pages/Account/Support/Support';
 
 const router = createHashRouter([
   {
@@ -33,7 +37,14 @@ const router = createHashRouter([
             loader: reviewLoader,
           },
           { path: '/information', element: <Information />},
+          {
+            path: '/balance',
+            element: <Balance />,
+            loader: balanceLoader,
+          },
           { path: '/tariff', element: <Tariff />},
+          { path: '/history', element: <History />},
+          { path: '/support', element: <Support />},
         ],
       },
       { path: '/signin', element: <Signin /> },

@@ -64,7 +64,7 @@ const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
               style={{ opacity: 1 }}
             />
             <NavLinkWidthIcon
-              path='/'
+              path='/balance'
               text='Пополнить баланс'
               icon={wallet}
               style={{ opacity: 1 }}
