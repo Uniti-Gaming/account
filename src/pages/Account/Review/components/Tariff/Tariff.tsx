@@ -7,7 +7,7 @@ interface TariffProps {
     image: string;
     name: string;
     isActive: boolean;
-    expiryDate: string;
+    expiryDate?: string;
 }
 
 const Tariff: FC<TariffProps> = ({image, name, isActive, expiryDate}) => {

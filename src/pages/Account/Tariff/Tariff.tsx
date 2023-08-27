@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
+import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import { ITariffPopup, TariffPopupContext } from '@/core/contexts/TariffPopupContext';
+import { ITariff } from '@interfaces/userInterface';
 
 import CurrentTariff from './components/CurrentTariff/CurrentTariff';
 import TariffCatalog from './components/TariffCatalog/TariffCatalog';
@@ -10,6 +11,7 @@ import Key from './components/Key/Key';
 
 
 const Tariff = () => {
+  const tariff = useLoaderData() as ITariff;
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const Tariff = () => {
     <TariffPopupContext.Provider value={contextValue}>
       <Key />
       <CurrentTariff isActive={true} />
-      <TariffCatalog />
+      <TariffCatalog tariff={tariff} />
       <TariffPopup />
     </TariffPopupContext.Provider>
   );

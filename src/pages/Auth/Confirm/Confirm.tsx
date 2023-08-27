@@ -1,7 +1,7 @@
 import { useState, useRef, FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { checkCode, resendCodeVerification } from '@services/verificationService';
+import { checkCode, resendEmailVerification, resendNumberVerification } from '@services/verificationService';
 import { IUser } from '@interfaces/userInterface';
 import { title } from './text';
 import styles from './Confirm.module.scss';
@@ -38,7 +38,7 @@ const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
   };
 
   const resendCode = () => {
-    resendCodeVerification(type);
+    type === 'email' ? resendEmailVerification() : resendNumberVerification();
   };
 
   return (

@@ -3,7 +3,8 @@ import { createHashRouter } from 'react-router-dom';
 import { appLoader } from './appLoader';
 import { loader as reviewLoader } from './pages/Account/Review/loader';
 import { loader as balanceLoader } from './pages/Account/Balance/loader';
-import { emailLoader } from './pages/Auth/Confirm/loader';
+import { loader as tariffLoader } from './pages/Account/Tariff/loader';
+import { emailLoader, phoneLoader } from './pages/Auth/Confirm/loader';
 
 import App from './App';
 import ProtectedRoute from './HOC/ProtectedRoute';
@@ -42,7 +43,11 @@ const router = createHashRouter([
             element: <Balance />,
             loader: balanceLoader,
           },
-          { path: '/tariff', element: <Tariff />},
+          {
+            path: '/tariff',
+            element: <Tariff />,
+            loader: tariffLoader,
+          },
           { path: '/history', element: <History />},
           { path: '/support', element: <Support />},
         ],
@@ -59,6 +64,7 @@ const router = createHashRouter([
       {
         path: '/confirm-phone',
         element: <ProtectedRoute element={Confirm} type='number'/>,
+        loader: phoneLoader,
       },
       { path: '/success-phone', element: <Success type='phone' /> },
       { path: '/success-email', element: <Success type='email' /> },

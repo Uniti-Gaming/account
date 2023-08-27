@@ -26,7 +26,7 @@ export interface ITransaction {
     currency_type: 'main' | 'coins' | 'tickets';
     amount: string;
     status: 'success' | 'error' | 'pending';
-  }
+}
 
 export interface IDifrent {
     sex: string;
@@ -34,10 +34,19 @@ export interface IDifrent {
     tiktok: string;
     favorite: string;
 }
+
+export interface ISubscription {
+    subscribe_id: string;
+    subscribe_name: string;
+    subscribe_logo: string;
+    subscribe_price_1: string
+    subscribe_price_3: string
+    subscribe_price_6: string
+}
+
 export interface ITariff {
     success: boolean;
-    subscribe_id?: string;
-    subscribe_name?: 'Хранитель' | 'Титан' | 'Властелин' | 'Герой';
-    subscribe_end?: string;
-    message?: string;
+    active_subscribe: false | string;
+    expiry_date?: string;
+    subscriptions: ISubscription[];
 }

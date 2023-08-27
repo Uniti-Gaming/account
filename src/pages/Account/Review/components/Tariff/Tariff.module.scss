@@ -3,18 +3,19 @@
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, .15);
     padding: 5px 0;
+    gap: 13px;
+
     &:last-of-type {
         border: none;
     }
 }
 .image {
-    width: 70px;
-    height: 70px;
-    transform: scale(150%) translateX(-8px) translateY(5px);
+    width: 73px;
+    height: 73px;
 }
 .wrapper {
     display: grid;
-    grid-template-columns: 125px 85px 120px 130px;
+    grid-template-columns: 100px 85px 120px 130px;
     gap: 0 28px;
 }
 .name {

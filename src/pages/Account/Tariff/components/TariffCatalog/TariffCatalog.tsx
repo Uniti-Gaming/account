@@ -1,13 +1,21 @@
-import { tariffData } from './tariffData';
+import { FC } from 'react';
+
+import { ITariff } from '@interfaces/userInterface';
 import styles from './TariffCatalog.module.scss';
 
 import TariffCard from '../TariffCard/TariffCard';
 
-const TariffCatalog = () => {
+interface TariffCatalogProps {
+  tariff: ITariff;
+}
+const TariffCatalog: FC<TariffCatalogProps> = ({tariff}) => {
   return (
     <div className={styles.catalog}>
-      {tariffData.map((tariff, index) => (
-        <TariffCard key={index} {...tariff}/>
+      {tariff.subscriptions.map((tariff) => (
+        <TariffCard
+          key={tariff.subscribe_id}
+          {...tariff}
+        />
       ))}
     </div>
   );

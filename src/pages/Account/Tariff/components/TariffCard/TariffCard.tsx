@@ -1,20 +1,29 @@
 import { FC, useState } from 'react';
 import classNames from 'classnames';
 
+import { ISubscription } from '@interfaces/userInterface';
 import styles from './TariffCard.module.scss';
+
 import Button from '@/components/Button/Button';
 
-interface TariffCardProps {
-    title: string
-    image: string
-    price: number
-}
 
-const TariffCard: FC<TariffCardProps> = ({ title, image, price }) => {
-  const [count, setCount] = useState<number>(1);
+const TariffCard: FC<ISubscription> = ({
+  subscribe_name,
+  subscribe_logo,
+  subscribe_price_1,
+  subscribe_price_3,
+  subscribe_price_6,
+}) => {
+  const [count, setCount] = useState<1 | 3 | 6>(1);
+  const price = {
+    1: subscribe_price_1,
+    3: subscribe_price_3,
+    6: subscribe_price_6,
+  };
+
   return (
     <div className={styles.card}>
-      <h3 className={styles.title}>{title}</h3>
+      <h3 className={styles.title}>{subscribe_name}</h3>
       <div className={styles.main}>
         <div className={styles.buttons}>
           <button
@@ -36,9 +45,9 @@ const TariffCard: FC<TariffCardProps> = ({ title, image, price }) => {
             6 месяцев
           </button>
         </div>
-        <img className={styles.image} src={image} alt={title} />
+        <img className={styles.image} src={subscribe_logo} alt={subscribe_name} />
         <div className={styles.total}>
-          <p className={styles.price}>{price * count} TMT</p>
+          <p className={styles.price}>{price[count]} TMT</p>
           <span className={styles.time}>
             {count === 1 ? '/ месяц' : count === 3 ? '/ 3 месяца' : '/ 6 месяцев'}
           </span>
