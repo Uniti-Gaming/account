@@ -1,5 +1,5 @@
 import { FC, useRef } from 'react';
-import { Outlet, useNavigation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom';
 
 import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { IUser } from '@interfaces/userInterface';
@@ -26,7 +26,10 @@ const Account: FC<AccountProps> = ({verifiedUser}) => {
           <VerifiedUserContext.Provider value={verifiedUser}> 
             <div className={styles.content}>
               {navigation.state === 'loading' ? (
-                <Loader />
+                <>
+                  <ScrollRestoration />
+                  <Loader />
+                </>
               ) : (
                 <Outlet context={titleRef} />
               )}

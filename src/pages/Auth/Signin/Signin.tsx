@@ -40,20 +40,20 @@ const Signin = () => {
         password: values.password,
         checkbox: !!saveRef.current?.checked,
       })
-        .then((res) => {
-          if (res.success) {
-            getUser()
-              .then((user) => {
-                login(user);
-                navigate('/', { replace: true });
-              });
-          } else {
-            setErrors(res.errors);
-            setLoading(false);
-          }
+        .then(() => {
+          getUser()
+            .then((user) => {
+              login(user);
+              navigate('/', { replace: true });
+            });
         })
-        .catch(() => {
-          setServerError(true);
+        .catch(async (error) => {
+          if (error instanceof Response) {
+            const errorData = await error.json();
+            setErrors(errorData.errors);
+          } else {
+            setServerError(true);
+          }
           setLoading(false);
         });
     } else {

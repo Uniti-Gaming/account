@@ -73,7 +73,7 @@ const SignUp = () => {
     if (form.checkValidity() && values.password === values.confirmPassword) {
       setLoading(true);
       try {
-        const res = await signup({
+        await signup({
           name: values.name,
           email: values.email,
           number: values.number.replace(/[^\d+]/g, ''),
@@ -85,20 +85,19 @@ const SignUp = () => {
           privacy_policy: true,
           terms_of_use: true,
         });
-        if (res.success) {
-          getUser()
-            .then((user) => {
-              login(user);
-              navigate('/', { replace: true });
-            });
-        } else {
-          setErrors(res.errors);
+        getUser()
+          .then((user) => {
+            login(user);
+            navigate('/', { replace: true });
+          });
+      } catch (error) {
+        if (error instanceof Response) {
+          const errorData = await error.json();
+          setErrors(errorData.errors);
           setTimeout(() => {
             scrollToError();
           }, 100);
-          setLoading(false);
         }
-      } catch (err) {
         setLoading(false);
       }
     } else {

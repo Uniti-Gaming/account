@@ -1,12 +1,22 @@
-import { getBalance } from '@/core/services/userService';
+import { getBalance, getTariff, getTransactions } from '@/core/services/userService';
 import { checkVerification } from '@services/verificationService';
 
 export const loader = async () => {
   try {
-    const [verification, balance] = await Promise.all([checkVerification(), getBalance()]);
+    const [
+      verification,
+      balance,
+      transactions,
+      tariff,
+    ] = await Promise.all([
+      checkVerification(),
+      getBalance(),
+      getTransactions(),
+      getTariff(),
+    ]);
 
-    return { verification, balance };
-  } catch {
+    return { verification, balance, transactions, tariff };
+  } catch (error) {
     const verification = {
       VerifyEmail: false,
       VerifyNumber: false,
@@ -18,6 +28,6 @@ export const loader = async () => {
       tickets: 0,
     };
 
-    return { verification, balance };
+    return { verification, balance, transactions: [] };
   }
 };

@@ -8,9 +8,9 @@ export const baseOptions: RequestInit = {
   credentials: 'include',
 };
 
-export const getResponseData = async (res: Response) => {
-  if (!res.ok && res.status !== 400) {
-    return Promise.reject(res);
+export const getResponseData = (response: Response) => {
+  if (!response.ok) {
+    return Promise.reject(response);
   }
-  return await res.json();
+  return response.json();
 };

@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import LinkWithArrow from '@/components/LinkWithArrow/LinkWithArrow';
 import styles from './Tariff.module.scss';
 
@@ -5,9 +7,10 @@ interface TariffProps {
     image: string;
     name: string;
     isActive: boolean;
+    expiryDate: string;
 }
 
-const Tariff = ({image, name, isActive}: TariffProps) => {
+const Tariff: FC<TariffProps> = ({image, name, isActive, expiryDate}) => {
   return (
     <div className={styles.tariff}>
       <img className={styles.image} src={image} alt={`иконка тарифа ${name}`} />
@@ -27,7 +30,7 @@ const Tariff = ({image, name, isActive}: TariffProps) => {
         <div>
           {isActive && (
             <>
-              <p className={styles.time}>27 нояб. 2022г.</p>
+              <p className={styles.time}>{expiryDate}</p>
               <p className={styles.text}>Окончание периода подписки</p>
             </>
           )}

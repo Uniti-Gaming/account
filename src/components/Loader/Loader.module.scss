@@ -1,6 +1,7 @@
 .loader {
     position: relative;
     width: 40px;
+    padding-bottom: 50px;
     margin: auto;
 
     .circle {
@@ -20,7 +21,6 @@
             height: 5px;
             border-radius: 5px;
             background: #fff;
-            /* Pick a color */
         }
 
         &:nth-child(2) {

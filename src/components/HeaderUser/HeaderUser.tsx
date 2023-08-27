@@ -1,19 +1,21 @@
-import { FC, MouseEvent, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { FC, MouseEvent, useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
-import styles from './HeaderUser.module.scss';
+import { IUser } from '@interfaces/userInterface';
+import { logout } from '@services/userService';
 import userIcon from '@images/user-icon.svg';
 import userSquare from '@images/user-square.svg';
 import arowIcon from '@images/arow.svg';
 import wallet from '@images/wallet.svg';
 import tariffIcon from '@images/triangle-round-rectangle.svg';
 import exitIcon from '@images/exit.svg';
+import styles from './HeaderUser.module.scss';
 
 import DropDown from '../DropDown/DropDown';
 import NavLinkWidthIcon from '../NavLinkWidthIcon/NavLinkWidthIcon';
 import HeaderUserInfo from '../HeaderUserInfo/HeaderUserInfo';
-import { IUser } from '@/core/interfaces/userInterface';
+import { AuthContext } from '@/core/contexts/AuthContext';
 
 interface HeaderUserProps {
   currentUser: IUser | null;
@@ -21,6 +23,8 @@ interface HeaderUserProps {
 
 const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
   const [isOpen, setOpen] = useState(false);
 
   const toggleOpen = (e: MouseEvent) => {
@@ -31,6 +35,12 @@ const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
   useEffect(() => {
     setOpen(false);
   }, [location]);
+
+  const handleLogout = () => {
+    logout();
+    login(null);
+    navigate('/signin', { replace: true });
+  };
 
   return (
     <>
@@ -80,6 +90,7 @@ const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
               text='Выйти из аккаунта'
               icon={exitIcon}
               style={{ opacity: 1, color: '#DE3341' }}
+              onClick={handleLogout}
             />
           </nav>
         </DropDown>
