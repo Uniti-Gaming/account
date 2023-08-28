@@ -4,6 +4,7 @@ import { appLoader } from './appLoader';
 import { loader as reviewLoader } from './pages/Account/Review/loader';
 import { loader as balanceLoader } from './pages/Account/Balance/loader';
 import { loader as tariffLoader } from './pages/Account/Tariff/loader';
+import { loader as suportLoader } from './pages/Account/Support/loader';
 import { emailLoader, phoneLoader } from './pages/Auth/Confirm/loader';
 
 import App from './App';
@@ -49,7 +50,11 @@ const router = createHashRouter([
             loader: tariffLoader,
           },
           { path: '/history', element: <History />},
-          { path: '/support', element: <Support />},
+          {
+            path: '/support',
+            element: <Support />,
+            loader: suportLoader,
+          },
         ],
       },
       { path: '/signin', element: <Signin /> },
