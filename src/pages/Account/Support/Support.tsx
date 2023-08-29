@@ -2,7 +2,6 @@ import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import { IFaqPost } from '@interfaces/faqInterface';
 import { extractFaq } from '@utils/extractFaq';
-import { scrollToElement } from '@utils/scrollToElement';
 import styles from './Support.module.scss';
 
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
@@ -11,7 +10,15 @@ const Support = () => {
   const data = useLoaderData() as IFaqPost[];
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
   titleRef.current ? titleRef.current.textContent = 'Помощь' : null;
-
+  const scrollToElement = (elementId: string) => {
+    const elementPosition = document.getElementById(elementId)?.getBoundingClientRect().top;
+    if (elementPosition) {
+      window.scrollBy({
+        top: elementPosition - 100,
+        behavior: 'smooth',
+      });
+    }
+  };
   return (
     <>
       {data.map((groop, groopIndex) => (

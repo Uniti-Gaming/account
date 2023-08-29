@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
-import { scrollToElement } from '@utils/scrollToElement';
 import { optionsCity, optionsvisitFrom } from '@/assets/data/options';
 import { signup } from '@services/authService';
 import { getUser } from '@/core/services/userService';
@@ -59,6 +58,16 @@ const SignUp = () => {
     }
   };
 
+  const scrollToError = () => {
+    const elementPosition = document.getElementById('error')?.getBoundingClientRect().top;
+    if (elementPosition) {
+      window.scrollBy({
+        top: elementPosition - 200,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   const onSubmit = async (evt: React.FormEvent) => {
     const form = evt.target as HTMLFormElement;
     if (form.checkValidity() && values.password === values.confirmPassword) {
@@ -86,7 +95,7 @@ const SignUp = () => {
           const errorData = await error.json();
           setErrors(errorData.errors);
           setTimeout(() => {
-            scrollToElement('error');
+            scrollToError();
           }, 100);
         }
         setLoading(false);
@@ -103,7 +112,7 @@ const SignUp = () => {
       });
       setErrors({ ...errors, ...newErrors });
       setTimeout(() => {
-        scrollToElement('error');
+        scrollToError();
       }, 100);
     }
   };
