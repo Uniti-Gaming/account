@@ -51,4 +51,10 @@ export const defaultUser = {
   user_id: 'UG-45-qwer',
   email: 'bababum1995@gmail.com',
   user_ref: 'XXXX-XXXX-XXXX',
+  city: 'Москва',
+  prefer_lang: 'Русский',
+  gender: 'Мужской',
+  instagram: 'instagram',
+  tiktok: 'tiktok',
+  love_service: 'Unite Gaming',
 };

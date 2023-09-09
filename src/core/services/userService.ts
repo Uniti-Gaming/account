@@ -18,6 +18,9 @@ export const getTariff = () => {
 export const getUser = () => {
   return request('user_data/', { method: 'POST' });
 };
+export const getUserInfo = () => {
+  return request('get_user_info/', { method: 'GET' });
+};
 export const logout = () => {
   return request('logout/', { method: 'POST' });
 };
@@ -25,6 +28,37 @@ export const applyPromocode = (value: string) => {
   return request('use_promocode/', {
     method: 'POST',
     body: JSON.stringify({ promocode: value }),
+  });
+};
+export const editLang = (data: {[key: string]: string }) => {
+  return request('edit/prefer_lang/', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+};
+export const editPrivateInformation = (data: {[key: string]: string }) => {
+  return request('edit/private_information/', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+};
+export const editAdditionalInformation = (data: {[key: string]: string }) => {
+  return request('edit/additional_information/', {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+};
+
+export const editEmail = (value: string) => {
+  return request('edit/email/', {
+    method: 'POST',
+    body: JSON.stringify({ email: value }),
+  });
+};
+export const editNumber = (value: string) => {
+  return request('edit/number/', {
+    method: 'POST',
+    body: JSON.stringify({ number: value }),
   });
 };
 

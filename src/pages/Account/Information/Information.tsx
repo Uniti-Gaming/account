@@ -12,7 +12,7 @@ import PhonePopup from './components/PhonePopup/PhonePopup';
 import LangPopup from './components/LangPopup/LangPopup';
 
 const Information = () => {
-  const verifiedUser = useContext(VerifiedUserContext);
+  const { currentUser } = useContext(VerifiedUserContext);
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
 
   useEffect(() => {
@@ -22,19 +22,19 @@ const Information = () => {
   const pageData = [
     {
       title: 'Электронная почта',
-      value: verifiedUser.email,
+      value: currentUser.email,
       label: 'Электронная почта',
       Popup: EmailPopup,
     },
     {
       title: 'Номер телефона',
-      value: verifiedUser.number,
+      value: currentUser.number,
       label: 'Номер телефона',
       Popup: PhonePopup,
     },
     {
       title: 'РАССЫЛКА ОТ UNITE GAMING',
-      value: 'Русский',
+      value: currentUser.prefer_lang,
       label: 'Предпочитаемый язык переписки',
       Popup: LangPopup,
     },
@@ -42,16 +42,16 @@ const Information = () => {
 
   return (
     <>
-      <AccountBlock id={verifiedUser.user_id} code={verifiedUser.user_ref} />
-      <PrivateInfo name={verifiedUser.name} city={''} />
+      <AccountBlock id={currentUser.user_id} code={currentUser.user_ref} />
+      <PrivateInfo name={currentUser.name} city={currentUser.city} />
       {pageData.map((item, index) => (
         <BlockWithOneString key={index} {...item} />
       ))}
       <Difrent
-        sex={''}
-        instagram={''}
-        tiktok={''}
-        favorite={''}
+        sex={currentUser.gender}
+        instagram={currentUser.instagram}
+        tiktok={currentUser.tiktok}
+        favorite={currentUser.love_service}
       />
     </>
   );

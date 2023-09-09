@@ -1,4 +1,9 @@
-import { createContext } from 'react';
+import { Dispatch, SetStateAction, createContext } from 'react';
 import { IUser } from '@interfaces/userInterface';
 
-export const VerifiedUserContext = createContext({} as IUser);
+interface IVerifiedUserContext {
+    currentUser: IUser;
+    login: Dispatch<SetStateAction<IUser>>;
+  }
+
+export const VerifiedUserContext = createContext({} as IVerifiedUserContext);

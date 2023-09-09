@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 
 import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { useForm } from '@hooks/useForm';
@@ -9,17 +9,27 @@ import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInp
 import PopupInput from '@/components/PopupInput/PopupInput';
 import PopupSelect from '../PopupSelect/PopupSelect';
 import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
+import { editPrivateInformation } from '@/core/services/userService';
 
 const PrivateInfoPopup: FC<PopupProps> = (props) => {
-  const verifiedUser = useContext(VerifiedUserContext);
+  const { currentUser, login } = useContext(VerifiedUserContext);
+  const [loading, setLoading] = useState(false);
   const { values, handleChange, setValues } = useForm({
-    name: verifiedUser.name,
-    city: '',
+    name: currentUser.name,
+    city: currentUser.city,
   });
-  const handleSubmit = () => { };
+  const handleSubmit = () => {
+    setLoading(true);
+    editPrivateInformation(values)
+      .then(() => {
+        login({ ...currentUser, ...values });
+        props.handleClose();
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
-    <PopupEditInfo handleSubmit={handleSubmit} {...props} >
+    <PopupEditInfo handleSubmit={handleSubmit} {...props} loading={loading} >
       <>
         <LabelForPopupInput name='Имя'>
           <PopupInput

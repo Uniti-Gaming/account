@@ -38,7 +38,7 @@ const router = createHashRouter([
             element: <Review />,
             loader: reviewLoader,
           },
-          { path: '/information', element: <Information />},
+          { path: '/information', element: <Information /> },
           {
             path: '/balance',
             element: <Balance />,

@@ -4,6 +4,12 @@ export interface IUser {
     email: string;
     number: string;
     user_ref: string;
+    city: string;
+    prefer_lang: 'Русский' | 'Turkmenskiy';
+    gender: 'Мужской' | 'Женский';
+    instagram: string;
+    tiktok: string;
+    love_service: string;
 }
 
 export interface IVerification {
@@ -26,13 +32,6 @@ export interface ITransaction {
     currency_type: 'main' | 'coins' | 'tickets';
     amount: string;
     status: 'success' | 'error' | 'pending';
-}
-
-export interface IDifrent {
-    sex: string;
-    instagram: string;
-    tiktok: string;
-    favorite: string;
 }
 
 export interface ISubscription {

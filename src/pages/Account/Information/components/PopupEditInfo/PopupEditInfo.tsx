@@ -10,9 +10,10 @@ import Popup from '@/components/Popup/Popup';
 interface PopupEditInfoProps extends PopupProps {
     children: JSX.Element | JSX.Element[]
     handleSubmit: () => void
+    loading: boolean
 }
 
-const PopupEditInfo: FC<PopupEditInfoProps> = ({ title, children, isOpen, handleClose, handleSubmit }) => {
+const PopupEditInfo: FC<PopupEditInfoProps> = ({ title, children, isOpen, handleClose, handleSubmit, loading }) => {
   const onSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     handleSubmit();
@@ -23,7 +24,7 @@ const PopupEditInfo: FC<PopupEditInfoProps> = ({ title, children, isOpen, handle
         <form className={styles.form} onSubmit={onSubmit}>
           {children}
           <div className={styles.buttons}>
-            <Button type='submit' text='Сохранить' />
+            <Button type='submit' text='Сохранить' loading={loading} />
             <Button
               text='Отмена'
               type='button'
