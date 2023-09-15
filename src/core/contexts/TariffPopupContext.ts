@@ -1,8 +1,22 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
+import { ISubscribeOpportunities } from '../interfaces/userInterface';
 
 export interface ITariffPopup {
-    title: string,
-    text: string
+    type: 'tariff' | 'key' | 'buy'
+    title: string
+    text?: string[]
+    image: string
+    button: {
+        grey: string
+        primary: string
+    }
+    options?: ISubscribeOpportunities
+    output?: {
+        name: string
+        period: string
+        total: string
+        time: string
+    }
 }
 
 interface ITariffPopupContext {

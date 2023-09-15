@@ -1,41 +1,118 @@
 .container {
-    width: 660px;
-    height: 370px;
-    border-radius: 20px;
-    background: #232229;
+    max-width: 440px;
+    border-radius: 10px;
+    background: #393942;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 35px 48px 35px 65px;
+    padding: 27px 17px 23px;
     box-sizing: border-box;
     position: relative;
+    filter: drop-shadow(0px 4px 30px rgba(189, 0, 229, 0.50));
+    max-height: 90vh;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
-.close {
-    position: absolute;
-    right: 24px;
-    top: 24px;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    border: none;
-    background-image: url(../../../../../assets/images/close-small.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
+.image {
+    aspect-ratio: 1 / 1;
 }
 .title {
     color: #FFF;
-    font-size: 28px;
+    text-align: center;
+    margin: 9px 0 20px;
+    font-size: 20px;
+    font-style: normal;
     font-weight: 600;
-    letter-spacing: -0.14px;
-    align-self: flex-start;
-    margin: 0 0 18px;
+    line-height: 22px;
 }
 .text {
-    color: #FFF;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: -0.075px;
-    margin: 0;
-    flex: 1;
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    margin: 0 13px 20px;
+    max-width: 259px;
+}
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    width: 100%;
+}
+.list {
+    padding: 0;
+    margin: 0 0 40px;
+}
+.option {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+
+    img {
+        width: 24px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.14px;
+        opacity: 0.7;
+        flex: 1;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .apruved, .notApruved {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
+    .apruved {
+        background-image: url(../../../../../assets/images/account/tariff/options/success.svg);
+    }
+    .notApruved {
+        background-image: url(../../../../../assets/images/account/tariff/options/not-success.svg);
+    }
+}
+.buy {
+    width: calc(100% + 34px);
+    transform: translateY(-27px);
+    padding-top: 20px;
+    background-color: #232229;
+
+    .title {
+        margin: 0;
+        font-size: 24px;
+    }
+    .image {
+        width: 200px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+.output {
+    display: grid;
+    grid-template-columns: 122px 140px;
+    align-items: end;
+    gap: 20px 3px;
+    margin: 0 20px;
+
+    p {
+        margin: 0;
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: 600;
+    }
+}
+.label {
+    color: rgba(255, 255, 255, 0.50);
+    font-weight: 700;
 }

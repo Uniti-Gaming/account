@@ -2,16 +2,21 @@ import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } f
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import { ITariffPopup, TariffPopupContext } from '@/core/contexts/TariffPopupContext';
-import { ITariff } from '@interfaces/userInterface';
+import { ICurrentTariff, ISubscribeDetail, IUserKeys } from '@interfaces/userInterface';
 
 import CurrentTariff from './components/CurrentTariff/CurrentTariff';
 import TariffCatalog from './components/TariffCatalog/TariffCatalog';
 import TariffPopup from './components/TariffPopup/TariffPopup';
 import Key from './components/Key/Key';
 
+interface ILoaderData {
+  tariff: ISubscribeDetail[];
+  keys: IUserKeys;
+  currentTariff: ICurrentTariff;
+}
 
 const Tariff = () => {
-  const tariff = useLoaderData() as ITariff;
+  const { tariff, keys, currentTariff } = useLoaderData() as ILoaderData;
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
 
   useEffect(() => {
@@ -31,8 +36,13 @@ const Tariff = () => {
 
   return (
     <TariffPopupContext.Provider value={contextValue}>
-      <Key />
-      <CurrentTariff isActive={true} />
+      <Key keys={keys} />
+      {currentTariff.active_subscribe && (
+        <CurrentTariff
+          date={currentTariff.expiry_date || ''}
+          tariff={tariff.find(item => item.subscribe_id == currentTariff.active_subscribe)}
+        />
+      )}
       <TariffCatalog tariff={tariff} />
       <TariffPopup />
     </TariffPopupContext.Provider>

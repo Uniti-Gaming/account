@@ -15,6 +15,12 @@ export const getTransactions = () => {
 export const getTariff = () => {
   return request('user_subscribes/', { method: 'GET' });
 };
+export const getCurrentTariff = () => {
+  return request('get_user_subscribe/', { method: 'GET' });
+};
+export const getUserKeys = () => {
+  return request('get_user_keys/', { method: 'POST' });
+};
 export const getUser = () => {
   return request('user_data/', { method: 'POST' });
 };

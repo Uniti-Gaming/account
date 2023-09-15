@@ -2,7 +2,7 @@
     border-radius: 6px;
     background: #34323C;
     width: 186px;
-    height: 326px;
+    height: 366px;
     box-sizing: border-box;
     padding: 20px 14px;
     display: flex;
@@ -22,39 +22,58 @@
 .wrapper {
     display: flex;
     align-items: center;
+    gap: 10px;
+    width: 100%;
+    
+    &:first-of-type {
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    &:last-of-type {
+        margin-top: 10px;
+    }
 }
 .image {
     border-radius: 50%;
+    width: 82px;
+    height: 82px;
 }
-.label,
-.pass {
-    margin: 0;
-    font-size: 12px;
+.user, .key {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.user {
+    background-image: url(../../../../../assets/images/account/keys/user-square.svg);
+}
+.key {
+    background-image: url(../../../../../assets/images/account/keys/key.svg);
+}
+.value {
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
     font-weight: 600;
-    letter-spacing: -0.18px;
-}
-.pass {
-    color: #A1A1A1;
-    margin: 0 8px;
-}
-.edit, .show {
-    background-color: transparent;
-    border: none;
-    width: 14px;
-    height: 14px;
-    background-size: cover;
-    &:hover {
-        opacity: 0.8;
-        cursor: pointer;
-    }
+    line-height: normal;
+    letter-spacing: -0.14px;
+    margin: 0;
+    flex: 1;
 }
 .show {
+    background-color: transparent;
+    border: none;
+    background-size: cover;
+    width: 14px;
+    height: 14px;
     background-image:  url(../../../../../assets/images/eye-slash.svg);
     margin-right: 2px;
     &.open {
         background-image:  url(../../../../../assets/images/eye.svg);
     }
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+    }
 }
-.edit {
-    background-image:  url(../../../../../assets/images/account/pencil.svg);
-}
+

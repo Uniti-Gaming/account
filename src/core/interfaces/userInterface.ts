@@ -43,9 +43,42 @@ export interface ISubscription {
     subscribe_price_6: string
 }
 
-export interface ITariff {
-    success: boolean;
+export interface ICurrentTariff {
     active_subscribe: false | string;
     expiry_date?: string;
+}
+
+export interface ITariff extends ICurrentTariff {
     subscriptions: ISubscription[];
+}
+
+export interface ISubscribeOpportunities {
+    id: number;
+    subscribe_id: number;
+    subscribe_descr: string | null;
+    key_pc: boolean;
+    key_android: boolean;
+    teamspeak: boolean;
+    mumble: boolean;
+    serv_games: boolean;
+    netw_games: boolean;
+    coins: number;
+    tickets: number;
+    basic_lib: boolean;
+    additional_lib: boolean;
+    key_steam: boolean;
+    high_download: boolean;
+    blocked_games: boolean;
+}
+export interface ISubscribeDetail extends ISubscription {
+    id: number;
+    subscribe_logo_2: string;
+    subscribe_opportunities: ISubscribeOpportunities[];
+}
+
+export interface IUserKeys {
+    login: string
+    steam_password: string
+    windows_password: string
+    mobile_password: string
 }

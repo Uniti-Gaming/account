@@ -10,16 +10,23 @@ interface CardKeyProps {
   image: string
   title: string
   password: string
-  description: string
+  description: string[]
+  login: string
 }
 
-const CardKey: FC<CardKeyProps> = ({ image, title, password, description }) => {
+const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login }) => {
   const { openPopup } = useContext(TariffPopupContext);
   const [showPass, setShowPass] = useState<boolean>(false);
   const openPopupWithDescription = () => {
     openPopup({
+      type: 'key',
       title: title,
       text: description,
+      image: image,
+      button: {
+        grey: 'Назад',
+        primary: 'Скачать',
+      },
     });
   };
   return (
@@ -27,17 +34,20 @@ const CardKey: FC<CardKeyProps> = ({ image, title, password, description }) => {
       <img className={styles.image} src={image} alt={title} />
       <h4 className={styles.title}>{title}</h4>
       <div className={styles.wrapper}>
-        <p className={styles.label}>Пароль:</p>
-        <p className={styles.pass}>{showPass ? password : '***********'}</p>
+        <span className={styles.user} />
+        <p className={styles.value}>{login}</p>
+      </div>
+      <div className={styles.wrapper}>
+        <span className={styles.key} />
+        <p className={styles.value}>{showPass ? password : '*************'}</p>
         <button
           className={classNames(styles.show, { [styles.open]: showPass })}
           onClick={() => setShowPass(!showPass)} />
-        <button className={styles.edit} />
       </div>
       <Button
         handleClick={openPopupWithDescription}
         text='Подробнее'
-        style={{ backgroundColor: '#484652', margin: '43px 0 10px' }}
+        style={{ backgroundColor: '#484652', margin: '27px 0 10px' }}
         small
       />
       <Button text='Скачать' small />

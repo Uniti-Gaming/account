@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { ISubscribeDetail } from '@/core/interfaces/userInterface';
 import styles from './CurrentTariff.module.scss';
 
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
@@ -8,28 +9,33 @@ import FieldValuePairWrapperWithUnderLine from
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 
 interface CurrentTariffProps {
-    isActive: boolean
+  tariff: ISubscribeDetail | undefined;
+  date: string;
 }
 
-const CurrentTariff: FC<CurrentTariffProps> = ({isActive}) => {
+const CurrentTariff: FC<CurrentTariffProps> = ({ tariff, date }) => {
   return (
     <LayoutBlock title='Текущий тариф'>
       <div className={styles.body}>
         <FieldValuePairWrapperWithUnderLine>
-          <FieldValuePair
-            value='HERO - 30ТМТ/месяц'
-            label='Текущий тариф' />
+          <>
+            {tariff && (
+              <FieldValuePair
+                value={`${tariff.subscribe_name} - ${tariff.subscribe_price_1}ТМТ/месяц`}
+                label='Текущий тариф' />
+            )}
+          </>
         </FieldValuePairWrapperWithUnderLine>
         <FieldValuePairWrapperWithUnderLine>
           <FieldValuePair
-            classValue={isActive? styles.active : styles.notActive}
-            value={isActive? 'Активен' : 'Не активен'}
+            classValue={styles.active}
+            value='Активен'
             label='Статус' />
         </FieldValuePairWrapperWithUnderLine>
         <FieldValuePairWrapperWithUnderLine>
           <FieldValuePair
             classValue={styles.data}
-            value='28.06.2023'
+            value={date}
             label='Дата окончания тарифа' />
         </FieldValuePairWrapperWithUnderLine>
       </div>

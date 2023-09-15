@@ -22,7 +22,7 @@ interface ReviewLoaderData {
 
 const Review = () => {
   const { verification, balance, transactions, tariff } = useLoaderData() as ReviewLoaderData;
-  const verifiedUser = useContext(VerifiedUserContext);
+  const {currentUser} = useContext(VerifiedUserContext);
   const titleRef = useOutletContext() as React.RefObject<HTMLHeadingElement>;
   titleRef.current ? titleRef.current.textContent = 'Обзор учётной записи' : null;
   const [promocodeIsLoading, setPromocodeIsLoading] = useState<boolean>(false);
@@ -63,7 +63,7 @@ const Review = () => {
       <Safety safety={verification} />
       <PromoCode handleSubmit={handleSubmitPromocode} isLoading={promocodeIsLoading} />
       <Deposit balance={userBalance} />
-      <UserInfo currentUser={verifiedUser} />
+      <UserInfo currentUser={currentUser} />
       <TariffBlock tariff={tariff} />
       <History transactions={transactions} />
     </>
