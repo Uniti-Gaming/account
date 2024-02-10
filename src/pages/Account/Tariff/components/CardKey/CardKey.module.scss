@@ -8,7 +8,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
 }
+
 .title {
     text-align: center;
     font-size: 16px;
@@ -19,37 +21,45 @@
     min-height: 44px;
     line-height: normal;
 }
+
 .wrapper {
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
-    
+
     &:first-of-type {
         padding-bottom: 8px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
+
     &:last-of-type {
         margin-top: 10px;
     }
 }
+
 .image {
     border-radius: 50%;
     width: 82px;
     height: 82px;
 }
-.user, .key {
+
+.user,
+.key {
     width: 20px;
     height: 20px;
     background-repeat: no-repeat;
     background-position: center;
 }
+
 .user {
     background-image: url(../../../../../assets/images/account/keys/user-square.svg);
 }
+
 .key {
     background-image: url(../../../../../assets/images/account/keys/key.svg);
 }
+
 .value {
     color: #FFF;
     font-size: 14px;
@@ -60,20 +70,22 @@
     margin: 0;
     flex: 1;
 }
+
 .show {
     background-color: transparent;
     border: none;
     background-size: cover;
     width: 14px;
     height: 14px;
-    background-image:  url(../../../../../assets/images/eye-slash.svg);
+    background-image: url(../../../../../assets/images/eye-slash.svg);
     margin-right: 2px;
+
     &.open {
-        background-image:  url(../../../../../assets/images/eye.svg);
+        background-image: url(../../../../../assets/images/eye.svg);
     }
+
     &:hover {
         opacity: 0.8;
         cursor: pointer;
     }
 }
-

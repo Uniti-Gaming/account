@@ -16,21 +16,24 @@ const CurrentTariff: FC<CurrentTariffProps> = ({ tariff, date }) => {
     <LayoutBlock title='Текущий тариф'>
       <table className={styles.body}>
         <tbody>
-          <>
-            {tariff && (
-              <FieldValuePair
-                value={`${tariff.subscribe_name} - ${tariff.subscribe_price_1}ТМТ/месяц`}
-                label='Текущий тариф' />
-            )}
-          </>
+          {tariff && (
+            <FieldValuePair
+              value={`${tariff.subscribe_name} - ${tariff.subscribe_price_1}ТМТ/месяц`}
+              label='Текущий тариф'
+              underline
+            />
+          )}
           <FieldValuePair
             classValue={styles.active}
             value='Активен'
-            label='Статус' />
+            label='Статус'
+            underline
+          />
           <FieldValuePair
             classValue={styles.data}
             value={date}
-            label='Дата окончания тарифа' />
+            label='Дата окончания тарифа'
+          />
         </tbody>
       </table>
     </LayoutBlock>

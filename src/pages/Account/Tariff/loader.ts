@@ -22,7 +22,7 @@ export const loader = async () => {
     return {
       tariff: defaultTariff.subscriptions,
       keys: defaultKeys,
-      currentTariff: { active_subscribe: false },
+      currentTariff: { active_subscribe: '236963', expiry_date: '28.06.2023' },
     };
   }
 };
