@@ -1,5 +1,6 @@
 export const defaultTariff = {
-  active_subscribe: false,
+  active_subscribe: 'Герой',
+  expiry_date: '27 нояб. 2022г.',
   subscriptions: [
     {
       subscribe_id: '236963',

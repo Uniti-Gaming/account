@@ -2,6 +2,9 @@ import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 import DifrentPopup from '../DifrentPopup/DifrentPopup';
 import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
 
+
+import styles from './Difrent.module.scss';
+
 interface DifrentProps {
   sex: string
   instagram: string
@@ -16,20 +19,22 @@ const Difrent = ({ sex, instagram, tiktok, favorite }: DifrentProps) => {
       button={{ text: 'Обновить', edit: true }}
       Popup={DifrentPopup}
     >
-      <div style={{ padding: '54px 0 59px' }}>
-        <FieldValuePair
-          value={sex}
-          label='Мой пол' />
-        <FieldValuePair
-          value={instagram}
-          label='Аккаунт в Instagram' />
-        <FieldValuePair
-          value={tiktok}
-          label='Аккаунт в Tik-Tok' />
-        <FieldValuePair
-          value={favorite}
-          label='Любимый сервис в Unite Gaming' />
-      </div>
+      <table className={styles.table}>
+        <tbody>
+          <FieldValuePair
+            value={sex}
+            label='Мой пол' />
+          <FieldValuePair
+            value={instagram}
+            label='Аккаунт в Instagram' />
+          <FieldValuePair
+            value={tiktok}
+            label='Аккаунт в Tik-Tok' />
+          <FieldValuePair
+            value={favorite}
+            label='Любимый сервис в Unite Gaming' />
+        </tbody>
+      </table>
     </BlockWidthPopup>
   );
 };

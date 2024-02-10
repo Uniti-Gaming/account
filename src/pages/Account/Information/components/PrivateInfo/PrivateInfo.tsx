@@ -1,8 +1,8 @@
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
-import FieldValuePairWrapperWithUnderLine from
-  '@/components/FieldValuePairWrapperWithUnderLine/FieldValuePairWrapperWithUnderLine';
 import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
 import PrivateInfoPopup from '../PrivateInfoPopup/PrivateInfoPopup';
+
+import styles from './PrivateInfo.module.scss';
 
 interface PrivateInfoProps {
   name: string
@@ -16,14 +16,12 @@ const PrivateInfo = ({ name, city }: PrivateInfoProps) => {
       button={{ text: 'Обновить', edit: true }}
       Popup={PrivateInfoPopup}
     >
-      <div style={{ padding: '31px 0 23px' }}>
-        <FieldValuePairWrapperWithUnderLine>
-          <FieldValuePair value={name} label='Имя' />
-        </FieldValuePairWrapperWithUnderLine>
-        <FieldValuePairWrapperWithUnderLine>
+      <table className={styles.table}>
+        <tbody>
+          <FieldValuePair value={name} label='Имя' underline />
           <FieldValuePair value={city} label='Город' />
-        </FieldValuePairWrapperWithUnderLine>
-      </div>
+        </tbody>
+      </table>
     </BlockWidthPopup>
   );
 };

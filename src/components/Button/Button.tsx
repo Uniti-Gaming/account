@@ -4,29 +4,31 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-    text: string
-    type?: 'button' | 'submit' | 'reset'
-    style?: CSSProperties;
-    loading?: boolean
-    handleClick?: () => void
-    children?: JSX.Element
-    fullPage?: boolean
-    small?: boolean
-    disabled?: boolean
+  text: string
+  type?: 'button' | 'submit' | 'reset'
+  style?: CSSProperties;
+  loading?: boolean
+  handleClick?: () => void
+  children?: JSX.Element
+  fullPage?: boolean
+  small?: boolean
+  disabled?: boolean
+  className?: string
 }
 
 const Button: FC<ButtonProps> = ({
   handleClick, loading, disabled,
   fullPage, small, style,
   text, type,
-  children,
+  children, className,
 }) => {
-  const buttonClass = classNames(styles.button, {
-    [styles.disabled]: disabled,
-    [styles.load]: loading,
-    [styles.fullPage]: fullPage,
-    [styles.small]: small,
-  });
+  const buttonClass = classNames(
+    styles.button, className, {
+      [styles.disabled]: disabled,
+      [styles.load]: loading,
+      [styles.fullPage]: fullPage,
+      [styles.small]: small,
+    });
 
   return (
     <button

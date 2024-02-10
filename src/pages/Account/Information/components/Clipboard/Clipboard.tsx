@@ -1,5 +1,4 @@
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
-import FieldValuePairWrapper from '@/components/FieldValuePairWrapperWithUnderLine/FieldValuePairWrapperWithUnderLine';
 import styles from './Clipboard.module.scss';
 
 interface ClipboardProps {
@@ -12,13 +11,20 @@ const Clipboard = ({ value, label }: ClipboardProps) => {
     navigator.clipboard.writeText(value);
   };
   return (
-    <FieldValuePairWrapper>
-      <FieldValuePair {...{ value, label }} />
-      <button
-        className={styles.button}
-        onClick={clipboardHundler}
-      />
-    </FieldValuePairWrapper>
+    <FieldValuePair
+      underline
+      classValue={styles.hasButton}
+      label={label}
+      value={(
+        <>
+          {value}
+          <button
+            className={styles.button}
+            onClick={clipboardHundler}
+          />
+        </>
+      )}
+    />
   );
 };
 

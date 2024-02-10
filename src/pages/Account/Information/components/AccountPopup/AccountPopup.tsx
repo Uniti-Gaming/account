@@ -30,6 +30,7 @@ const AccountPopup: FC<PopupProps> = ({ isOpen, handleClose, title }) => {
           <Button
             text='Ок'
             handleClick={handleClose}
+            className={styles.button}
             style={{ margin: '39px auto 0', display: 'block' }}
           />
         </div>

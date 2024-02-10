@@ -1,3 +1,5 @@
+@import '../../../../../assets/styles/media';
+
 .tariff {
     display: flex;
     align-items: center;
@@ -9,15 +11,18 @@
         border: none;
     }
 }
+
 .image {
     width: 73px;
     height: 73px;
 }
+
 .wrapper {
     display: grid;
     grid-template-columns: 100px 85px 120px 130px;
     gap: 0 28px;
 }
+
 .name {
     font-weight: 700;
     font-size: 14px;
@@ -25,7 +30,10 @@
     letter-spacing: -0.01em;
     margin: 0;
 }
-.text, .disabled, .included {
+
+.text,
+.disabled,
+.included {
     font-weight: 600;
     font-size: 13px;
     line-height: 16px;
@@ -33,17 +41,63 @@
     opacity: 0.5;
     margin: 9px 0 0;
 }
-.disabled, .included {
+
+.disabled,
+.included {
     margin: 0;
 }
+
 .included {
     opacity: 1;
     color: #00FF75;
 }
+
 .time {
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
     letter-spacing: -0.01em;
     margin: 0;
+}
+
+@include media('tablet') {
+    .wrapper {
+        gap: 8px 21px;
+        grid-template-areas:
+            'name date link'
+            'active date link';
+        grid-template-columns: auto;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .itemName,
+    .itemActive {
+        .text {
+            display: none;
+        }
+    }
+
+    .itemName {
+        grid-area: name;
+    }
+
+    .itemActive {
+        grid-area: active;
+    }
+
+    .itemDate {
+        grid-area: date;
+    }
+
+    .link {
+        font-size: 0;
+        grid-area: link;
+        text-align: end;
+
+        span {
+            background-image: url('../../../../../assets/images/info.svg');
+        }
+    }
 }

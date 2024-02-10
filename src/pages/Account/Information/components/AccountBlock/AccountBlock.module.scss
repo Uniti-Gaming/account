@@ -1,0 +1,10 @@
+@import '../../../../../assets/styles/media';
+
+.table {
+    width: 100%;
+    padding: 49px 0 41px;
+
+    @include media('phone') {
+        padding: 29px 0 32px;
+    }
+}

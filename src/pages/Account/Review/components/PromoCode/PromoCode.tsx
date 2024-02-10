@@ -34,7 +34,7 @@ const PromoCode: FC<PromoCodeProps> = ({ handleSubmit, isLoading }) => {
           type='submit'
           text='Использовать'
           loading={isLoading}
-          style={{padding: '17px 24px', fontSize: '18px'}}
+          className={styles.button}
         />
       </form>
     </LayoutBlock>

@@ -24,11 +24,16 @@ const PopupEditInfo: FC<PopupEditInfoProps> = ({ title, children, isOpen, handle
         <form className={styles.form} onSubmit={onSubmit}>
           {children}
           <div className={styles.buttons}>
-            <Button type='submit' text='Сохранить' loading={loading} />
+            <Button
+              type='submit'
+              text='Сохранить'
+              className={styles.submit}
+              loading={loading}
+            />
             <Button
               text='Отмена'
               type='button'
-              style={{ backgroundColor: '#34323C' }}
+              className={styles.buttonGray}
               handleClick={handleClose}
             />
           </div>

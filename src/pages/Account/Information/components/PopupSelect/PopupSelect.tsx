@@ -7,6 +7,9 @@ import ReactSelect from '@/components/ReactSelect/ReactSelect';
 const containerStyles = {
   width: '398px',
   height: '48px',
+  '@media (max-width: 576px)': {
+    width: '100%',
+  },
 };
 
 const controlStyles = {

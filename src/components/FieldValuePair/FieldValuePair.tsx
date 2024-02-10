@@ -1,19 +1,21 @@
 import classNames from 'classnames';
+import { ReactElement } from 'react';
 
 import styles from './FieldValuePair.module.scss';
 
 interface FieldValuePairProps {
     classValue?: string
-    value: string;
+    underline?: boolean
+    value: string | ReactElement;
     label: string;
   }
 
-const FieldValuePair = ({value, label, classValue}: FieldValuePairProps) => {
+const FieldValuePair = ({value, label, classValue, underline}: FieldValuePairProps) => {
   return (
-    <>
-      <p className={styles.label}>{label}</p>
-      <p className={classNames(styles.value, classValue)}>{value}</p>
-    </>
+    <tr className={classNames({[styles.underline]: underline})}>
+      <th className={styles.label}>{label}</th>
+      <td className={classNames(styles.value, classValue)}>{value}</td>
+    </tr>
   );
 };
 

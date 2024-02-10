@@ -1,3 +1,5 @@
+@import '../../../../../assets/styles/media';
+
 .content {
     padding: 48px 30px 27px;
 }
@@ -23,4 +25,26 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.16px;
+}
+
+.button {
+    margin: 39px auto 0;
+    display: block;
+}
+
+@include media('tablet-small') {
+    .content {
+        padding: 20px 0 0;
+    }
+
+    .pair {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .label,
+    .about,
+    .button {
+        width: 100%;
+    }
 }

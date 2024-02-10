@@ -1,3 +1,5 @@
+@import '../../assets/styles/media';
+
 .input {
     width: 398px;
     height: 48px;
@@ -10,4 +12,10 @@
     font-size: 16px;
     letter-spacing: -0.015em;
     color: #FFFFFF;
+}
+
+@include media('tablet-small') {
+    .input {
+        width: 100%;
+    }
 }

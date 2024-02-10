@@ -4,8 +4,6 @@ import { ISubscribeDetail } from '@/core/interfaces/userInterface';
 import styles from './CurrentTariff.module.scss';
 
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
-import FieldValuePairWrapperWithUnderLine from
-  '@/components/FieldValuePairWrapperWithUnderLine/FieldValuePairWrapperWithUnderLine';
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 
 interface CurrentTariffProps {
@@ -16,8 +14,8 @@ interface CurrentTariffProps {
 const CurrentTariff: FC<CurrentTariffProps> = ({ tariff, date }) => {
   return (
     <LayoutBlock title='Текущий тариф'>
-      <div className={styles.body}>
-        <FieldValuePairWrapperWithUnderLine>
+      <table className={styles.body}>
+        <tbody>
           <>
             {tariff && (
               <FieldValuePair
@@ -25,20 +23,16 @@ const CurrentTariff: FC<CurrentTariffProps> = ({ tariff, date }) => {
                 label='Текущий тариф' />
             )}
           </>
-        </FieldValuePairWrapperWithUnderLine>
-        <FieldValuePairWrapperWithUnderLine>
           <FieldValuePair
             classValue={styles.active}
             value='Активен'
             label='Статус' />
-        </FieldValuePairWrapperWithUnderLine>
-        <FieldValuePairWrapperWithUnderLine>
           <FieldValuePair
             classValue={styles.data}
             value={date}
             label='Дата окончания тарифа' />
-        </FieldValuePairWrapperWithUnderLine>
-      </div>
+        </tbody>
+      </table>
     </LayoutBlock>
   );
 };

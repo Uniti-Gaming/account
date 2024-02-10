@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { PopupProps } from '@/core/interfaces/PopupProps';
+import styles from './BlockWithOneString.module.scss';
 
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 import BlockWidthPopup from '../BlockWidthPopup/BlockWidthPopup';
@@ -18,9 +19,11 @@ const BlockWithOneString: FC<BlockWithOneStringProps> = ({ value, label, Popup, 
       button={{ text: 'Обновить', edit: true }}
       Popup={Popup}
     >
-      <div style={{ padding: '70px 0 64px' }}>
-        <FieldValuePair {...{value, label}} />
-      </div>
+      <table className={styles.table}>
+        <tbody>
+          <FieldValuePair {...{value, label}} />
+        </tbody>
+      </table>
     </BlockWidthPopup>
   );
 };

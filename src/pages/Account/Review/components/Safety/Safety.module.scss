@@ -1,4 +1,5 @@
 @import '../../../../../assets/styles/constants.scss';
+@import '../../../../../assets/styles/media';
 
 .body {
     padding: 46px 0 60px;
@@ -6,9 +7,11 @@
     gap: 46px;
     align-items: center;
 }
+
 .value {
     position: relative;
 }
+
 .number {
     position: absolute;
     top: 0;
@@ -19,6 +22,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .procent {
     font-weight: 600;
     font-size: 38px;
@@ -27,15 +31,18 @@
     text-align: center;
     letter-spacing: -0.015em;
 }
+
 .progress {
     transform: rotate(-90deg);
     width: 220px;
     height: 220px;
     fill: none;
     stroke-width: 8px;
+
     circle:nth-child(1) {
         stroke: #D9D9D9;
     }
+
     circle:nth-child(2) {
         transition: stroke-dashoffset 1s linear;
         stroke: $primaryColor;
@@ -43,8 +50,20 @@
         stroke-dashoffset: 666;
     }
 }
+
 .data {
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+@include media('tablet') {
+    .body {
+        flex-direction: column;
+        padding: 32px 0 12px;
+    }
+
+    .data {
+        gap: 20px;
+    }
 }

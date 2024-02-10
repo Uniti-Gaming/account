@@ -19,4 +19,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 70px);
+    --bg: #18181b;
+    --primary: #79109d;
+    --white: #fff;
+    --active: #9f2ec7;
+    --disabled-text-color: #a1a1a1;
+    --gold: #ffd700;
+    --gray: #393942;
 }

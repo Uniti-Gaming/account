@@ -4,19 +4,19 @@ import { IUser } from '@interfaces/userInterface';
 import styles from './UserInfo.module.scss';
 
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
-import UserInfoItem from '../UserInfoItem/UserInfoItem';
+import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 
 interface UserInfoProps {
   currentUser: IUser;
 }
 
-const UserInfo: FC<UserInfoProps> = ({currentUser}) => {
+const UserInfo: FC<UserInfoProps> = ({ currentUser }) => {
   const userInfo = [
     { label: 'ID:', value: currentUser.user_id },
     { label: 'Имя:', value: currentUser.name },
     { label: 'Телефон:', value: currentUser.number },
-    { label: 'Электронная почта:', value: currentUser.email },
-    { label: 'Реферальный номер:', value: currentUser.user_ref },
+    { label: 'E-mail:', value: currentUser.email },
+    { label: 'Реф. номер:', value: currentUser.user_ref },
   ];
   return (
     <LayoutBlock
@@ -25,11 +25,13 @@ const UserInfo: FC<UserInfoProps> = ({currentUser}) => {
         text: 'Сведения об учётной записи >',
         path: '/information',
       }} >
-      <div className={styles.body}>
-        {userInfo.map((item, index) => (
-          <UserInfoItem key={index} label={item.label} value={item.value} />
-        ))}
-      </div>
+      <table className={styles.body}>
+        <tbody>
+          {userInfo.map((item, index) => (
+            <FieldValuePair key={index} label={item.label} value={item.value} />
+          ))}
+        </tbody>
+      </table>
     </LayoutBlock>
   );
 };

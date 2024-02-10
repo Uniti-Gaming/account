@@ -1,3 +1,5 @@
+@import '../../assets/styles/media';
+
 .header {
     position: fixed;
     top: 0;
@@ -138,7 +140,7 @@
     }
 }
 
-@media screen and (max-width: 1010px) {
+@include media('desktop') {
     .link {
         font-size: 13px;
         padding: 8px;
@@ -153,9 +155,6 @@
         margin: 0;
     }
 
-}
-
-@media screen and (max-width: 900px) {
     .header {
         height: 55px;
     }

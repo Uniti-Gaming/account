@@ -1,14 +1,37 @@
+@import '../../../../../assets/styles/media';
+
 .form {
     padding: 40px 0;
 }
+
 .buttons {
     margin-left: 180px;
     display: flex;
     align-items: center;
     gap: 20px;
 }
+
 .buttonGray {
+    background-color: #34323C;
+
     &:hover {
         background: #4c4a54;
+    }
+}
+
+@include media('tablet-small') {
+    .form {
+        padding: 20px 0;
+    }
+
+    .buttons {
+        margin: 0;
+        gap: 17px;
+        flex-direction: column;
+    }
+
+    .submit,
+    .buttonGray {
+        width: 100%;
     }
 }

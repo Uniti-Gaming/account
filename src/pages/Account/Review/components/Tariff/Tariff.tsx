@@ -4,22 +4,22 @@ import LinkWithArrow from '@/components/LinkWithArrow/LinkWithArrow';
 import styles from './Tariff.module.scss';
 
 interface TariffProps {
-    image: string;
-    name: string;
-    isActive: boolean;
-    expiryDate?: string;
+  image: string;
+  name: string;
+  isActive: boolean;
+  expiryDate?: string;
 }
 
-const Tariff: FC<TariffProps> = ({image, name, isActive, expiryDate}) => {
+const Tariff: FC<TariffProps> = ({ image, name, isActive, expiryDate }) => {
   return (
     <div className={styles.tariff}>
       <img className={styles.image} src={image} alt={`иконка тарифа ${name}`} />
       <div className={styles.wrapper}>
-        <div>
+        <div className={styles.itemName}>
           <h5 className={styles.name}>{name}</h5>
           <p className={styles.text}>Тариф</p>
         </div>
-        <div>
+        <div className={styles.itemActive}>
           {isActive ? (
             <p className={styles.included}>Активен</p>
           ) : (
@@ -27,7 +27,7 @@ const Tariff: FC<TariffProps> = ({image, name, isActive, expiryDate}) => {
           )}
           <p className={styles.text}>Подробнее</p>
         </div>
-        <div>
+        <div className={styles.itemDate}>
           {isActive && (
             <>
               <p className={styles.time}>{expiryDate}</p>
@@ -36,8 +36,10 @@ const Tariff: FC<TariffProps> = ({image, name, isActive, expiryDate}) => {
           )}
         </div>
         <LinkWithArrow
-          text={isActive? 'Улучшить тариф' : 'Выбрать тариф'}
-          path='/account/tariff' />
+          text={isActive ? 'Улучшить тариф' : 'Выбрать тариф'}
+          path='/account/tariff'
+          className={styles.link}
+        />
       </div>
     </div>
   );

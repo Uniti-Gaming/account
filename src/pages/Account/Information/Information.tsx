@@ -23,7 +23,7 @@ const Information = () => {
     {
       title: 'Электронная почта',
       value: currentUser.email,
-      label: 'Электронная почта',
+      label: 'E-mail',
       Popup: EmailPopup,
     },
     {

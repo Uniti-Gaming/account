@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import styles from './LinkWithArrow.module.scss';
 
 interface LinkWithArrowProps {
-    text: string
-    path: string
+  text: string
+  path: string
+  className?: string
 }
 
-const LinkWithArrow = ({text, path}: LinkWithArrowProps) => {
+const LinkWithArrow = ({ text, path, className }: LinkWithArrowProps) => {
   return (
-    <Link className={styles.link} to={path}>{text}<span/></Link>
+    <Link className={classNames(styles.link, className)} to={path}>
+      {text}
+      <span />
+    </Link>
   );
 };
 

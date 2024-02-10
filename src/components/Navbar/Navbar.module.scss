@@ -1,10 +1,15 @@
 @import '../../assets/styles/constants.scss';
+@import '../../assets/styles/media';
 
 .wrapper {
     width: 320px;
     position: sticky;
     top: 80px;
     height: fit-content;
+
+    @include media('desktop') {
+        display: none;
+    }
 }
 
 .navbar {
