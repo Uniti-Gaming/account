@@ -1,4 +1,5 @@
 import { useLoaderData, useOutletContext } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { IBalance } from '@interfaces/userInterface';
 import upCoin from '@images/account/coins/up-coin.png';
@@ -27,13 +28,17 @@ const Balance = () => {
             <img className={styles.image} src={unCoin} alt='монета баллов' />
             <p className={styles.text}>{balance.coins} UG Баллов</p>
           </div>
-          <button className={styles.exchange}>Обменять баланс на баллы</button>
+          <button className={classNames(styles.exchange, styles.scores)}>
+            Обменять баланс на баллы
+          </button>
           <p className={styles.text}>Билеты</p>
           <div>
             <img className={styles.image} src={ticket} alt='билет' />
             <p className={styles.text}>{balance.tickets} Билетов</p>
           </div>
-          <button className={styles.exchange}>Обменять баланс на билеты</button>
+          <button className={classNames(styles.exchange, styles.tickets)}>
+            Обменять баланс на билеты
+          </button>
           <button className={styles.replenish}>Пополнить кошелёк Unite Gaming</button>
           <button className={styles.code}>Использовать код</button>
         </div>
