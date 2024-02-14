@@ -55,6 +55,12 @@ export const optionsFavorite: IOption[] = [
   { value: 'Покупка игр', label: 'Покупка игр' },
   { value: 'Сообщество', label: 'Сообщество' },
 ];
+export const optionsReplenish: IOption[] = [
+  {value: 'Подарочная карта', label: 'Подарочная карта'},
+  {value: 'Точка приема оплаты Unite Gaming', label: 'Точка приема оплаты Unite Gaming'},
+  {value: 'ТОплата с карты (скоро)', label: 'Оплата с карты (скоро)'},
+  {value: 'TM CELL (скоро)', label: 'TM CELL (скоро)'},
+];
 
 function generateOptions(max: number, min: number): IOption[] {
   const options: IOption[] = Array.from({ length: max - min + 1 }, (_, i) => {

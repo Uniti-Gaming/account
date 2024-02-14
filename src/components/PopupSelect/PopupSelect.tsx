@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { SelectProps } from '@/core/interfaces/selectProps';
 
-import ReactSelect from '@/components/ReactSelect/ReactSelect';
+import ReactSelect from '../ReactSelect/ReactSelect';
 
 const containerStyles = {
   width: '398px',

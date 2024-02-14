@@ -5,13 +5,13 @@ import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 import { IBalance, ITariff, ITransaction, IVerification } from '@interfaces/userInterface';
 import { applyPromocode, getBalance } from '@services/userService';
 
-import Deposit from './components/Deposit/Deposit';
+import Deposit from '@/components/Deposit/Deposit';
+import InfoMessages from '@/components/InfoMessages/InfoMessages';
 import History from './components/History/History';
 import PromoCode from './components/PromoCode/PromoCode';
 import Safety from './components/Safety/Safety';
 import TariffBlock from './components/TariffBlock/TariffBlock';
 import UserInfo from './components/UserInfo/UserInfo';
-import InfoMessages from '@/components/InfoMessages/InfoMessages';
 
 interface ReviewLoaderData {
   verification: IVerification;

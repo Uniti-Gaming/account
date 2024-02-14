@@ -6,7 +6,7 @@ import { editEmail } from '@/core/services/userService';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
 import PopupInput from '@/components/PopupInput/PopupInput';
-import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
+import PopupEditInfo from '../../../../../components/PopupWithForm/PopupWithForm';
 
 const EmailPopup: FC<PopupProps> = (props) => {
   const { currentUser, login } = useContext(VerifiedUserContext);

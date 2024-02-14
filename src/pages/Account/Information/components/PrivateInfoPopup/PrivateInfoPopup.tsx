@@ -7,8 +7,8 @@ import { optionsCity } from '@/assets/data/options';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
 import PopupInput from '@/components/PopupInput/PopupInput';
-import PopupSelect from '../PopupSelect/PopupSelect';
-import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
+import PopupSelect from '../../../../../components/PopupSelect/PopupSelect';
+import PopupEditInfo from '../../../../../components/PopupWithForm/PopupWithForm';
 import { editPrivateInformation } from '@/core/services/userService';
 
 const PrivateInfoPopup: FC<PopupProps> = (props) => {

@@ -6,8 +6,8 @@ import { editLang } from '@/core/services/userService';
 import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
 
 import LabelForPopupInput from '@/components/LabelForPopupInput/LabelForPopupInput';
-import PopupEditInfo from '../PopupEditInfo/PopupEditInfo';
-import PopupSelect from '../PopupSelect/PopupSelect';
+import PopupEditInfo from '../../../../../components/PopupWithForm/PopupWithForm';
+import PopupSelect from '../../../../../components/PopupSelect/PopupSelect';
 
 const LangPopup: FC<PopupProps> = (props) => {
   const { currentUser, login } = useContext(VerifiedUserContext);

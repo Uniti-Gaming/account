@@ -7,7 +7,7 @@ import upCoin from '@images/account/coins/up-coin.png';
 import unCoin from '@images/account/coins/un-coin.png';
 import ticket from '@images/account/coins/ticket.png';
 
-import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
+import LayoutBlock from '../LayoutBlock/LayoutBlock';
 import BalanceItem from '../BalanceItem/BalanceItem';
 
 interface DepositProps {
