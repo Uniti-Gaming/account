@@ -18,8 +18,12 @@ const Header = () => {
   const { currentUser } = useContext(AuthContext);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
+  const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    closeMenu();
   }, [location]);
 
   return (
@@ -44,7 +48,7 @@ const Header = () => {
             <option value='ru'>RU</option>
             <option value='tm'>TM</option>
           </select>
-          <HeaderUser currentUser={currentUser} />
+          <HeaderUser closeMenu={closeMenu} currentUser={currentUser} />
         </nav>
         <button
           className={classNames(styles.burger, { [styles.active]: isMenuOpen })}

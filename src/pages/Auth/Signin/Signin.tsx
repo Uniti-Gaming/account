@@ -2,7 +2,7 @@ import { useContext, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { signin } from '@services/authService';
-import { getUser } from '@/core/services/userService';
+import { getUser, getUserInfo } from '@/core/services/userService';
 import { AuthContext } from '@/core/contexts/AuthContext';
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import styles from './Signin.module.scss';
@@ -41,9 +41,9 @@ const Signin = () => {
         checkbox: !!saveRef.current?.checked,
       })
         .then(() => {
-          getUser()
-            .then((user) => {
-              login(user);
+          Promise.all([getUser(), getUserInfo()])
+            .then(([user, userInfo]) => {
+              login({ ...user, ...userInfo });
               navigate('/', { replace: true });
             });
         })

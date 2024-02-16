@@ -1,6 +1,6 @@
 import { getBalance, getTariff, getTransactions } from '@/core/services/userService';
 import { checkVerification } from '@services/verificationService';
-import { defaultBalance, defaultTariff, defaultVerification } from '@/assets/data/fakeData';
+import { defaultBalance, defaultTariff, defaultTransactions, defaultVerification } from '@/assets/data/fakeData';
 
 export const loader = async () => {
   try {
@@ -21,7 +21,7 @@ export const loader = async () => {
     return {
       verification: defaultVerification,
       balance: defaultBalance,
-      transactions: [],
+      transactions: defaultTransactions,
       tariff: defaultTariff,
     };
   }

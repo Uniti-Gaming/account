@@ -9,3 +9,6 @@ const request = (endpoint: string, options?: RequestInit) => {
 export const getTariff = () => {
   return request('get_subscribes/', { method: 'GET' });
 };
+export const getRates = () => {
+  return request('exchange_rates/', { method: 'GET' });
+};

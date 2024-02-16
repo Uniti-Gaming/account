@@ -145,3 +145,54 @@ export const defaultKeys = {
   windows_password: 'Password',
   mobile_password: 'Password',
 };
+export const defaultTransactions = [
+  {
+    transaction_id: '18',
+    user_id: 'UG-24-0756',
+    date: '28.08.2023',
+    operation_type: 'Пополнение баланса',
+    currency_type: 'undefined',
+    amount: 'undefined',
+    status: 'error',
+  },
+  {
+    transaction_id: '18',
+    user_id: 'UG-24-0756',
+    date: '28.08.2023',
+    operation_type: 'Пополнение баланса',
+    currency_type: 'undefined',
+    amount: 'undefined',
+    status: 'error',
+  },
+  {
+    transaction_id: '18',
+    user_id: 'UG-24-0756',
+    date: '28.08.2023',
+    operation_type: 'Пополнение баланса',
+    currency_type: 'undefined',
+    amount: 'undefined',
+    status: 'error',
+  },
+  {
+    transaction_id: '18',
+    user_id: 'UG-24-0756',
+    date: '28.08.2023',
+    operation_type: 'Пополнение баланса',
+    currency_type: 'undefined',
+    amount: 'undefined',
+    status: 'error',
+  },
+  {
+    transaction_id: '18',
+    user_id: 'UG-24-0756',
+    date: '28.08.2023',
+    operation_type: 'Пополнение баланса',
+    currency_type: 'undefined',
+    amount: 'undefined',
+    status: 'error',
+  },
+];
+export const defaultRates = {
+  main_coins: '2.00',
+  main_tickets: '20.00',
+};

@@ -5,7 +5,7 @@ import { AuthContext } from '@/core/contexts/AuthContext';
 import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import { optionsCity, optionsvisitFrom } from '@/assets/data/options';
 import { signup } from '@services/authService';
-import { getUser } from '@/core/services/userService';
+import { getUser, getUserInfo } from '@/core/services/userService';
 import styles from './SignUp.module.scss';
 import infoIcon from '@images/info.svg';
 
@@ -85,9 +85,9 @@ const SignUp = () => {
           privacy_policy: true,
           terms_of_use: true,
         });
-        getUser()
-          .then((user) => {
-            login(user);
+        Promise.all([getUser(), getUserInfo()])
+          .then(([user, userInfo]) => {
+            login({ ...user, ...userInfo });
             navigate('/', { replace: true });
           });
       } catch (error) {
@@ -129,7 +129,7 @@ const SignUp = () => {
       <AuthForm
         loading={isLoading}
         handleSubmit={onSubmit}
-        button='Войти в систему'
+        button='Зарегистрироваться'
         disabled={agreeRef.current?.checked ? false : true}
       >
         <AuthLabel text='Имя' required>

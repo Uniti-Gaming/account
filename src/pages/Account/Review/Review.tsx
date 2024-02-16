@@ -65,7 +65,7 @@ const Review = () => {
       <Deposit balance={userBalance} />
       <UserInfo currentUser={currentUser} />
       <TariffBlock tariff={tariff} />
-      <History transactions={transactions} />
+      <History transactions={transactions.slice(0, 3)} />
     </>
   );
 };

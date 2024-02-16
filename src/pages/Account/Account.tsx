@@ -13,7 +13,7 @@ interface AccountProps {
   verifiedUser: IUser
 }
 
-const Account: FC<AccountProps> = ({verifiedUser}) => {
+const Account: FC<AccountProps> = ({ verifiedUser }) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const navigation = useNavigation();
 
@@ -34,7 +34,7 @@ const Account: FC<AccountProps> = ({verifiedUser}) => {
         <h1 ref={titleRef} className={styles.title}>Обзор учётной записи</h1>
         <div className={styles.container}>
           <Navbar />
-          <VerifiedUserContext.Provider value={contextValue}> 
+          <VerifiedUserContext.Provider value={contextValue}>
             <div className={styles.content}>
               {navigation.state === 'loading' ? (
                 <>

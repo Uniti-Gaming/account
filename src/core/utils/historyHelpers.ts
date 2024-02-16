@@ -6,6 +6,8 @@ const getCurrency = (type: 'main' | 'coins' | 'tickets') => {
     return 'баллов(UG)';
   case 'tickets':
     return 'Билетов';
+  default:
+    return '';
   }
 };
 
@@ -17,6 +19,8 @@ const getStatus = (status: 'success' | 'error' | 'pending') => {
     return 'Неудачно';
   case 'pending':
     return 'В обработке';
+  default:
+    return '';
   }
 };
 

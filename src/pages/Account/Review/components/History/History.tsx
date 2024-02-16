@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { ITransaction } from '@interfaces/userInterface';
-import { getCurrency, getStatus } from './functions';
+import { getCurrency, getStatus } from '@utils/historyHelpers';
 import styles from './History.module.scss';
 
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';

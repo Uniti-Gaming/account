@@ -5,6 +5,7 @@ import { loader as reviewLoader } from './pages/Account/Review/loader';
 import { loader as balanceLoader } from './pages/Account/Balance/loader';
 import { loader as tariffLoader } from './pages/Account/Tariff/loader';
 import { loader as suportLoader } from './pages/Account/Support/loader';
+import { loader as historyLoader } from './pages/Account/History/loader';
 import { emailLoader, phoneLoader } from './pages/Auth/Confirm/loader';
 
 import App from './App';
@@ -22,6 +23,7 @@ import Reset from './pages/Auth/Reset/Reset';
 import Balance from './pages/Account/Balance/Balance';
 import History from './pages/Account/History/History';
 import Support from './pages/Account/Support/Support';
+import UseCode from './pages/UseCode/UseCode';
 
 const router = createHashRouter([
   {
@@ -49,7 +51,11 @@ const router = createHashRouter([
             element: <Tariff />,
             loader: tariffLoader,
           },
-          { path: '/history', element: <History />},
+          {
+            path: '/history',
+            element: <History />,
+            loader: historyLoader,
+          },
           {
             path: '/support',
             element: <Support />,
@@ -74,6 +80,10 @@ const router = createHashRouter([
       { path: '/success-phone', element: <Success type='phone' /> },
       { path: '/success-email', element: <Success type='email' /> },
       { path: '/success-password', element: <Success type='password' /> },
+      {
+        path: '/use-code',
+        element: <ProtectedRoute element={UseCode} type='email'/>,
+      },
     ],
   },
 ]);

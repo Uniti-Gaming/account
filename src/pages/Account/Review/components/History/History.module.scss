@@ -1,6 +1,8 @@
+@import '../../../../../assets/styles/media';
+
 .body {
     padding: 14px 0;
-    height: 180px;
+    min-height: 180px;
     box-sizing: border-box;
     position: relative;
 }
@@ -35,4 +37,40 @@
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+}
+
+@include media('tablet') {
+    .body {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .transaction {
+        grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
+
+        &:last-of-type {
+            border: none;
+        }
+    }
+
+    .text {
+        text-align: center;
+
+        &:nth-child(1) {
+            grid-row: span 2;
+            justify-self: left;
+        }
+
+        &:nth-child(2) {
+            grid-row: span 2;
+        }
+    }
+
+    .empty {
+        position: static;
+        transform: none;
+        margin: 12px auto;
+        text-align: center;
+    }
 }

@@ -19,9 +19,10 @@ import { AuthContext } from '@/core/contexts/AuthContext';
 
 interface HeaderUserProps {
   currentUser: IUser | null;
+  closeMenu: () => void;
 }
 
-const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
+const HeaderUser: FC<HeaderUserProps> = ({ currentUser, closeMenu }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -72,18 +73,21 @@ const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
               text='Учётная запись'
               icon={userSquare}
               style={{ opacity: 1 }}
+              onClick={closeMenu}
             />
             <NavLinkWidthIcon
               path='/balance'
               text='Пополнить баланс'
               icon={wallet}
               style={{ opacity: 1 }}
+              onClick={closeMenu}
             />
             <NavLinkWidthIcon
               path='/tariff'
               text='Тарифы и ключи'
               icon={tariffIcon}
               style={{ opacity: 1 }}
+              onClick={closeMenu}
             />
             <NavLinkWidthIcon
               path='/'
@@ -99,8 +103,8 @@ const HeaderUser: FC<HeaderUserProps> = ({currentUser}) => {
           onClose={() => setOpen(false)}
           className={classNames(styles.dropdownSign, { [styles.open]: isOpen })}
         >
-          <Link to='/signin' className={styles.link}>Войти</Link>
-          <Link to='/signup' className={styles.link}>Регистрация</Link>
+          <Link onClick={closeMenu} to='/signin' className={styles.link}>Войти</Link>
+          <Link onClick={closeMenu} to='/signup' className={styles.link}>Регистрация</Link>
         </DropDown>
       )}
     </>

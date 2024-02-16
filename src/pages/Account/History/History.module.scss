@@ -1,0 +1,113 @@
+@import '../../../assets/styles/constants';
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0 13px;
+    border-bottom: $border-line;
+}
+
+.button {
+    padding: 11px 21px;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: -0.01em;
+
+    &.notActive {
+        background-color: transparent;
+        color: $disabled-text-color;
+
+        &:hover {
+            color: #FFF;
+            background-color: $primaryHoverColor;
+        }
+    }
+
+    &.next {
+        border-radius: 50%;
+        padding: 0;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        text-align: center;
+        display: block;
+        margin-left: auto;
+    }
+}
+
+.dots {
+    margin: 0 15px;
+}
+
+.table {
+    margin: 26px -32px 0;
+    width: calc(100% + 64px);
+    border-radius: 6px;
+    background: #34323c;
+    padding-bottom: 23px;
+    min-height: 350px;
+
+    th {
+        border-bottom: $border-line;
+        color: $disabled-text-color;
+    }
+
+    td,
+    th {
+        text-align: center;
+        padding: 14px 0;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+
+        &:first-of-type {
+            padding-left: 32px;
+        }
+
+        &:last-of-type {
+            padding-right: 32px;
+        }
+    }
+
+    .success {
+        color: #0cc508;
+    }
+
+    .error {
+        color: #de3341;
+    }
+
+    .pending {
+        color: #ffd400;
+    }
+
+    .first td {
+        padding-top: 24px;
+    }
+
+    .transaction {
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            width: calc(100% - 64px);
+            height: 1px;
+            position: absolute;
+            left: 32px;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:last-of-type {
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .footer {
+        text-align: start;
+    }
+}

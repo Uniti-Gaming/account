@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 import styles from './Clipboard.module.scss';
+import classNames from 'classnames';
 
 interface ClipboardProps {
   value: string;
@@ -7,9 +10,17 @@ interface ClipboardProps {
 }
 
 const Clipboard = ({ value, label }: ClipboardProps) => {
+  const [copid, setCopid] = useState(false);
   const clipboardHundler = () => {
-    navigator.clipboard.writeText(value);
+    navigator.clipboard.writeText(value)
+      .then(() => {
+        setCopid(true);
+        setTimeout(() => {
+          setCopid(false);
+        }, 3000);
+      });
   };
+
   return (
     <FieldValuePair
       underline
@@ -19,7 +30,7 @@ const Clipboard = ({ value, label }: ClipboardProps) => {
         <>
           {value}
           <button
-            className={styles.button}
+            className={classNames(styles.button, { [styles.copied]: copid })}
             onClick={clipboardHundler}
           />
         </>

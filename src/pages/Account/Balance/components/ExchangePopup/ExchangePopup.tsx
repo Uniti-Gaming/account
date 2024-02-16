@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { PopupProps } from '@/core/interfaces/PopupProps';
@@ -9,23 +9,26 @@ import Button from '@/components/Button/Button';
 import styles from './ExchangePopup.module.scss';
 
 type ICoins = {
-  [key in 'scores' | 'tickets']: {
+  [key in 'main_coins' | 'main_tickets']: {
     title: string;
     name: string;
     label: string;
+    endpoint: string;
   };
 };
 
 const coins: ICoins = {
-  scores: {
+  main_coins: {
     title: 'Обменять баланс на баллы',
-    name: 'балл UG',
-    label: 'баллы UG',
+    name: 'Баллы UG',
+    label: 'Баллы UG',
+    endpoint: 'main_to_coins',
   },
-  tickets: {
+  main_tickets: {
     title: 'Обменять баланс на билеты',
     name: 'билет',
     label: 'билеты',
+    endpoint: 'main_to_tickets',
   },
 };
 
@@ -33,15 +36,24 @@ interface ExchangePopupProps extends PopupProps {
   title: keyof ICoins;
   rate: number;
   balance: number | string;
+  changeBalance: ({ value, endpoint }: { value: number; endpoint: string }) => Promise<boolean>;
 }
 
-const ExchangePopup: FC<ExchangePopupProps> = ({ title, handleClose, isOpen, rate, balance }) => {
+const ExchangePopup: FC<ExchangePopupProps> = ({ title, handleClose, isOpen, rate, balance, changeBalance }) => {
   const [value, setValue] = useState(rate);
   const [isConfirm, setConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    if (isConfirm) { /* empty */ } else {
+    if (isConfirm) {
+      setLoading(true);
+      changeBalance({ value, endpoint: coins[title].endpoint })
+        .then((res) => {
+          if (res) handleClose();
+        })
+        .finally(() => setLoading(false));
+    } else {
       setConfirm(true);
     }
   };
@@ -53,6 +65,12 @@ const ExchangePopup: FC<ExchangePopupProps> = ({ title, handleClose, isOpen, rat
       handleClose();
     }
   };
+
+  useEffect(() => {
+    setValue(rate);
+    setConfirm(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
 
   return (
     <Popup isOpen={isOpen} handleClose={handleClose}>
@@ -119,6 +137,7 @@ const ExchangePopup: FC<ExchangePopupProps> = ({ title, handleClose, isOpen, rat
             />
             <Button
               type='submit'
+              loading={loading}
               text='Подтвердить'
               className={styles.submit}
             />
