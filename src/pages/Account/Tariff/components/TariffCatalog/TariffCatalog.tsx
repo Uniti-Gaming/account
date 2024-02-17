@@ -6,15 +6,18 @@ import styles from './TariffCatalog.module.scss';
 import TariffCard from '../TariffCard/TariffCard';
 
 interface TariffCatalogProps {
-  tariff: ISubscribeDetail[];
+  tariffArray: ISubscribeDetail[];
+  handleactivateTariff: (data: { id: number, month: number }) => void;
 }
-const TariffCatalog: FC<TariffCatalogProps> = ({tariff}) => {
+
+const TariffCatalog: FC<TariffCatalogProps> = ({tariffArray, handleactivateTariff}) => {
   return (
     <div className={styles.catalog}>
-      {tariff.map((tariff) => (
+      {tariffArray.map((tariff) => (
         <TariffCard
           key={tariff.subscribe_id}
-          {...tariff}
+          tariff={tariff}
+          handleactivateTariff={handleactivateTariff}
         />
       ))}
     </div>

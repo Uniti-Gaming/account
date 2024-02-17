@@ -58,7 +58,7 @@ export const PaginationButtons: FC<IPaginationButtonsProps> = ({ totalPages, cur
         <td>
           {currentPage < totalPages && (
             <Button
-              text='>'
+              text=''
               handleClick={() => onChangePage(currentPage + 1)}
               className={classNames(styles.button, styles.next)}
             />

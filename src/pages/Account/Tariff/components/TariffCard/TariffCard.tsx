@@ -24,14 +24,21 @@ function addMonthsToDate(months: 1 | 3 | 6) {
   return formattedDate;
 }
 
-const TariffCard: FC<ISubscribeDetail> = ({
-  subscribe_name,
-  subscribe_logo_2,
-  subscribe_price_1,
-  subscribe_price_3,
-  subscribe_price_6,
-  subscribe_opportunities,
-}) => {
+interface ITariffCardProps {
+  tariff: ISubscribeDetail;
+  handleactivateTariff: (data: { id: number, month: number }) => void;
+}
+
+const TariffCard: FC<ITariffCardProps> = ({ tariff, handleactivateTariff }) => {
+  const {
+    subscribe_name,
+    subscribe_id,
+    subscribe_logo_2,
+    subscribe_price_1,
+    subscribe_price_3,
+    subscribe_price_6,
+    subscribe_opportunities,
+  } = tariff;
   const { openPopup } = useContext(TariffPopupContext);
   const [count, setCount] = useState<1 | 3 | 6>(1);
   const price = {
@@ -45,9 +52,12 @@ const TariffCard: FC<ISubscribeDetail> = ({
       type: 'tariff',
       title: subscribe_name,
       image: subscribe_logo_2,
-      button: {
-        grey: 'Назад',
-        primary: 'Активировать',
+      buttons: {
+        grey: { text: 'Назад' },
+        primary: {
+          text: 'Активировать',
+          onClick: openBuyPopup,
+        },
       },
       options: subscribe_opportunities[0],
     });
@@ -58,9 +68,12 @@ const TariffCard: FC<ISubscribeDetail> = ({
       type: 'buy',
       title: 'Вы приобретаете:',
       image: subscribe_logo_2,
-      button: {
-        grey: 'Отмена',
-        primary: 'Подтвердить',
+      buttons: {
+        grey: { text: 'Отмена' },
+        primary: {
+          text: 'Подтвердить',
+          onClick: () => handleactivateTariff({ id: Number(subscribe_id), month: count }),
+        },
       },
       output: {
         name: subscribe_name,

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { FC, useContext } from 'react';
 
 import { TariffPopupContext } from '@/core/contexts/TariffPopupContext';
 import styles from './TariffPopup.module.scss';
@@ -8,7 +8,7 @@ import Button from '@/components/Button/Button';
 import { options } from './data';
 
 
-const TariffPopup = () => {
+const TariffPopup: FC<{ isLoading: boolean }> = ({ isLoading }) => {
   const { openPopup, popup } = useContext(TariffPopupContext);
 
   const closePopup = () => {
@@ -75,13 +75,14 @@ const TariffPopup = () => {
             <div className={styles.buttons}>
               <Button
                 handleClick={closePopup}
-                text={popup.button.grey}
+                text={popup.buttons.grey.text}
                 style={{ fontSize: '12px', backgroundColor: '#484652', width: '100%' }}
               />
               <Button
-                handleClick={closePopup}
-                text={popup.button.primary}
+                handleClick={popup.buttons.primary.onClick}
+                text={popup.buttons.primary.text}
                 style={{ fontSize: '12px', width: '100%' }}
+                loading={isLoading}
               />
             </div>
           </>

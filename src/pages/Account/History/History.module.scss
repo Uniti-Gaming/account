@@ -33,6 +33,11 @@
         text-align: center;
         display: block;
         margin-left: auto;
+        background-image: url('../../../assets/images/arow.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 16px;
+        transform: rotate(-90deg);
     }
 }
 
@@ -56,6 +61,7 @@
     td,
     th {
         text-align: center;
+        vertical-align: top;
         padding: 14px 0;
         font-weight: 700;
         font-size: 16px;

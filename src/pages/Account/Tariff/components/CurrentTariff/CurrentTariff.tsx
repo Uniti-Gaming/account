@@ -18,7 +18,7 @@ const CurrentTariff: FC<CurrentTariffProps> = ({ tariff, date }) => {
         <tbody>
           {tariff && (
             <FieldValuePair
-              value={`${tariff.subscribe_name} - ${tariff.subscribe_price_1}ТМТ/месяц`}
+              value={tariff.subscribe_name}
               label='Текущий тариф'
               underline
             />

@@ -26,7 +26,7 @@ const History = () => {
       case 'all':
         return true;
       case filter:
-        return transaction.operation_type === filter;
+        return transaction.currency_type === filter;
       default:
         return false;
       }

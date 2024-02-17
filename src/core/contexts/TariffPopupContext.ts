@@ -6,9 +6,14 @@ export interface ITariffPopup {
     title: string
     text?: string[]
     image: string
-    button: {
-        grey: string
-        primary: string
+    buttons: {
+        grey: {
+            text: string
+        }
+        primary: {
+            text: string
+            onClick: () => void
+        }
     }
     options?: ISubscribeOpportunities
     output?: {
