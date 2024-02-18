@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import classNames from 'classnames';
 
-import styles from './History.module.scss';
+import styles from './PaginationButtons.module.scss';
 
-import Button from '@/components/Button/Button';
+import { Button } from '../Button/Button';
 
 interface IPaginationButtonsProps {
   totalPages: number;
@@ -30,7 +29,7 @@ export const PaginationButtons: FC<IPaginationButtonsProps> = ({ totalPages, cur
               <Button
                 text='1'
                 handleClick={() => onChangePage(1)}
-                className={classNames(styles.button, styles.notActive)}
+                isActive={false}
               />
               <span className={styles.dots}>.......</span>
             </>
@@ -40,7 +39,7 @@ export const PaginationButtons: FC<IPaginationButtonsProps> = ({ totalPages, cur
               key={page}
               text={String(page)}
               handleClick={() => onChangePage(page)}
-              className={classNames(styles.button, { [styles.notActive]: page !== currentPage })}
+              isActive={page === currentPage}
             />
           ))}
           {currentPage < totalPages - 2 && (
@@ -49,7 +48,7 @@ export const PaginationButtons: FC<IPaginationButtonsProps> = ({ totalPages, cur
               <Button
                 text={String(totalPages)}
                 handleClick={() => onChangePage(totalPages)}
-                className={classNames(styles.button, styles.notActive)}
+                isActive={false}
               />
             </>
           )}
@@ -60,7 +59,8 @@ export const PaginationButtons: FC<IPaginationButtonsProps> = ({ totalPages, cur
             <Button
               text=''
               handleClick={() => onChangePage(currentPage + 1)}
-              className={classNames(styles.button, styles.next)}
+              isActive={true}
+              className={styles.next}
             />
           )}
         </td>

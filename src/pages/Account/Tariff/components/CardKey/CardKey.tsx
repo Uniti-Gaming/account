@@ -23,9 +23,12 @@ const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login 
       title: title,
       text: description,
       image: image,
-      button: {
-        grey: 'Назад',
-        primary: 'Скачать',
+      buttons: {
+        grey: { text: 'Назад' },
+        primary: {
+          text: 'Скачать',
+          onClick: () => {},
+        },
       },
     });
   };

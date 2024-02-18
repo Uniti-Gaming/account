@@ -1,0 +1,26 @@
+@import '../../../../../assets/styles/constants';
+@import '../../../../../assets/styles/media';
+
+.filter {
+    padding: 22px 0 13px;
+}
+
+.desktop {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: $border-line;
+}
+
+.mobile {
+    display: none;
+}
+
+@include media('tablet-small') {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+}

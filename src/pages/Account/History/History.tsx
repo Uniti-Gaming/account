@@ -7,8 +7,10 @@ import { getCurrency, getStatus } from '@utils/historyHelpers';
 import styles from './History.module.scss';
 
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
-import Button from '@/components/Button/Button';
-import { PaginationButtons } from './PaginationButtons';
+import { PaginationButtons, Filter } from './components';
+
+const isDesktope = window.innerWidth > 576;
+const countTransactions = isDesktope ? 5 : 15;
 
 const History = () => {
   const transactions = useLoaderData() as ITransaction[];
@@ -16,8 +18,8 @@ const History = () => {
   const [displayedTransactions, setDisplayedTransactions] = useState({
     page: 1,
     filter: 'all',
-    transactions: transactions.slice(0, 5),
-    totalPages: Math.ceil(transactions.length / 5),
+    transactions: transactions.slice(0, countTransactions),
+    totalPages: Math.ceil(transactions.length / countTransactions),
   });
 
   const handleChangeDisplayedTransactions = ({ page, filter }: { page: number, filter: string }) => {
@@ -35,8 +37,8 @@ const History = () => {
     setDisplayedTransactions({
       page,
       filter,
-      transactions: newTransactions.slice((page - 1) * 5, page * 5),
-      totalPages: Math.ceil(newTransactions.length / 5),
+      transactions: newTransactions.slice((page - 1) * countTransactions, page * countTransactions),
+      totalPages: Math.ceil(newTransactions.length / countTransactions),
     });
   };
 
@@ -46,40 +48,10 @@ const History = () => {
 
   return (
     <LayoutBlock title='История транзакций'>
-      <div className={styles.filter}>
-        <Button
-          text='Все'
-          className={classNames(
-            styles.button,
-            { [styles.notActive]: displayedTransactions.filter !== 'all' },
-          )}
-          handleClick={() => handleChangeDisplayedTransactions({ page: 1, filter: 'all' })}
-        />
-        <Button
-          text='Баланс'
-          className={classNames(
-            styles.button,
-            { [styles.notActive]: displayedTransactions.filter !== 'main' },
-          )}
-          handleClick={() => handleChangeDisplayedTransactions({ page: 1, filter: 'main' })}
-        />
-        <Button
-          text='UG баллы'
-          className={classNames(
-            styles.button,
-            { [styles.notActive]: displayedTransactions.filter !== 'coins' },
-          )}
-          handleClick={() => handleChangeDisplayedTransactions({ page: 1, filter: 'coins' })}
-        />
-        <Button
-          text='Билеты'
-          className={classNames(
-            styles.button,
-            { [styles.notActive]: displayedTransactions.filter !== 'tickets' },
-          )}
-          handleClick={() => handleChangeDisplayedTransactions({ page: 1, filter: 'tickets' })}
-        />
-      </div>
+      <Filter
+        curentFilter={displayedTransactions.filter}
+        handleChange={(filter) => handleChangeDisplayedTransactions({ page: 1, filter })}
+      />
       <table className={styles.table}>
         <thead>
           <tr>
@@ -122,7 +94,7 @@ const History = () => {
               </tr>
             )}
         </tbody>
-        {displayedTransactions.totalPages > 1 && (
+        {displayedTransactions.totalPages > 1 && isDesktope && (
           <PaginationButtons
             totalPages={displayedTransactions.totalPages}
             currentPage={displayedTransactions.page}

@@ -165,7 +165,7 @@ export const defaultTransactions = [
     status: 'error',
   },
   {
-    transaction_id: '3',
+    transaction_id: '2',
     user_id: 'UG-24-0756',
     date: '28.08.2023',
     operation_type: 'Пополнение баланса',
@@ -174,7 +174,7 @@ export const defaultTransactions = [
     status: 'error',
   },
   {
-    transaction_id: '3',
+    transaction_id: '1',
     user_id: 'UG-24-0756',
     date: '28.08.2023',
     operation_type: 'Пополнение баланса',
@@ -183,7 +183,7 @@ export const defaultTransactions = [
     status: 'error',
   },
   {
-    transaction_id: '4',
+    transaction_id: '2',
     user_id: 'UG-24-0756',
     date: '28.08.2023',
     operation_type: 'Пополнение баланса',
@@ -192,7 +192,7 @@ export const defaultTransactions = [
     status: 'error',
   },
   {
-    transaction_id: '18',
+    transaction_id: '2',
     user_id: 'UG-24-0756',
     date: '28.08.2023',
     operation_type: 'Пополнение баланса',

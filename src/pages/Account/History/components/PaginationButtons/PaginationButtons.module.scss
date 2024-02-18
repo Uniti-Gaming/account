@@ -1,0 +1,23 @@
+.dots {
+    margin: 0 15px;
+}
+
+.footer {
+    text-align: start !important;
+}
+
+.next {
+    border-radius: 50%;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    background-image: url('../../../../../assets/images/arow.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    transform: rotate(-90deg);
+}

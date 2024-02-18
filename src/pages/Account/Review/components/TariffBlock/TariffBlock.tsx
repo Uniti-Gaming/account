@@ -25,7 +25,7 @@ const TariffBlock: FC<TariffBlockProps> = ({ tariff }) => {
             key={item.subscribe_id}
             image={item.subscribe_logo}
             name={item.subscribe_name}
-            isActive={item.subscribe_name === tariff.active_subscribe}
+            isActive={item.subscribe_id === tariff.active_subscribe}
             expiryDate={tariff.expiry_date}
           />
         ))}

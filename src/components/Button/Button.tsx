@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string
   type?: 'button' | 'submit' | 'reset'
   style?: CSSProperties;

@@ -1,49 +1,5 @@
 @import '../../../assets/styles/constants';
-
-.filter {
-    display: flex;
-    justify-content: space-between;
-    padding: 22px 0 13px;
-    border-bottom: $border-line;
-}
-
-.button {
-    padding: 11px 21px;
-    font-weight: 800;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: -0.01em;
-
-    &.notActive {
-        background-color: transparent;
-        color: $disabled-text-color;
-
-        &:hover {
-            color: #FFF;
-            background-color: $primaryHoverColor;
-        }
-    }
-
-    &.next {
-        border-radius: 50%;
-        padding: 0;
-        height: 30px;
-        width: 30px;
-        line-height: 30px;
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        background-image: url('../../../assets/images/arow.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 16px;
-        transform: rotate(-90deg);
-    }
-}
-
-.dots {
-    margin: 0 15px;
-}
+@import '../../../assets/styles/media';
 
 .table {
     margin: 26px -32px 0;
@@ -51,7 +7,7 @@
     border-radius: 6px;
     background: #34323c;
     padding-bottom: 23px;
-    min-height: 350px;
+    min-height: 200px;
 
     th {
         border-bottom: $border-line;
@@ -74,6 +30,10 @@
         &:last-of-type {
             padding-right: 32px;
         }
+    }
+
+    .empty {
+        vertical-align: middle;
     }
 
     .success {
@@ -112,8 +72,27 @@
             }
         }
     }
+}
 
-    .footer {
-        text-align: start;
+@include media('tablet-small') {
+    .table {
+        margin: 24px 0 18px;
+        width: 100%;
+        box-sizing: border-box;
+
+        td:nth-of-type(2),
+        th:nth-of-type(2),
+        td:nth-of-type(3),
+        th:nth-of-type(3),
+        td:nth-of-type(5),
+        th:nth-of-type(5) {
+            display: none;
+        }
+
+
+        td:first-of-type,
+        th:first-of-type {
+            padding-left: 0;
+        }
     }
 }

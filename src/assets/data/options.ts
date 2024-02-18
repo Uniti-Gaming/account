@@ -56,10 +56,16 @@ export const optionsFavorite: IOption[] = [
   { value: 'Сообщество', label: 'Сообщество' },
 ];
 export const optionsReplenish: IOption[] = [
-  {value: 'Подарочная карта', label: 'Подарочная карта'},
-  {value: 'Точка приема оплаты Unite Gaming', label: 'Точка приема оплаты Unite Gaming'},
-  {value: 'ТОплата с карты (скоро)', label: 'Оплата с карты (скоро)'},
-  {value: 'TM CELL (скоро)', label: 'TM CELL (скоро)'},
+  { value: 'Подарочная карта', label: 'Подарочная карта' },
+  { value: 'Точка приема оплаты Unite Gaming', label: 'Точка приема оплаты Unite Gaming' },
+  { value: 'ТОплата с карты (скоро)', label: 'Оплата с карты (скоро)' },
+  { value: 'TM CELL (скоро)', label: 'TM CELL (скоро)' },
+];
+export const filterHistoryOptions: IOption[] = [
+  { value: 'all', label: 'Все' },
+  { value: 'main', label: 'Баланс' },
+  { value: 'coins', label: 'UG баллы' },
+  { value: 'tickets', label: 'Билеты' },
 ];
 
 function generateOptions(max: number, min: number): IOption[] {

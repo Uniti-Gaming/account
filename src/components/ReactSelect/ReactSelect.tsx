@@ -27,7 +27,7 @@ const ReactSelect: FC<ReactSelectProps> = ({
   return (
     <Select
       options={options}
-      value={values[name] ? { value: values[name], label: values[name] } : null}
+      value={options.find((option) => option.value === values[name])}
       onChange={handleChange}
       placeholder={placeholder}
       required={true}
