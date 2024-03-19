@@ -62,6 +62,7 @@ const Safety: FC<SafetyProps> = ({ safety }) => {
               approved: 'Дополнительные поля заполнены',
             }}
             approved={safety.userDetails}
+            path='/information/#difrent'
           />
         </div>
       </div>

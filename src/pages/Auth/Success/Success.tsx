@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import succesIcon from '@images/account/Subtract.svg';
 import { text } from './text';
@@ -13,6 +14,12 @@ interface SuccessProps {
 
 
 const Success: FC<SuccessProps> = ({type}) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => navigate('/'), 5000);
+  });
+
   return (
     <MainAuth text={{ title: 'Успех!' }} >
       <img className={styles.icon} src={succesIcon} alt='Успех' />

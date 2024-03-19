@@ -1,11 +1,14 @@
 import { getTransactions } from '@/core/services/userService';
-import { defaultTransactions } from '@/assets/data/fakeData';
 
 export const loader = async () => {
   try {
     const transactions = await getTransactions();
-    return transactions;
+    if (transactions instanceof Array) {
+      return transactions;
+    } else {
+      return[];
+    }
   } catch {
-    return defaultTransactions;
+    return [];
   }
 };

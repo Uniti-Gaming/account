@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { checkCode, resendEmailVerification, resendNumberVerification } from '@services/verificationService';
 import { IUser } from '@interfaces/userInterface';
-import { title } from './text';
+import { data } from './data';
 import styles from './Confirm.module.scss';
 
 import Button from '@/components/Button/Button';
@@ -18,23 +18,23 @@ interface ConfirmProps {
   verifiedUser: IUser;
 }
 
-const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
+const Confirm: FC<ConfirmProps> = ({ type, verifiedUser }) => {
   const navigate = useNavigate();
-  const initialDigits = type ===  'number' ? ['', '', '', ''] : ['', '', '', '', '', ''];
-  const [digits, setDigits] = useState<string[]>(initialDigits);
+  const [digits, setDigits] = useState<string[]>(data.initialDigits[type]);
   const [status, setStatus] = useState('idle');
   const ref = useRef<IPinInputRef>(null);
   const onSubmit = () => {
     setStatus('loading');
     checkCode(type, digits.join(''))
       .then((res) => {
-        if(res.success) {
+        if (res.success) {
           setStatus('success');
           navigate(`/success-${type}`, { replace: true });
         } else {
           setStatus('error');
         }
-      });
+      })
+      .catch(() => setStatus('error'));
   };
 
   const resendCode = () => {
@@ -42,7 +42,7 @@ const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
   };
 
   return (
-    <MainAuth text={{ title: title[type] }} >
+    <MainAuth text={{ title: data.title[type] }} >
       <p className={styles.text}>
         Введите проверочный код, отправленный на:
       </p>
@@ -53,10 +53,10 @@ const Confirm: FC<ConfirmProps> = ({type, verifiedUser}) => {
         loading={status === 'loading'}
       >
         <label className='label'>
-          <PinInput ref={ref} digits={digits} onChange={setDigits} error={status === 'error'}/>
+          <PinInput ref={ref} digits={digits} onChange={setDigits} error={status === 'error'} />
         </label>
         <ButtonWithTimer
-          time={type === 'number' ? 120 : 60}
+          time={data.time[type]}
           handleClick={resendCode}
         />
       </AuthForm>

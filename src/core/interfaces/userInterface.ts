@@ -33,29 +33,9 @@ export interface ITransaction {
     amount: string;
     status: 'success' | 'error' | 'pending';
 }
-
-export interface ISubscription {
-    subscribe_id: string;
-    subscribe_name: string;
-    subscribe_logo: string;
-    subscribe_price_1: string
-    subscribe_price_3: string
-    subscribe_price_6: string
-}
-
-export interface ICurrentTariff {
-    active_subscribe: false | string;
-    expiry_date?: string;
-}
-
-export interface ITariff extends ICurrentTariff {
-    subscriptions: ISubscription[];
-}
-
-export interface ISubscribeOpportunities {
-    id: number;
+export interface ISubscribeOpportunity {
     subscribe_id: number;
-    subscribe_descr: string | null;
+    subscribe_descr: null | string;
     key_pc: boolean;
     key_android: boolean;
     teamspeak: boolean;
@@ -70,10 +50,21 @@ export interface ISubscribeOpportunities {
     high_download: boolean;
     blocked_games: boolean;
 }
-export interface ISubscribeDetail extends ISubscription {
-    id: number;
+
+export interface ISubscribeDetails {
+    subscribe_id: number;
+    subscribe_name: string;
+    subscribe_price_1: number;
+    subscribe_price_3: number;
+    subscribe_price_6: number;
+    subscribe_logo: string;
     subscribe_logo_2: string;
-    subscribe_opportunities: ISubscribeOpportunities[];
+    subscribe_opportunities: ISubscribeOpportunity[];
+}
+
+export interface ICurrentTariff {
+    active_subscribe: false | string;
+    expiry_date?: string;
 }
 
 export interface IUserKeys {

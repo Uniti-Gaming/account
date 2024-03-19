@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } f
 import { useLoaderData, useOutletContext } from 'react-router-dom';
 
 import { ITariffPopup, TariffPopupContext } from '@/core/contexts/TariffPopupContext';
-import { IBalance, ICurrentTariff, ISubscribeDetail, IUserKeys } from '@interfaces/userInterface';
+import { IBalance, ICurrentTariff, ISubscribeDetails, IUserKeys } from '@interfaces/userInterface';
 import { activateTariff } from '@services/managementService';
 import { getBalance, getCurrentTariff } from '@services/userService';
 
@@ -14,7 +14,7 @@ import TariffPopup from './components/TariffPopup/TariffPopup';
 import Key from './components/Key/Key';
 
 interface ILoaderData {
-  tariff: ISubscribeDetail[];
+  tariff: ISubscribeDetails[];
   keys: IUserKeys;
   currentTariff: ICurrentTariff;
   balance: IBalance;
@@ -83,7 +83,7 @@ const Tariff = () => {
       {userData.currentTariff.active_subscribe && (
         <CurrentTariff
           date={userData.currentTariff.expiry_date || ''}
-          tariff={tariff.find(item => item.subscribe_id == userData.currentTariff.active_subscribe)}
+          tariff={tariff.find(item => item.subscribe_id == Number(userData.currentTariff.active_subscribe))}
         />
       )}
       <Deposit balance={userData.balance} />

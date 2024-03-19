@@ -6,6 +6,7 @@ interface IKeysData {
   description: string[];
   image: string;
   title: string;
+  link: string;
   password: 'steam_password' | 'windows_password' | 'mobile_password';
 }
 
@@ -20,6 +21,7 @@ export const keyesData: IKeysData[] = [
     image: windows,
     title: 'Unite Gaming for PC',
     password: 'windows_password',
+    link: 'http://account.unite-gaming.com/files/windows.vpn',
   },
   {
     description: [
@@ -34,6 +36,7 @@ export const keyesData: IKeysData[] = [
     image: steam,
     title: 'Ключ -Steam',
     password: 'steam_password',
+    link: 'http://account.unite-gaming.com/files/steam.vpn',
   },
   {
     description: [
@@ -45,5 +48,6 @@ export const keyesData: IKeysData[] = [
     image: android,
     title: 'Unite Gaming for Android',
     password: 'mobile_password',
+    link: 'http://account.unite-gaming.com/files/mobile.vpn',
   },
 ];

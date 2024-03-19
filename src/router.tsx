@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 
 import { appLoader } from './appLoader';
 import { loader as reviewLoader } from './pages/Account/Review/loader';
@@ -24,8 +24,9 @@ import Balance from './pages/Account/Balance/Balance';
 import History from './pages/Account/History/History';
 import Support from './pages/Account/Support/Support';
 import UseCode from './pages/UseCode/UseCode';
+import NotFound from './pages/NotFound/NotFound';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
@@ -65,7 +66,7 @@ const router = createHashRouter([
       },
       { path: '/signin', element: <Signin /> },
       { path: '/signup', element: <SignUp /> },
-      { path: '/reset', element: <Reset /> },
+      { path: '/forgot', element: <Reset /> },
       { path: '/new-password', element: <NewPassword /> },
       {
         path: '/confirm-email',
@@ -77,12 +78,16 @@ const router = createHashRouter([
         element: <ProtectedRoute element={Confirm} type='number'/>,
         loader: phoneLoader,
       },
-      { path: '/success-phone', element: <Success type='phone' /> },
+      { path: '/success-number', element: <Success type='phone' /> },
       { path: '/success-email', element: <Success type='email' /> },
       { path: '/success-password', element: <Success type='password' /> },
       {
         path: '/use-code',
         element: <ProtectedRoute element={UseCode} type='email'/>,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
       },
     ],
   },

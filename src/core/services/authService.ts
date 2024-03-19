@@ -22,3 +22,11 @@ export const signup = (formData: ISignupForm) => {
   });
 };
 
+export const forgotPassword = (value: string) => {
+  return fetch(`${apiUrl}/account/forgot-password/`, {
+    ...baseOptions,
+    method: 'POST',
+    body: JSON.stringify({ email: value }),
+  })
+    .then(getResponseData);
+};

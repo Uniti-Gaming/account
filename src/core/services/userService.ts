@@ -7,22 +7,22 @@ const request = (endpoint: string, options?: RequestInit) => {
 };
 
 export const getBalance = () => {
-  return request('user_balance/', { method: 'POST' });
+  return request('user_balance/', { method: 'GET' });
 };
 export const getTransactions = () => {
-  return request('get_transactions/', { method: 'POST' });
+  return request('get_transactions/', { method: 'GET' });
 };
-export const getTariff = () => {
-  return request('user_subscribes/', { method: 'GET' });
-};
+// export const getTariff = () => {
+//   return request('user_subscribes/', { method: 'GET' });
+// };
 export const getCurrentTariff = () => {
   return request('get_user_subscribe/', { method: 'GET' });
 };
 export const getUserKeys = () => {
-  return request('get_user_keys/', { method: 'POST' });
+  return request('get_user_keys/', { method: 'GET' });
 };
 export const getUser = () => {
-  return request('user_data/', { method: 'POST' });
+  return request('user_data/', { method: 'GET' });
 };
 export const getUserInfo = () => {
   return request('get_user_info/', { method: 'GET' });

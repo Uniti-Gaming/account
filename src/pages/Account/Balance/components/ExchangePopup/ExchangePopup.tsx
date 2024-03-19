@@ -20,14 +20,14 @@ type ICoins = {
 const coins: ICoins = {
   main_coins: {
     title: 'Обменять баланс на баллы',
-    name: 'Баллы UG',
+    name: 'балл UG',
     label: 'Баллы UG',
     endpoint: 'main_to_coins',
   },
   main_tickets: {
     title: 'Обменять баланс на билеты',
     name: 'билет',
-    label: 'билеты',
+    label: 'Билеты',
     endpoint: 'main_to_tickets',
   },
 };

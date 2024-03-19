@@ -12,11 +12,13 @@ interface CardKeyProps {
   password: string
   description: string[]
   login: string
+  link: string
 }
 
-const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login }) => {
+const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login, link }) => {
   const { openPopup } = useContext(TariffPopupContext);
   const [showPass, setShowPass] = useState<boolean>(false);
+
   const openPopupWithDescription = () => {
     openPopup({
       type: 'key',
@@ -27,11 +29,36 @@ const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login 
         grey: { text: 'Назад' },
         primary: {
           text: 'Скачать',
-          onClick: () => {},
+          onClick: downloadFile,
         },
       },
     });
   };
+
+  const downloadFile = () => {
+    fetch(link)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.blob();
+      })
+      .then(blob => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'windows.vpn');
+        document.body.appendChild(link);
+        link.click();
+        if (link.parentNode !== null) {
+          link.parentNode.removeChild(link);
+        }
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  };
+
   return (
     <div className={styles.card}>
       <img className={styles.image} src={image} alt={title} />
@@ -53,7 +80,7 @@ const CardKey: FC<CardKeyProps> = ({ image, title, password, description, login 
         style={{ backgroundColor: '#484652', margin: '27px 0 10px' }}
         small
       />
-      <Button text='Скачать' small />
+      <Button text='Скачать' small handleClick={downloadFile} />
     </div>
   );
 };

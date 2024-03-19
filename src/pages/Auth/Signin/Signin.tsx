@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { signin } from '@services/authService';
@@ -18,7 +18,7 @@ import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 const Signin = () => {
   const navigate = useNavigate();
   const saveRef = useRef<HTMLInputElement | null>(null);
-  const { login } = useContext(AuthContext);
+  const { login, currentUser } = useContext(AuthContext);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [serverError, setServerError] = useState<boolean>(false);
   const { values, handleChange, errors, setErrors } = useFormWithValidation({
@@ -30,6 +30,10 @@ const Signin = () => {
     if (serverError) setServerError(false);
     handleChange(evt);
   };
+
+  useEffect(() => {
+    if (currentUser) navigate('/', { replace: true });
+  }, [currentUser, navigate]);
 
   const onSubmit = (evt: React.FormEvent) => {
     const form = evt.target as HTMLFormElement;
@@ -50,7 +54,11 @@ const Signin = () => {
         .catch(async (error) => {
           if (error instanceof Response) {
             const errorData = await error.json();
-            setErrors(errorData.errors);
+            if (errorData.errors) {
+              setErrors(errorData.errors);
+            } else {
+              setServerError(true);
+            }
           } else {
             setServerError(true);
           }

@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-import { ISubscribeDetail } from '@/core/interfaces/userInterface';
+import { ISubscribeDetails } from '@/core/interfaces/userInterface';
 import styles from './CurrentTariff.module.scss';
 
 import FieldValuePair from '@/components/FieldValuePair/FieldValuePair';
 import LayoutBlock from '@/components/LayoutBlock/LayoutBlock';
 
 interface CurrentTariffProps {
-  tariff: ISubscribeDetail | undefined;
+  tariff: ISubscribeDetails | undefined;
   date: string;
 }
 

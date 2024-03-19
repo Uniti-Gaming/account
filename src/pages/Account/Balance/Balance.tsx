@@ -79,12 +79,12 @@ const Balance = () => {
         <div className={styles.body}>
           <p className={styles.text}>Текущий баланс</p>
           <div className={styles.money}>
-            <img className={styles.image} src={upCoin} alt='монета тмт' />
+            <img className={styles.image} src={unCoin} alt='монета тмт' />
             <p className={styles.text}>{userBalance.main} TMT</p>
           </div>
           <p className={styles.text}>Баллы</p>
           <div>
-            <img className={styles.image} src={unCoin} alt='монета баллов' />
+            <img className={styles.image} src={upCoin} alt='монета баллов' />
             <p className={styles.text}>{userBalance.coins} UG Баллов</p>
           </div>
           <button

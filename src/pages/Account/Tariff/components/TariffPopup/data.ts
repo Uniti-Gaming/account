@@ -1,4 +1,4 @@
-import { ISubscribeOpportunities } from '@/core/interfaces/userInterface';
+import { ISubscribeOpportunity } from '@/core/interfaces/userInterface';
 
 import windows from '@images/account/tariff/options/windows.svg';
 import android from '@images/account/tariff/options/android.svg';
@@ -17,7 +17,7 @@ import ticket from '@images/account/coins/ticket.png';
 interface IOption {
   text: { ru: string };
   image: string;
-  value: keyof ISubscribeOpportunities;
+  value: keyof ISubscribeOpportunity;
 }
 
 export const options: IOption[] = [
@@ -72,7 +72,7 @@ export const options: IOption[] = [
   },
   {
     text: {
-      ru: 'билет',
+      ru: 'билета',
     },
     image: ticket,
     value: 'tickets',

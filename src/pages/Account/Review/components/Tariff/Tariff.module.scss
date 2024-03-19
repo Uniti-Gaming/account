@@ -60,6 +60,36 @@
     margin: 0;
 }
 
+.link {
+    background-color: transparent;
+    color: #37a8c1;
+    border: none;
+    padding: 0;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+
+    &::after {
+        content: '';
+        background-image: url(../../../../../assets/images/ArrowLineUpRight.svg);
+        width: 22px;
+        height: 22px;
+        background-size: cover;
+        margin-top: -7px;
+        margin-left: 4px;
+        transform: translateY(6px);
+        display: inline-block;
+    }
+
+    &.active {
+        color: #9f2ec7;
+        &::after {
+            display: none;
+        }
+    }
+}
+
 @include media('tablet') {
     .wrapper {
         gap: 8px 21px;
@@ -96,7 +126,7 @@
         grid-area: link;
         text-align: end;
 
-        span {
+        &::after {
             background-image: url('../../../../../assets/images/info.svg');
         }
     }

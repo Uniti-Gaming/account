@@ -14,9 +14,10 @@
 }
 
 .container {
-    width: 100%;
+    width: fit-content;
     display: flex;
     justify-content: center;
     gap: 19px;
-    margin-bottom: 54px;
+    margin: 0 auto 54px;
+    position: relative;
 }

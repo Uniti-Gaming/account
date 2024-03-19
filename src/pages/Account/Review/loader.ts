@@ -1,6 +1,7 @@
-import { getBalance, getTariff, getTransactions } from '@/core/services/userService';
+import { getBalance, getCurrentTariff, getTransactions } from '@/core/services/userService';
 import { checkVerification } from '@services/verificationService';
-import { defaultBalance, defaultTariff, defaultTransactions, defaultVerification } from '@/assets/data/fakeData';
+import { defaultBalance, defaultTariff, defaultVerification } from '@/assets/data/fakeData';
+import { getTariff } from '@/core/services/managementService';
 
 export const loader = async () => {
   try {
@@ -9,20 +10,30 @@ export const loader = async () => {
       balance,
       transactions,
       tariff,
+      currentTariff,
     ] = await Promise.all([
       checkVerification(),
       getBalance(),
       getTransactions(),
       getTariff(),
+      getCurrentTariff(),
     ]);
 
-    return { verification, balance, transactions, tariff };
+    return {
+      verification,
+      balance,
+      transactions,
+      tariff:
+      tariff.subscribe_details,
+      currentTariff,
+    };
   } catch {
     return {
       verification: defaultVerification,
       balance: defaultBalance,
-      transactions: defaultTransactions,
-      tariff: defaultTariff,
+      transactions: [],
+      tariff: defaultTariff.subscribe_details,
+      currentTariff: { active_subscribe: false },
     };
   }
 };

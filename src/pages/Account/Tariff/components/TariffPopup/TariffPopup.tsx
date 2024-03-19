@@ -60,8 +60,12 @@ const TariffPopup: FC<{ isLoading: boolean }> = ({ isLoading }) => {
                     {options.map((option, index) => (
                       <li className={styles.option} key={index}>
                         <img src={option.image} alt={option.text.ru} />
-                        <p>{option.text.ru}</p>
-                        {popup.options && popup.options[option.value] ? (
+                        <p>
+                          {(option.value === 'tickets' || option.value === 'coins')
+                          && popup.opportunities && `${popup.opportunities[option.value]} `}
+                          {option.text.ru}
+                        </p>
+                        {popup.opportunities && popup.opportunities[option.value] ? (
                           <span className={styles.apruved} />
                         ) : (
                           <span className={styles.notApruved} />

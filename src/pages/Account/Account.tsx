@@ -1,7 +1,8 @@
-import { Dispatch, FC, SetStateAction, useCallback, useMemo, useRef, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useContext, useMemo, useRef, useState } from 'react';
 import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom';
 
 import { VerifiedUserContext } from '@/core/contexts/VerifiedUserContext';
+import { AuthContext } from '@/core/contexts/AuthContext';
 import { IUser } from '@interfaces/userInterface';
 import styles from './Account.module.scss';
 
@@ -17,10 +18,12 @@ const Account: FC<AccountProps> = ({ verifiedUser }) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const navigation = useNavigation();
 
+  const notVerified = useContext(AuthContext);
   const [currentUser, setCurrentUser] = useState<IUser>(verifiedUser);
 
   const login: Dispatch<SetStateAction<IUser>> = useCallback((user) => {
     setCurrentUser(user);
+    notVerified.login(user as IUser);
   }, []);
 
   const contextValue = useMemo(() => ({

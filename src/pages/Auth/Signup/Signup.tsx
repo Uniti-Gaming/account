@@ -1,4 +1,4 @@
-import { useRef, useState, MouseEvent, useContext } from 'react';
+import { useRef, useState, MouseEvent, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '@/core/contexts/AuthContext';
@@ -38,7 +38,7 @@ const initialState = {
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { login, currentUser } = useContext(AuthContext);
   const agreeRef = useRef<HTMLInputElement | null>(null);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [showInfo, setShowInfo] = useState({ email: false, ref: false });
@@ -51,6 +51,10 @@ const SignUp = () => {
       [name]: !showInfo[name],
     });
   };
+
+  useEffect(() => {
+    if (currentUser) navigate('/', { replace: true });
+  }, [currentUser, navigate]);
 
   const handleCheckbox = (evt: MouseEvent) => {
     if (evt.target && 'checked' in evt.target) {

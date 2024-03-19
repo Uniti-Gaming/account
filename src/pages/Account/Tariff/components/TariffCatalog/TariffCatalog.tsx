@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
-import { ISubscribeDetail } from '@interfaces/userInterface';
+import { ISubscribeDetails } from '@interfaces/userInterface';
 import styles from './TariffCatalog.module.scss';
 
 import TariffCard from '../TariffCard/TariffCard';
 
 interface TariffCatalogProps {
-  tariffArray: ISubscribeDetail[];
+  tariffArray: ISubscribeDetails[];
   handleactivateTariff: (data: { id: number, month: number }) => void;
 }
 

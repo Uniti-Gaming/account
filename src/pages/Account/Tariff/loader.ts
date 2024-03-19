@@ -23,10 +23,10 @@ export const loader = async () => {
     };
   } catch {
     return {
-      tariff: defaultTariff.subscriptions,
+      tariff: defaultTariff.subscribe_details,
       keys: defaultKeys,
       balance: defaultBalance,
-      currentTariff: { active_subscribe: '236963', expiry_date: '28.06.2023' },
+      currentTariff: { active_subscribe: false },
     };
   }
 };

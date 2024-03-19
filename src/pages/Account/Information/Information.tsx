@@ -47,6 +47,7 @@ const Information = () => {
       {pageData.map((item, index) => (
         <BlockWithOneString key={index} {...item} />
       ))}
+      <div id='difrent' />
       <Difrent
         sex={currentUser.gender}
         instagram={currentUser.instagram}

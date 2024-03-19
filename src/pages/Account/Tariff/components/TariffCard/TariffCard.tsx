@@ -1,8 +1,9 @@
 import { FC, useContext, useState } from 'react';
 import classNames from 'classnames';
 
-import { ISubscribeDetail } from '@interfaces/userInterface';
+import { ISubscribeDetails } from '@interfaces/userInterface';
 import { TariffPopupContext } from '@/core/contexts/TariffPopupContext';
+import { addMonthsToDate } from '@utils/dateUtils';
 import styles from './TariffCard.module.scss';
 
 import Button from '@/components/Button/Button';
@@ -13,19 +14,8 @@ const months = {
   6: '6 месяцев',
 };
 
-function addMonthsToDate(months: 1 | 3 | 6) {
-  const currentDate = new Date();
-  const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + months, currentDate.getDate());
-  const formattedDate = newDate.toLocaleDateString('ru-RU', {
-    day: '2-digit',
-    month: '2-digit',
-    year: '2-digit',
-  }).replace(/\./g, '.');
-  return formattedDate;
-}
-
 interface ITariffCardProps {
-  tariff: ISubscribeDetail;
+  tariff: ISubscribeDetails;
   handleactivateTariff: (data: { id: number, month: number }) => void;
 }
 
@@ -59,7 +49,7 @@ const TariffCard: FC<ITariffCardProps> = ({ tariff, handleactivateTariff }) => {
           onClick: openBuyPopup,
         },
       },
-      options: subscribe_opportunities[0],
+      opportunities: subscribe_opportunities[0],
     });
   };
 
@@ -112,6 +102,7 @@ const TariffCard: FC<ITariffCardProps> = ({ tariff, handleactivateTariff }) => {
         <div className={styles.total}>
           <p className={styles.price}>{price[count]} TMT</p>
           <span className={styles.time}>{`/ ${months[count]}`}</span>
+          <span></span>
         </div>
         <div className={styles.buttons}>
           <Button text='Активировать' small handleClick={openBuyPopup} />

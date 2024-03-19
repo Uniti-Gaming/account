@@ -1,22 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputMask from 'react-input-mask';
 
 import { applyPromocode } from '@services/userService';
-import { useFormWithValidation } from '@hooks/useFormWithValidation';
 import styles from './UseCode.module.scss';
 
 import Button from '@/components/Button/Button';
 import MainAuth from '../Auth/components/MainAuth/MainAuth';
 import AuthForm from '../Auth/components/AuthForm/AuthForm';
-import AuthInput from '../Auth/components/AuthInput/AuthInput';
-import ErrorMessage from '../Auth/components/ErrorMessage/ErrorMessage';
 import AuthLabel from '../Auth/components/AuthLabel/AuthLabel';
 import LinkWithArrow from '@/components/LinkWithArrow/LinkWithArrow';
 import InfoMessages from '@/components/InfoMessages/InfoMessages';
 
 const UseCode = () => {
   const navigate = useNavigate();
-  const { values, handleChange, errors } = useFormWithValidation({});
+  const [value, setValue] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [infoMessagesList, setInfoMessagesList] = useState<{ message: string, success: boolean }[]>([]);
 
@@ -31,7 +29,7 @@ const UseCode = () => {
 
   const handleSubmitPromocode = () => {
     setLoading(true);
-    applyPromocode(values.code)
+    applyPromocode(value)
       .then((res) => addInfoMessage(res))
       .catch(async (error) => {
         if (error instanceof Response) {
@@ -56,16 +54,14 @@ const UseCode = () => {
         button='Использовать код'
       >
         <AuthLabel text='Промокод'>
-          <AuthInput
-            type='text'
-            name='code'
-            value={values.code || ''}
-            onChange={handleChange}
+          <InputMask
+            className={styles.input}
+            mask={'****-****-****'}
             placeholder='Введите код'
-            error={!!errors.code}
-            required
+            maskPlaceholder={null}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
-          <ErrorMessage message={errors.code} />
         </AuthLabel>
       </AuthForm>
       <Button

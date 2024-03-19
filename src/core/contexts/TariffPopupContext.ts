@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
-import { ISubscribeOpportunities } from '../interfaces/userInterface';
+import { ISubscribeOpportunity } from '../interfaces/userInterface';
 
 export interface ITariffPopup {
     type: 'tariff' | 'key' | 'buy'
@@ -15,11 +15,11 @@ export interface ITariffPopup {
             onClick: () => void
         }
     }
-    options?: ISubscribeOpportunities
+    opportunities?: ISubscribeOpportunity
     output?: {
         name: string
         period: string
-        total: string
+        total: number
         time: string
     }
 }

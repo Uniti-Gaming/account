@@ -1,0 +1,39 @@
+.wrapper {
+    max-width: 1000px;
+    box-sizing: border-box;
+    margin: 132px auto 220px;
+    padding-left: 55px;
+}
+
+.title {
+    font-size: 48px;
+}
+
+.subtitle {
+    font-size: 20px;
+}
+
+.title,
+.subtitle {
+    max-width: 752px;
+    text-align: left;
+    margin: 0 0 24px;
+}
+
+@media screen and (max-width:850px) {
+    .section {
+        margin: 113px auto 118px;
+    }
+
+    .title,
+    .subtitle {
+        max-width: 566px;
+    }
+}
+
+@media screen and (max-width:550px) {
+    .section {
+        margin: 113px auto 87px;
+        padding: 0 24px;
+    }
+}

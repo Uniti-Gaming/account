@@ -6,10 +6,34 @@
     line-height: normal;
     letter-spacing: -0.08px;
     margin: 57px auto 10px;
-    width: 280px;
+    max-width: 280px;
 }
 
 .wrapper {
     width: fit-content;
     margin: 44px auto;
+}
+
+.success {
+    .text {
+        margin-top: 28px;
+
+        &:not(.disabled) {
+            max-width: 390px;
+        }
+
+        &.disabled {
+            opacity: .5;
+        }
+    }
+
+    .email {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 115%;
+        letter-spacing: -0.01em;
+        color: #c04be8;
+        margin: 37px 0 34px;
+        text-align: center;
+    }
 }
